@@ -45,7 +45,7 @@ tr.vd{opacity:.5;text-decoration:line-through}a{color:var(--bad);cursor:pointer}
 <input id="q" placeholder="جست‌وجو: سریال، ماشین، کد، پلاک، راننده، پروژه" oninput="q=this.value;if(view!='cards')view='cards';render()"></header>
 <div class="stripe"></div><nav id="nav"></nav><main id="main"></main><div id="m" onclick="if(event.target==this)modal()"></div><div id="t"></div>
 <script>
-const K='roadfuel_v2',$=s=>document.querySelector(s),clone=o=>JSON.parse(JSON.stringify(o));
+const K='roadfuel_v3',$=s=>document.querySelector(s),clone=o=>JSON.parse(JSON.stringify(o));
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const D=s=>String(s).replace(/[۰-۹]/g,d=>'۰۱۲۳۴۵۶۷۸۹'.indexOf(d)).replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d));
 const N=v=>+D(v).replace(/٫/g,'.').replace(/[,٬]/g,'');
@@ -87,14 +87,6 @@ function saveCard(id,v){const T=clone(S),sr=v.serial.trim();
  else{if(v.sys0<0||v.card0<0)return'مقادیر اولیه نمی‌تواند منفی باشد';T.cards.push({id:'C'+T.seq++,active:true,date:new Date().toISOString(),...v})}
  commit(T);return null}
 function blank(keep){return{tanks:[],machines:[],cards:[],persons:[],tx:[],edits:[],seq:10,settings:keep||{user:'مدیر سیستم',role:'admin',low:100,price:0,prices:[],sources:[{name:'بودجه پروژه',active:true},{name:'دفتر مرکزی',active:true},{name:'پیمانکار',active:true}]}}}
-function seed(){S={tanks:[],machines:[],cards:[],persons:[],tx:[],edits:[],seq:10,settings:{user:'مدیر سیستم',role:'admin',low:100,price:30000,prices:[],sources:[{name:'بودجه پروژه',active:true},{name:'دفتر مرکزی',active:true},{name:'پیمانکار',active:true}]}};
- [['علی رضایی','راننده'],['حسن کریمی','مسئول سوخت'],['محمد احمدی','اپراتور ماشین‌آلات'],['مهدی نوری','مدیر']].forEach((p,i)=>S.persons.push({id:'P'+(i+1),name:p[0],role:p[1],code:'10'+(i+1),phone:'',active:true,note:''}));
- [['GC-100245','بیل مکانیکی کوماتسو','EX-01','بیل مکانیکی','','علی رضایی','کارگاه محور شمالی',5000,200,300],['GC-100311','لودر کاترپیلار','LD-02','لودر','','محمد احمدی','کارگاه محور شمالی',3000,60,200],['GC-100478','کمپرسی ولوو','TR-07','کمپرسی','۱۲ ع ۳۴۵ ایران ۱۰','حسن کریمی','پروژه باند دوم',2000,200,180]]
- .forEach((c,i)=>S.cards.push({id:'C'+(i+1),serial:c[0],name:c[1],code:c[2],type:c[3],plate:c[4],driver:c[5],project:c[6],sys0:c[7],card0:c[8],cap:c[9],note:'',active:true,date:new Date().toISOString()}));
- addTx({type:'charge',card:'C1',liters:1000,when:nowL(72),receipt:'R-501',note:'شارژ ماهانه'});
- addTx({type:'fuel',payer:'company',src:'بودجه پروژه',card:'C1',liters:150,when:nowL(48),person:'علی رضایی',driver:'',receipt:'',note:''});
- addTx({type:'charge',card:'C3',liters:300,when:nowL(30),receipt:'R-502',note:''});
- addTx({type:'fuel',payer:'person',payPerson:'حسن کریمی',card:'C3',liters:120,when:nowL(5),person:'حسن کریمی',driver:'',receipt:'',note:''})}
 if(!S||!S.cards)commit(blank());
 S.tanks=S.tanks||[];S.machines=S.machines||[];
 S.settings.sources=S.settings.sources||[{name:'بودجه پروژه',active:true},{name:'دفتر مرکزی',active:true},{name:'پیمانکار',active:true}];S.settings.prices=S.settings.prices||[];if(S.settings.price==null)S.settings.price=30000;
@@ -206,8 +198,6 @@ function addTT(o){const T=clone(S),k=T.tanks.find(x=>x.id==o.tank);
  if(o.type=='tfill'){if(o.payer=='person'?!o.payPerson:!o.src)return'پرداخت‌کننده را مشخص کنید';if(o.liters>b.s)return'مقدار شارژ از سهمیه مرکز مخزن ('+fn(b.s)+' لیتر) بیشتر است؛ ابتدا سهمیه ماهانه را شارژ کنید';if(k.cap>0&&b.k+o.liters>k.cap)return'مجموع از ظرفیت مخزن ('+fn(k.cap)+' لیتر) بیشتر می‌شود';o.price=T.settings.price||0;o.amount=Math.round(o.liters*o.price);if(o.payer=='person')o.settled=null}
  if(o.type=='tdraw'){if(!o.mref)return'ماشین را انتخاب کنید';if(o.liters>b.k)return'مقدار برداشت از موجودی مخزن ('+fn(b.k)+' لیتر) بیشتر است';o.price=Math.round(v.avg);o.amount=Math.round(o.liters*v.avg)}
  const t={id:'T'+T.seq++,at:new Date().toISOString(),by:T.settings.user,void:null,bs:b.s,bk:b.k,...o};T.tx.push(t);const a=tbal(T,k.id);t.as=a.s;t.ak=a.k;commit(T);return null}
-function seedT(){S.tanks.push({id:'K1',name:'مخزن کارگاه شمال',code:'TK-01',cap:10000,project:'کارگاه محور شمالی',sys0:5000,tank0:1000,p0:30000,note:'',active:true,date:new Date().toISOString()});S.machines.push({id:'M1',name:'گریدر کاترپیلار',code:'GR-03',type:'گریدر',plate:'',driver:'محمد احمدی',project:'کارگاه محور شمالی',note:'',active:true});
- addTx({type:'tquota',tank:'K1',liters:3000,when:nowL(80),receipt:'Q-01',note:'شارژ ماهانه'});addTx({type:'tfill',tank:'K1',liters:2000,when:nowL(60),person:'حسن کریمی',payer:'company',src:'دفتر مرکزی',receipt:'H-210',note:''});addTx({type:'tdraw',tank:'K1',liters:300,when:nowL(20),mref:'m:M1',mname:'گریدر کاترپیلار',person:'محمد احمدی',driver:'',receipt:'',note:''});addTx({type:'tmeas',tank:'K1',liters:2690,when:nowL(2),receipt:'',note:'اندازه‌گیری با میله'})}
 const ttile=k=>{const b=tbal(S,k.id),pc=k.cap?Math.max(0,Math.min(100,Math.round(b.k/k.cap*100))):0,lo=k.cap?b.k/k.cap<=.15:b.k<=S.settings.low;return`<div class="card${lo?' low':''}" onclick="go('tdet','${k.id}')" style="cursor:pointer"><div class="row" style="justify-content:space-between"><b>${esc(k.name)}</b><span class="tg">${esc(k.code)}</span></div><small>${esc(k.project)}${k.active?'':'، غیرفعال'}</small>${k.cap?`<div style="background:var(--line);border-radius:4px;height:12px;margin:8px 0"><div style="width:${pc}%;height:100%;background:${lo?'var(--bad)':'var(--y)'};border-radius:4px"></div></div>`:''}<div class="row"><div><small>سهمیه مرکز</small><br><b>${fn(b.s)}</b> ل</div><div><small>موجودی مخزن</small><br><b class="${lo?'bad':''}">${fn(b.k)}</b> ل${k.cap?' از '+fn(k.cap):''}</div></div></div>`};
 function tInfo(){const k=S.tanks.find(x=>x.id==$('#tk').value);if(!k){$('#tinf').innerHTML='';return}const b=tbal(S,k.id),v=tval(S,k.id);$('#tinf').innerHTML=`<div class="card">سهمیه مرکز: <b>${fn(b.s)}</b> ل، موجودی مخزن: <b>${fn(b.k)}</b>${k.cap?' از '+fn(k.cap):''} ل<br>میانگین قیمت موجودی: <b>${rl(Math.round(v.avg))}</b> برای هر لیتر</div>`}
 function tOp(ty,id){const T={tquota:'شارژ ماهانه سهمیه مرکز مخزن',tfill:'شارژ مخزن (انتقال از سهمیه به مخزن)',tdraw:'برداشت از مخزن',tmeas:'اندازه‌گیری فیزیکی مخزن',tsettle:'تعیین تکلیف پایان ماه مخزن'}[ty];
@@ -242,7 +232,6 @@ function dinfo(kind,id){const L={card:S.cards,pers:S.persons,tank:S.tanks,mach:S
 function delForm(kind,id){const d=dinfo(kind,id);if(!d)return;if(d.n)return modal(`<h3>حذف ${DK[kind]} ممکن نیست</h3><p><b>${esc(d.nm)}</b> در ${fn(d.n)} عملیات ثبت‌شده استفاده شده و برای حفظ سابقه قابل حذف نیست. به‌جای حذف می‌توانید آن را غیرفعال کنید.</p><button class="btn g" onclick="modal()">بستن</button>`);
  modal(`<h3>حذف ${DK[kind]}</h3><p>${DK[kind]} <b>${esc(d.nm)}</b> حذف می‌شود. این کار فقط برای ثبت اشتباه است و برگشت‌پذیر نیست.</p><label>علت حذف (الزامی)</label><textarea id="dr" rows="2"></textarea><br><br><button class="btn d" onclick="doDel('${kind}','${id}')">حذف</button> <button class="btn g" onclick="modal()">انصراف</button>`)}
 function doDel(kind,id){const r=$('#dr').value.trim();if(!r)return toast('علت حذف الزامی است',1);const d=dinfo(kind,id);if(!d||d.n)return toast('این مورد قابل حذف نیست',1);const T=clone(S),K={card:'cards',pers:'persons',tank:'tanks',mach:'machines'}[kind];T[K]=T[K].filter(x=>x.id!=id);if(kind=='card')T.edits=T.edits.filter(e=>e.card!=id);(T.deletions=T.deletions||[]).push({kind:DK[kind],name:d.nm,reason:r,at:new Date().toISOString(),by:T.settings.user});commit(T);modal();toast('حذف شد');go({card:'cards',pers:'pers',tank:'tank',mach:'mach'}[kind])}
-(function(){if(S.seq==18&&S.cards.length==3&&S.tx.length==8&&S.tanks.length==1&&S.machines.length==1&&S.persons.length==4&&S.cards.map(c=>c.serial).sort().join()=='GC-100245,GC-100311,GC-100478'){commit(blank(S.settings));setTimeout(()=>toast('داده‌های نمونه پاک شدند'),400)}})();
 
 render();
 </script>
