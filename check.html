@@ -1,0 +1,21 @@
+<!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>بررسی نصب Road Fuel</title>
+<style>body{font:16px/1.7 Tahoma,sans-serif;margin:0;padding:16px;background:#f2f1ec;color:#222}ul{padding:0}li{margin:8px 0;list-style:none;padding:10px;background:#fff;border-radius:8px;border-right:6px solid #ccc}.ok{border-color:#23764a}.no{border-color:#c0362c}button{min-height:48px;padding:0 18px;font:inherit;font-weight:700;background:#f2b705;border:0;border-radius:6px}</style></head>
+<body><h2>بررسی نصب Road Fuel</h2><p>نتیجهٔ زیر را (یا عکس آن را) بفرستید.</p><ul id="lst"></ul><p id="ins"></p>
+<script>
+const lst=document.getElementById('lst'),add=(ok,t,h)=>{const l=document.createElement('li');l.className=ok?'ok':'no';l.textContent=(ok?'✓ ':'✗ ')+t+(!ok&&h?' — '+h:'');lst.appendChild(l)};
+(async()=>{
+add(location.protocol=='https:','آدرس HTTPS','باید از آدرس https باز شود');
+try{const x=await fetch('index.html',{cache:'no-store'}),t=await x.text();add(x.ok,'index.html پیدا شد','فایل در ریشه نیست');add(/rel=["']manifest["']/.test(t),'index.html به manifest لینک دارد','index.html قدیمی است؛ نسخهٔ جدید را آپلود کنید')}catch(e){add(false,'خواندن index.html','')}
+let m=null;
+try{const x=await fetch('manifest.json',{cache:'no-store'});if(!x.ok)throw 0;m=await x.json();add(true,'manifest.json خوانده شد')}catch(e){add(false,'manifest.json','فایل در ریشه نیست یا نام آن اشتباه است')}
+if(m){add(!!(m.name||m.short_name),'نام برنامه');add(['standalone','fullscreen','minimal-ui'].includes(m.display),'display مناسب');add(!!m.start_url,'start_url');
+for(const s of [192,512]){const ic=(m.icons||[]).find(i=>i.sizes==s+'x'+s);if(!ic){add(false,'آیکون '+s+' در manifest','تعریف نشده');continue}
+await new Promise(res=>{const im=new Image();im.onload=()=>{add(im.naturalWidth==s,'آیکون '+s+' بارگذاری شد ('+im.naturalWidth+'px)','اندازهٔ واقعی با manifest یکی نیست');res()};im.onerror=()=>{add(false,'آیکون '+s+' بارگذاری نشد','فایل '+ic.src+' در مخزن نیست');res()};im.src=new URL(ic.src,new URL('manifest.json',location.href)).href+'?'+Date.now()})}}
+if('serviceWorker' in navigator){try{const x=await fetch('sw.js',{cache:'no-store'});add(x.ok,'sw.js پیدا شد','فایل در ریشه نیست')}catch(e){add(false,'sw.js','')}
+try{let reg=await navigator.serviceWorker.getRegistration('./');if(!reg){try{reg=await navigator.serviceWorker.register('sw.js');add(true,'Service Worker همین حالا ثبت شد؛ این صفحه را ببندید و دوباره باز کنید')}catch(e){add(false,'ثبت Service Worker','خطا: '+e.message)}}else add(true,'Service Worker ثبت شده است')}catch(e){add(false,'Service Worker','')}}
+else add(false,'مرورگر از Service Worker پشتیبانی نمی‌کند');
+add(!matchMedia('(display-mode: standalone)').matches,'برنامه در حالت نصب‌شده باز نشده است','قبلاً نصب شده؛ از صفحهٔ اصلی گوشی باز کنید');
+})();
+let dp=null;addEventListener('beforeinstallprompt',e=>{e.preventDefault();dp=e;ins.innerHTML='<button id="ib">نصب برنامه</button>';document.getElementById('ib').onclick=()=>dp.prompt()});
+setTimeout(()=>{if(!dp)ins.textContent='Chrome هنوز اجازهٔ نصب نداده است. موارد ✗ را برطرف کنید.'},5000);
+</script></body></html>
