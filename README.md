@@ -39,7 +39,7 @@
 3. آدرس `https://USERNAME.github.io/REPO/` فعال می‌شود.
 
 ## نصب به‌عنوان اپلیکیشن (PWA)
-فایل‌های `manifest.json`، `sw.js` و پوشهٔ `icons/` را کنار `index.html` در ریشهٔ مخزن بگذارید. نصب فقط از آدرس HTTPS (مثل GitHub Pages) کار می‌کند، نه از فایل محلی.
+فایل‌های `manifest.json`، `sw.js` و دو فایل `icon-192.png` و `icon-512.png` را کنار `index.html` در ریشهٔ مخزن بگذارید. نصب فقط از آدرس HTTPS (مثل GitHub Pages) کار می‌کند، نه از فایل محلی.
 - اندروید (Chrome): منوی سه‌نقطه، سپس «Install app» یا «Add to Home screen».
 - آیفون (فقط Safari): دکمهٔ اشتراک‌گذاری، سپس «Add to Home Screen».
 - اگر نصب فعال نشد، صفحهٔ `check.html` (کنار `index.html`) را باز کنید تا مشکل فایل‌ها نمایش داده شود.
