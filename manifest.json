@@ -1,13 +1,13 @@
 {
-  "name": "Road Fuel - مدیریت گازوئیل ماشین‌آلات",
-  "short_name": "Road Fuel",
+  "name": "Road Care - سوخت، ناوگان و نگهداری",
+  "short_name": "Road Care",
   "lang": "fa",
   "dir": "rtl",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#202225",
-  "theme_color": "#202225",
+  "background_color": "#0a1c2b",
+  "theme_color": "#0b2a43",
   "icons": [
     {
       "src": "icon-192.png",
