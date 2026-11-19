@@ -251,7 +251,7 @@ img.report-brand-mark{border:0;padding:0;background:none;object-fit:cover;border
 </style>
 </head><body>
 <div id="splash" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" aria-hidden="true"><defs><linearGradient id="sbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#14344a"/><stop offset="1" stop-color="#0a1c2b"/></linearGradient><linearGradient id="sgold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd76a"/><stop offset="1" stop-color="#e9a620"/></linearGradient><linearGradient id="ssh" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".10"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/></linearGradient></defs><rect width="512" height="512" rx="116" fill="url(#sbg)"/><rect width="512" height="512" rx="116" fill="url(#ssh)"/><path d="M84 400 Q256 346 428 400" fill="none" stroke="#e8f1f6" stroke-width="9" stroke-linecap="round"/><path d="M84 430 H428" stroke="#e8f1f6" stroke-opacity=".28" stroke-width="5" stroke-linecap="round"/><rect x="118" y="336" width="150" height="22" rx="8" fill="url(#sgold)"/><rect x="138" y="104" width="110" height="240" rx="16" fill="url(#sgold)"/><rect x="156" y="126" width="74" height="62" rx="8" fill="#0a1c2b"/><path d="M193 214 q-25 33 -25 50 a25 25 0 0 0 50 0 q0 -17 -25 -50z" fill="#0a1c2b"/><mask id="jw"><rect width="512" height="512" fill="#fff"/><rect x="326" y="110" width="28" height="62" fill="#000"/></mask><mask id="hl"><rect width="512" height="512" fill="#fff"/><circle cx="340" cy="372" r="9" fill="#000"/></mask><g transform="translate(18 -4) rotate(32 340 270)"><rect x="326" y="190" width="28" height="170" rx="14" fill="url(#sgold)"/><circle cx="340" cy="170" r="44" fill="url(#sgold)" mask="url(#jw)"/><circle cx="340" cy="372" r="24" fill="url(#sgold)" mask="url(#hl)"/></g></svg><h1>Road<b>Care</b></h1><div class="by">By AliGhorbani</div></div>
-<aside id="desktopSide"><div class="brand"><div class="brand-mark">RC</div><div><strong>Road <b>Care</b></strong><small>FUEL & FLEET MANAGEMENT</small></div></div><div class="side-caption">مدیریت ناوگان</div><nav id="sideNav"></nav><div class="side-foot"><span class="side-dot"></span><span>سامانه مدیریت فعال</span><small>نسخه V51.0 · Road Care</small></div></aside>
+<aside id="desktopSide"><div class="brand"><div class="brand-mark">RC</div><div><strong>Road <b>Care</b></strong><small>FUEL & FLEET MANAGEMENT</small></div></div><div class="side-caption">مدیریت ناوگان</div><nav id="sideNav"></nav><div class="side-foot"><span class="side-dot"></span><span>سامانه مدیریت فعال</span><small>نسخه V54.0 · Road Care</small></div></aside>
 <header id="top"><button id="hb" aria-label="منو" onclick="drawer(1)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button><button id="backBtn" aria-label="بازگشت" onclick="appBack()" hidden><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M14 6l6 6-6 6"/></svg></button><div class="title"><span id="pt"></span><small>مدیریت سوخت، ماشین‌آلات و نگهداری</small></div><button id="sb" aria-label="جست‌وجو" onclick="sbar()"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></button></header>
 <div id="sbar"><input id="q" placeholder="جست‌وجو: سریال، ماشین، کد، پلاک، راننده، پروژه" oninput="q=this.value;if(view!='cards')view='cards';render()"></div>
 <div id="dr" onclick="if(event.target==this)drawer(0)"><nav id="nav"></nav></div><main id="main"></main><div id="m" onclick="if(event.target==this)modal()"></div><div id="t"></div>
@@ -588,7 +588,7 @@ function subPlan(id){const T=clone(S),name=$('#mt_nm').value.trim(),every=nv($('
  commit(T);modal();toast('ذخیره شد');render()}
 function delPlan(id){if(S.svc.some(x=>x.plans.includes(id)))return toast('این برنامه سابقهٔ سرویس دارد؛ آن را غیرفعال کنید',1);const T=clone(S);T.plans=T.plans.filter(x=>x.id!=id);commit(T);modal();toast('حذف شد');render()}
 function mtP(){const r=$('#mt_m').value,l=S.plans.filter(p=>p.ref==r&&p.active!==false);$('#mt_pl').innerHTML=!r?'':l.length?l.map(p=>{const a=planStat(p);return`<label style="display:flex;align-items:center;gap:8px;margin:6px 0;color:var(--ink)"><input type="checkbox" class="mp" value="${p.id}"> ${esc(p.name)} <span class="chip ${a.st}">${chipT(a)}</span></label>`}).join(''):'<p class="mut">برای این ماشین برنامهٔ سرویس تعریف نشده است؛ فقط شرح کار را بنویسید.</p>';const c=curVal(r);if(c!=null&&!$('#mt_v').value)$('#mt_v').value=c}
-function svcForm(ref){modal(`<h3>ثبت سرویس</h3>${mSel(ref)}<label>کارهای انجام‌شده (از برنامه‌ها)</label><div id="mt_pl"></div><label>کارکرد هنگام سرویس</label><input id="mt_v" inputmode="decimal"><label>تاریخ و ساعت</label><input id="mt_w" type="datetime-local" value="${nowL()}"><label>انجام‌دهنده</label><select id="mt_p">${pOpts()}</select><label>هزینهٔ مواد (ریال، اختیاری)</label><input id="mt_c" inputmode="decimal"><label>شرح کار</label><textarea id="mt_d" rows="2"></textarea><br><br><button class="btn" onclick="subSvc()">ثبت</button> <button class="btn g" onclick="modal()">انصراف</button>`);mtU()}
+function svcForm(ref){modal(`<h3>ثبت سرویس</h3>${mSel(ref)}<label>کارهای انجام‌شده (از برنامه‌ها)</label><div id="mt_pl"></div><label>کارکرد هنگام سرویس</label><input id="mt_v" inputmode="decimal"><label>تاریخ و ساعت</label><input id="mt_w" type="datetime-local" value="${nowL()}"><label>انجام‌دهنده</label><select id="mt_p">${drvOpts(ref)}</select><label>هزینهٔ مواد (ریال، اختیاری)</label><input id="mt_c" inputmode="decimal"><label>شرح کار</label><textarea id="mt_d" rows="2"></textarea><br><br><button class="btn" onclick="subSvc()">ثبت</button> <button class="btn g" onclick="modal()">انصراف</button>`);mtU()}
 function subSvc(){const T=clone(S),ref=$('#mt_m').value,plans=[...document.querySelectorAll('.mp:checked')].map(x=>x.value),desc=$('#mt_d').value,meter=nv($('#mt_v').value),when=$('#mt_w').value||nowL();
  if(!ref||!mget(ref).id)return toast('ماشین را انتخاب کنید',1);if(!plans.length&&!desc.trim())return toast('حداقل یک برنامه را انتخاب کنید یا شرح کار را بنویسید',1);if(!$('#mt_p').value)return toast('انجام‌دهنده را انتخاب کنید',1);
  const pl=plans.map(i=>T.plans.find(p=>p.id==i));if(pl.some(p=>!p||p.ref!=ref))return toast('برنامهٔ انتخاب‌شده معتبر نیست',1);if(pl.some(p=>p.basis=='m'||p.basis=='both')&&!(meter>=0))return toast('کارکرد هنگام سرویس را وارد کنید',1);
@@ -976,7 +976,7 @@ window.mcDone=(ref,key)=>{const o=openRepl(ref).find(x=>x.key==key);if(!o)return
 window.mcDoDone=(ref,key)=>{const o=openRepl(ref).find(x=>x.key==key),op=$('#md_p').value;if(!o)return;if(!op)return toast('انجام‌دهنده را انتخاب کنید',1);const T=clone(S),m=mget(ref),when=nowL();T.checks=T.checks||[];T.svc.push({id:'V'+T.seq++,ref,plans:[],when,meter:null,read:null,person:op,cost:nv($('#md_c').value)||0,desc:'تعویض '+o.title,by:T.settings.user,at:new Date().toISOString(),void:null,fromInspection:true});
  T.checks.push({id:'CHK'+T.seq++,ref,machineName:m.name,code:m.code||'',type:m.type,operator:op,at:when+':00',quick:true,items:[{checkId:o.cid,title:o.title,status:'replaced',note:''}],note:'',createdAt:new Date().toISOString()});T.settings.lastInsp=op;commit(T);modal();toast('ثبت شد');render()};
 /* سرویس */
-window.mcSvc=ref=>{const m=mget(ref),i=info(ref),cv=curVal(ref);modal('<h3>ثبت سرویس</h3><p><b>'+esc(m.name)+'</b></p><label>کارهای انجام‌شده</label>'+(i.pl.length?i.pl.slice().sort((a,b)=>({over:0,soon:1,unk:2,ok:3})[a.st]-({over:0,soon:1,unk:2,ok:3})[b.st]).map(a=>'<label style="display:flex;align-items:center;gap:9px;margin:7px 0;color:var(--ink);font-size:.95rem"><input type="checkbox" class="ms" value="'+a.p.id+'"'+(a.st=='over'||a.st=='soon'?' checked':'')+' style="width:22px"> <span style="flex:1">'+esc(a.p.name)+'</span><span class="chip '+a.st+'">'+chipT(a)+'</span></label>').join(''):'<p class="mut">برنامهٔ سرویس تعریف نشده؛ فقط شرح کار را بنویسید.</p>')+'<label>کارکرد هنگام سرویس'+(cv==null?'':' ('+UN[unit(ref)]+')')+'</label><input id="ms_v" inputmode="decimal" value="'+(cv==null?'':cv)+'"><label>انجام‌دهنده</label><select id="ms_p">'+pOptsSel(lastOp())+'</select><label>تاریخ و ساعت</label><input id="ms_w" type="datetime-local" value="'+nowL()+'"><label>هزینه (ریال، اختیاری)</label><input id="ms_c" inputmode="decimal"><label>شرح (اختیاری)</label><input id="ms_d"><br><br><button class="btn" onclick="mcSubSvc(\''+ref+'\')">ثبت سرویس</button> <button class="btn g" onclick="modal()">انصراف</button>')};
+window.mcSvc=ref=>{const m=mget(ref),i=info(ref),cv=curVal(ref);modal('<h3>ثبت سرویس</h3><p><b>'+esc(m.name)+'</b></p><label>کارهای انجام‌شده</label>'+(i.pl.length?i.pl.slice().sort((a,b)=>({over:0,soon:1,unk:2,ok:3})[a.st]-({over:0,soon:1,unk:2,ok:3})[b.st]).map(a=>'<label style="display:flex;align-items:center;gap:9px;margin:7px 0;color:var(--ink);font-size:.95rem"><input type="checkbox" class="ms" value="'+a.p.id+'"'+(a.st=='over'||a.st=='soon'?' checked':'')+' style="width:22px"> <span style="flex:1">'+esc(a.p.name)+'</span><span class="chip '+a.st+'">'+chipT(a)+'</span></label>').join(''):'<p class="mut">برنامهٔ سرویس تعریف نشده؛ فقط شرح کار را بنویسید.</p>')+'<label>کارکرد هنگام سرویس'+(cv==null?'':' ('+UN[unit(ref)]+')')+'</label><input id="ms_v" inputmode="decimal" value="'+(cv==null?'':cv)+'"><label>انجام‌دهنده</label><select id="ms_p">'+drvOpts(ref)+'</select><label>تاریخ و ساعت</label><input id="ms_w" type="datetime-local" value="'+nowL()+'"><label>هزینه (ریال، اختیاری)</label><input id="ms_c" inputmode="decimal"><label>شرح (اختیاری)</label><input id="ms_d"><br><br><button class="btn" onclick="mcSubSvc(\''+ref+'\')">ثبت سرویس</button> <button class="btn g" onclick="modal()">انصراف</button>')};
 window.mcSubSvc=ref=>{const T=clone(S),plans=[...document.querySelectorAll('.ms:checked')].map(x=>x.value),desc=$('#ms_d').value.trim(),meter=nv($('#ms_v').value),when=$('#ms_w').value||nowL(),op=$('#ms_p').value;if(!plans.length&&!desc)return toast('یک کار را تیک بزنید یا شرح بنویسید',1);if(!op)return toast('انجام‌دهنده را انتخاب کنید',1);
  const pl=plans.map(id=>T.plans.find(p=>p.id==id));if(pl.some(p=>!p||norm(p.ref)!=ref))return toast('برنامهٔ انتخاب‌شده معتبر نیست',1);if(pl.some(p=>p.basis!='d')&&!(meter>=0))return toast('کارکرد هنگام سرویس را وارد کنید',1);
  let rid=null;if(meter>=0){const r=addReadT(T,ref,meter,when,'همراه ثبت سرویس','');if(r.e)return toast(r.e,1);rid=r.id}
@@ -1204,7 +1204,7 @@ window.mcSaveInsp=(ref,allOk)=>{const m=mget(ref);if(!m||!m.id)return;const op=$
  T.checks.forEach(c=>{if(norm(c.ref)==ref&&!c.quick&&!c.superseded&&day(c.at)==today())c.superseded=true});
  recs.filter(x=>x.status=='replaced').forEach(x=>T.svc.push({id:'V'+T.seq++,ref,plans:[],when,meter:null,read:null,person:op,cost:0,desc:x.title+' — '+x.label,by:T.settings.user,at:iso,void:null,fromInspection:true}));
  T.checks.push({id:'CHK'+T.seq++,ref,machineName:m.name,code:m.code||'',type:m.type,operator:op,at:when+':00',meter:mv>=0?mv:null,items:recs,note:$('#mi_note').value,createdAt:iso});T.settings.lastInsp=op;commit(T);toast(nOpen?'بازرسی ثبت شد؛ '+fn(nOpen)+' مورد نیازمند اقدام':'بازرسی ثبت شد');(window.goReplace||go)('mdet',ref)};
-window.mcDone=(ref,key)=>{const o=mcOpenRepl(ref).find(x=>x.key==key);if(!o)return;modal('<h3>'+esc(o.done)+'</h3><p><b>'+esc(mname(ref))+'</b>: '+esc(o.title)+'</p><label>انجام‌دهنده</label><select id="md_p">'+persOpts(S.settings.lastInsp||'')+'</select><label>هزینه (ریال، اختیاری)</label><input id="md_c" inputmode="decimal"><br><br><button class="btn" onclick="mcDoDone(\''+ref+'\',\''+esc(o.key).replace(/\'/g,'')+'\')">ثبت</button> <button class="btn g" onclick="modal()">انصراف</button>')};
+window.mcDone=(ref,key)=>{const o=mcOpenRepl(ref).find(x=>x.key==key);if(!o)return;modal('<h3>'+esc(o.done)+'</h3><p><b>'+esc(mname(ref))+'</b>: '+esc(o.title)+'</p><label>انجام‌دهنده</label><select id="md_p">'+drvOpts(ref)+'</select><label>هزینه (ریال، اختیاری)</label><input id="md_c" inputmode="decimal"><br><br><button class="btn" onclick="mcDoDone(\''+ref+'\',\''+esc(o.key).replace(/\'/g,'')+'\')">ثبت</button> <button class="btn g" onclick="modal()">انصراف</button>')};
 window.mcDoDone=(ref,key)=>{const o=mcOpenRepl(ref).find(x=>x.key==key),op=$('#md_p').value;if(!o)return;if(!op)return toast('انجام‌دهنده را انتخاب کنید',1);const T=clone(S),m=mget(ref),when=nowL(),iso=new Date().toISOString();T.checks=T.checks||[];T.svc.push({id:'V'+T.seq++,ref,plans:[],when,meter:null,read:null,person:op,cost:nzv($('#md_c').value)||0,desc:o.title+' — '+o.done,by:T.settings.user,at:iso,void:null,fromInspection:true});
  T.checks.push({id:'CHK'+T.seq++,ref,machineName:m.name,code:m.code||'',type:m.type,operator:op,at:when+':00',quick:true,items:[{checkId:o.cid,title:o.title,status:'replaced',label:o.done,note:''}],note:'',createdAt:iso});T.settings.lastInsp=op;commit(T);modal();toast('ثبت شد');render()};
 /* ---- مدیریت چک‌لیست‌ها و دکمهٔ هر مورد ---- */
@@ -2786,6 +2786,133 @@ function restyle(){
 }
 const _render=window.render;
 window.render=function(){_render.apply(this,arguments);if(view==='tdet')restyle()};
+render();
+})();
+</script>
+<script>
+
+/* ===== Road Care V52.0: همهٔ انتخابگرهای تاریخ شمسی؛ مقدار ورودی بدون تغییر ===== */
+(function(){
+'use strict';
+const FA='۰۱۲۳۴۵۶۷۸۹';
+const toFa=x=>String(x).replace(/\d/g,d=>FA[+d]);
+const toEn=x=>String(x).replace(/[۰-۹]/g,d=>FA.indexOf(d));
+const JM=['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','آبان','آذر','دی','بهمن','اسفند'];
+const PF=new Intl.DateTimeFormat('en-US-u-ca-persian-nu-latn',{year:'numeric',month:'numeric',day:'numeric'});
+function g2j(iso){const p={};PF.formatToParts(new Date(iso+'T12:00:00Z')).forEach(x=>p[x.type]=+x.value);return[p.year,p.month,p.day]}
+function j2g(jy,jm,jd){
+ const days=(jm<=6?(jm-1)*31:186+(jm-7)*30)+jd-1;
+ let d=new Date(Date.UTC(jy+621,2,21+days,12));
+ for(let k=0;k<8;k++){const iso=d.toISOString().slice(0,10),j=g2j(iso),df=(j[0]*372+j[1]*31+j[2])-(jy*372+jm*31+jd);if(!df)return iso;d=new Date(d.getTime()-Math.sign(df)*864e5)}
+ return null;
+}
+function isoOf(v){return v?String(v).slice(0,10):''}
+function build(inp){
+ const isDT=inp.type==='datetime-local';
+ const cur=inp.value?String(inp.value):'';
+ const iso=isoOf(cur)||isoOf(new Date(Date.now()-new Date().getTimezoneOffset()*6e4).toISOString());
+ const [jy,jm,jd]=g2j(iso);
+ const time=isDT&&cur.length>10?cur.slice(11,16):'';
+ const wrap=document.createElement('div');wrap.className='jd-wrap';wrap.dataset.jd='1';
+ wrap.style.cssText='display:grid;grid-template-columns:1fr 1.5fr 1.1fr;gap:6px;align-items:center;margin:0';
+ const opt=(n,sel,t)=>'<option value="'+n+'"'+(n==sel?' selected':'')+'>'+t+'</option>';
+ const yrs=[];for(let y=jy-4;y<=jy+2;y++)yrs.push(y);
+ wrap.innerHTML='<select class="jd-d" aria-label="روز" style="min-height:44px">'+Array.from({length:31},(_,i)=>opt(i+1,jd,toFa(i+1))).join('')+'</select>'
+  +'<select class="jd-m" aria-label="ماه" style="min-height:44px">'+JM.map((m,i)=>opt(i+1,jm,m)).join('')+'</select>'
+  +'<select class="jd-y" aria-label="سال" style="min-height:44px">'+yrs.map(y=>opt(y,jy,toFa(y))).join('')+'</select>'
+  +(isDT?'<input class="jd-t" type="time" value="'+(time||'00:00')+'" style="min-height:44px;grid-column:1 / span 3">':'');
+ inp.type='hidden';inp.dataset.jdEnhanced='1';
+ inp.parentNode.insertBefore(wrap,inp);
+ const sync=()=>{const d=+wrap.querySelector('.jd-d').value,m=+wrap.querySelector('.jd-m').value,y=+wrap.querySelector('.jd-y').value;
+  let g=j2g(y,m,Math.min(d,31));let dd=d;while(!g&&dd>28){dd--;g=j2g(y,m,dd)}
+  if(!g)return;
+  if(isDT){const t=(wrap.querySelector('.jd-t')||{}).value||'00:00';inp.value=g+'T'+t}else inp.value=g;
+  inp.dispatchEvent(new Event('input',{bubbles:true}));inp.dispatchEvent(new Event('change',{bubbles:true}));
+ };
+ wrap.querySelectorAll('select,input').forEach(el=>el.addEventListener('change',sync));
+ wrap.querySelectorAll('select,input').forEach(el=>el.addEventListener('input',sync));
+ if(!inp.value)sync();
+}
+function enhanceAll(root){
+ (root||document).querySelectorAll('input[type="datetime-local"],input[type="date"]').forEach(inp=>{if(inp.dataset.jdEnhanced)return;build(inp)});
+}
+const mo=new MutationObserver(()=>enhanceAll(document));
+mo.observe(document.body,{childList:true,subtree:true});
+enhanceAll(document);
+})();
+</script>
+<script>
+
+/* ===== Road Care V53.0: حذف ماشین بدون کارت؛ فقط وقتی عملیاتش توسط همان کاربر ابطال شده باشد ===== */
+(function(){
+'use strict';
+const ALLOWED=()=>['admin','site'].includes(S.settings.role);
+const who=()=>S.settings.user||'';
+function opsOf(ref){
+ const tx=(S.tx||[]).filter(t=>!t.void&&(t.mref===ref||t.recv===ref));
+ const work=(S.work||[]).filter(w=>!w.superseded&&w.ref===ref);
+ const svc=(S.svc||[]).filter(x=>!x.void&&x.ref===ref);
+ const faults=(S.faults||[]).filter(x=>!x.void&&x.ref===ref);
+ const reads=(S.reads||[]).filter(x=>!x.void&&x.ref===ref);
+ return{tx,work,svc,faults,reads};
+}
+function summarize(o){return{total:o.tx.length+o.work.length+o.svc.length+o.faults.length+o.reads.length}}
+function ownerOf(x){return x.by||''}
+window.machDelForm=function(ref){
+ if(!ALLOWED())return toast('فقط مدیر و مسئول کارگاه می‌توانند ماشین را حذف کنند',1);
+ const m=(S.machines||[]).find(x=>'m:'+x.id===ref);if(!m)return;
+ const o=opsOf(ref),n=summarize(o).total;
+ const others=[...o.tx,...o.work,...o.svc,...o.faults,...o.reads].filter(x=>ownerOf(x)!==who());
+ if(others.length)return modal('<h3>حذف ممکن نیست</h3><p><b>'+esc(m.name)+'</b> دارای <b>'+fn(others.length)+'</b> عملیات ثبت‌شده توسط کاربران دیگر است.</p><p class="mut">حذف فقط وقتی ممکن است که عملیات‌ها توسط همان کاربر ثبت شده باشند؛ کاربران دیگر باید عملیات خودشان را ابطال کنند.</p><button class="btn g" onclick="modal()">بستن</button>');
+ const body=n?'<p>این ماشین <b>'+fn(n)+'</b> عملیات فعال دارد که همه توسط شما ثبت شده‌اند. برای حذف، این عملیات‌ها ابطال می‌شوند.</p>':'<p class="mut">این ماشین عملیات فعالی ندارد.</p>';
+ modal('<h3>حذف ماشین</h3><p><b>'+esc(m.name)+'</b> <span class="tg">'+esc(m.code||'')+'</span></p>'+body
+  +'<label>علت حذف (الزامی)</label><input id="md_why">'
+  +'<p class="mut" style="font-size:.85rem">قبل از حذف یک فایل پشتیبان دانلود می‌شود و حذف در گزارش مغایرت ثبت می‌شود.</p>'
+  +'<br><button class="btn d" onclick="machDelRun(\''+ref+'\')">'+(n?'ابطال عملیات‌ها و حذف':'حذف ماشین')+'</button> <button class="btn g" onclick="modal()">انصراف</button>');
+};
+window.machDelRun=function(ref){
+ if(!ALLOWED())return toast('دسترسی ندارید',1);
+ const why=(document.getElementById('md_why')||{value:''}).value.trim();if(!why)return toast('علت حذف را بنویسید',1);
+ const m0=(S.machines||[]).find(x=>'m:'+x.id===ref);if(!m0)return;
+ const o0=opsOf(ref);
+ const others=[...o0.tx,...o0.work,...o0.svc,...o0.faults,...o0.reads].filter(x=>ownerOf(x)!==who());
+ if(others.length)return toast('عملیات کاربران دیگر وجود دارد؛ حذف ممکن نیست',1);
+ if(typeof bkOut==='function')bkOut();
+ const T=clone(S);const at=new Date().toISOString(),by=T.settings.user;
+ const mark=x=>{x.void={reason:'حذف ماشین: '+why,by,at}};
+ const o=opsOf(ref);
+ o.tx.forEach(t=>{const tt=T.tx.find(y=>y.id===t.id);if(tt)mark(tt);T.tx.forEach(y=>{if(y.forFuel===t.id&&!y.void)y.void={reason:'حذف ماشین: '+why,by,at}})});
+ o.work.forEach(w=>{const tw=T.work.find(y=>y.id===w.id);if(tw)tw.superseded={reason:'حذف ماشین: '+why,by,at}});
+ o.svc.forEach(x=>{const tx=T.svc.find(y=>y.id===x.id);if(tx)mark(tx)});
+ o.faults.forEach(x=>{const tx=T.faults.find(y=>y.id===x.id);if(tx)mark(tx)});
+ o.reads.forEach(x=>{const tx=T.reads.find(y=>y.id===x.id);if(tx)mark(tx)});
+ T.machines=T.machines.filter(x=>x.id!==m0.id);
+ T.plans=(T.plans||[]).filter(p=>p.ref!==ref);
+ T.checks=(T.checks||[]).filter(c=>c.ref!==ref);
+ (T.deletions=T.deletions||[]).push({kind:'ماشین',name:m0.name+' ('+(m0.code||'')+')',reason:why,at,by,void:null});
+ commit(T);modal();toast('ماشین حذف شد');go('mach');
+};
+const _md=V.mdet;
+V.mdet=function(){let h=_md.apply(this,arguments);const ref=String(arg||'');
+ if(ref.startsWith('m:')&&ALLOWED()&&(S.machines||[]).some(x=>'m:'+x.id===ref)){
+  h='<div class="row np" style="margin-bottom:8px"><button class="btn d" onclick="machDelForm(\''+ref+'\')">حذف ماشین</button></div>'+h}
+ return h;
+};
+render();
+})();
+</script>
+<script>
+
+/* ===== Road Care V54.0: انجام‌دهندهٔ سرویس پیش‌فرض راننده‌ی همان خودرو ===== */
+(function(){
+'use strict';
+function recOf(ref){const id=String(ref||'').slice(2);return String(ref||'')[0]==='c'?(S.cards||[]).find(x=>x.id==id):(S.machines||[]).find(x=>x.id==id)}
+window.drvOpts=function(ref){
+ const v=recOf(ref),d=(v&&v.driver)||'';
+ const L=(S.persons||[]).filter(p=>p.active).map(p=>p.name);
+ if(d&&!L.includes(d))L.unshift(d);
+ return '<option value="">انتخاب کنید…</option>'+L.map(n=>'<option'+(n===d?' selected':'')+'>'+esc(n)+'</option>').join('');
+};
 render();
 })();
 </script>
