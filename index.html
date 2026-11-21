@@ -251,7 +251,7 @@ img.report-brand-mark{border:0;padding:0;background:none;object-fit:cover;border
 </style>
 </head><body>
 <div id="splash" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" aria-hidden="true"><defs><linearGradient id="sbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#14344a"/><stop offset="1" stop-color="#0a1c2b"/></linearGradient><linearGradient id="sgold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd76a"/><stop offset="1" stop-color="#e9a620"/></linearGradient><linearGradient id="ssh" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".10"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/></linearGradient></defs><rect width="512" height="512" rx="116" fill="url(#sbg)"/><rect width="512" height="512" rx="116" fill="url(#ssh)"/><path d="M84 400 Q256 346 428 400" fill="none" stroke="#e8f1f6" stroke-width="9" stroke-linecap="round"/><path d="M84 430 H428" stroke="#e8f1f6" stroke-opacity=".28" stroke-width="5" stroke-linecap="round"/><rect x="118" y="336" width="150" height="22" rx="8" fill="url(#sgold)"/><rect x="138" y="104" width="110" height="240" rx="16" fill="url(#sgold)"/><rect x="156" y="126" width="74" height="62" rx="8" fill="#0a1c2b"/><path d="M193 214 q-25 33 -25 50 a25 25 0 0 0 50 0 q0 -17 -25 -50z" fill="#0a1c2b"/><mask id="jw"><rect width="512" height="512" fill="#fff"/><rect x="326" y="110" width="28" height="62" fill="#000"/></mask><mask id="hl"><rect width="512" height="512" fill="#fff"/><circle cx="340" cy="372" r="9" fill="#000"/></mask><g transform="translate(18 -4) rotate(32 340 270)"><rect x="326" y="190" width="28" height="170" rx="14" fill="url(#sgold)"/><circle cx="340" cy="170" r="44" fill="url(#sgold)" mask="url(#jw)"/><circle cx="340" cy="372" r="24" fill="url(#sgold)" mask="url(#hl)"/></g></svg><h1>Road<b>Care</b></h1><div class="by">By AliGhorbani</div></div>
-<aside id="desktopSide"><div class="brand"><div class="brand-mark">RC</div><div><strong>Road <b>Care</b></strong><small>FUEL & FLEET MANAGEMENT</small></div></div><div class="side-caption">مدیریت ناوگان</div><nav id="sideNav"></nav><div class="side-foot"><span class="side-dot"></span><span>سامانه مدیریت فعال</span><small>نسخه V54.0 · Road Care</small></div></aside>
+<aside id="desktopSide"><div class="brand"><div class="brand-mark">RC</div><div><strong>Road <b>Care</b></strong><small>FUEL & FLEET MANAGEMENT</small></div></div><div class="side-caption">مدیریت ناوگان</div><nav id="sideNav"></nav><div class="side-foot"><span class="side-dot"></span><span>سامانه مدیریت فعال</span><small>نسخه V55.0 · Road Care</small></div></aside>
 <header id="top"><button id="hb" aria-label="منو" onclick="drawer(1)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button><button id="backBtn" aria-label="بازگشت" onclick="appBack()" hidden><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M14 6l6 6-6 6"/></svg></button><div class="title"><span id="pt"></span><small>مدیریت سوخت، ماشین‌آلات و نگهداری</small></div><button id="sb" aria-label="جست‌وجو" onclick="sbar()"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></button></header>
 <div id="sbar"><input id="q" placeholder="جست‌وجو: سریال، ماشین، کد، پلاک، راننده، پروژه" oninput="q=this.value;if(view!='cards')view='cards';render()"></div>
 <div id="dr" onclick="if(event.target==this)drawer(0)"><nav id="nav"></nav></div><main id="main"></main><div id="m" onclick="if(event.target==this)modal()"></div><div id="t"></div>
@@ -482,7 +482,7 @@ const ref=t=>t.type=='tdraw'?t.mref:(t.recv||'c:'+t.card);
 const rf=t=>t.tank?((S.tanks.find(k=>k.id==t.tank)||{}).name||''):((S.cards.find(x=>x.id==t.card)||{}).serial||'');
 const mget=r=>{const a=String(r).split(':');if(a[0]=='o')return{name:a.slice(1).join(':'),code:'سایر'};return(a[0]=='c'?S.cards:S.machines).find(x=>x.id==a[1])||{}},mname=r=>mget(r).name||'',mcode=r=>mget(r).code||'';
 const machOpts=sel=>S.cards.filter(c=>c.active).map(c=>`<option value="c:${c.id}"${'c:'+c.id==sel?' selected':''}>${esc(c.name)}، ${esc(c.code)}</option>`).join('')+S.machines.filter(m=>m.active!==false).map(m=>`<option value="m:${m.id}"${'m:'+m.id==sel?' selected':''}>${esc(m.name)}، ${esc(m.code)} (بدون کارت)</option>`).join('');
-function tbal(T,id){const k=T.tanks.find(x=>x.id==id);let s=+k.sys0,q=+k.tank0;for(const t of T.tx){if(t.tank!=id||t.void)continue;if(t.type=='tquota')s+=t.liters;if(t.type=='tfill'){s-=t.liters;q+=t.liters}if(t.type=='tdraw')q-=t.liters;if(t.type=='tsettle'&&t.mode=='burn')s-=t.liters}return{s,k:q}}
+function tbal(T,id){const k=T.tanks.find(x=>x.id==id);let s=+k.sys0,q=+k.tank0;for(const t of T.tx){if(t.tank!=id||t.void)continue;if(t.type=='tquota')s+=t.liters;if(t.type=='tfill'){s-=t.liters;q+=t.liters}if(t.type=='tdraw')q-=t.liters;if(t.type=='tsettle'&&t.mode=='burn')s-=t.liters;if(t.type=='tpoolin')s+=t.liters;if(t.type=='tpoolout')s-=t.liters}return{s,k:q}}
 function tval(T,id){const k=T.tanks.find(x=>x.id==id);let q=+k.tank0,v=q*(k.p0||0);for(const t of T.tx){if(t.tank!=id||t.void)continue;if(t.type=='tfill'){q+=t.liters;v+=t.amount}if(t.type=='tdraw'){q-=t.liters;v-=t.amount}}return{q,v,avg:q>0?v/q:(k.p0||0)}}
 function addTT(o){const T=clone(S),k=T.tanks.find(x=>x.id==o.tank);
  if(!k)return'مخزن انتخاب نشده است';
@@ -490,9 +490,10 @@ function addTT(o){const T=clone(S),k=T.tanks.find(x=>x.id==o.tank);
  if(!k.active)return'این مخزن غیرفعال است';
  const b=tbal(T,k.id),v=tval(T,k.id);
  if(o.type=='tsettle'){if(T.settings.role!='admin')return'فقط مدیر مجاز به تعیین تکلیف پایان ماه است';if(!(o.note||'').trim())return'علت یا توضیح الزامی است';if(o.mode=='carry')o.liters=b.s;else if(o.liters>b.s)return'مقدار از سهمیه مانده مخزن در مرکز ('+fn(b.s)+' لیتر) بیشتر است'}
- if(o.type=='tfill'){if(o.payer=='person'?!o.payPerson:!o.src)return'پرداخت‌کننده را مشخص کنید';if(o.liters>b.s)return'مقدار شارژ از سهمیه مرکز مخزن ('+fn(b.s)+' لیتر) بیشتر است؛ ابتدا سهمیه ماهانه را شارژ کنید';if(k.cap>0&&b.k+o.liters>k.cap)return'مجموع از ظرفیت مخزن ('+fn(k.cap)+' لیتر) بیشتر می‌شود';o.price=(k.rate>0?k.rate:T.settings.price)||0;o.amount=Math.round(o.liters*o.price);if(o.payer=='person')o.settled=null}
+ if(o.type=='tfill'){if(o.payer=='person'?!o.payPerson:!o.src)return'پرداخت‌کننده را مشخص کنید';const srcKeyP=o.srcKey||tpoolKey(k);const pool=tpoolBalKey(T,srcKeyP);if(o.liters>pool)return'مقدار شارژ از مانده مرکز پروژه ('+fn(pool)+' لیتر) بیشتر است؛ ابتدا سهمیه ماهانه را شارژ کنید';if(k.cap>0&&b.k+o.liters>k.cap)return'مجموع از ظرفیت مخزن ('+fn(k.cap)+' لیتر) بیشتر می‌شود';o.price=(k.rate>0?k.rate:T.settings.price)||0;o.amount=Math.round(o.liters*o.price);if(o.payer=='person')o.settled=null}
  if(o.type=='tdraw'){if(!o.mref)return'ماشین را انتخاب کنید';if(o.liters>b.k)return'مقدار برداشت از موجودی مخزن ('+fn(b.k)+' لیتر) بیشتر است';o.price=Math.round(v.avg);o.amount=Math.round(o.liters*v.avg)}
- const t={id:'T'+T.seq++,at:new Date().toISOString(),by:T.settings.user,void:null,bs:b.s,bk:b.k,...o};T.tx.push(t);const a=tbal(T,k.id);t.as=a.s;t.ak=a.k;commit(T);return null}
+ if(o.type=='tfill'){const srcKey=o.srcKey||tpoolKey(k);const own=tpoolKey(k)===srcKey?Math.max(0,Math.min(o.liters,b.s)):0;const short=o.liters-own;if(short>0){let left=short;const donors=T.tanks.filter(x=>x.id!==k.id&&x.active!==false&&tpoolKey(x)===srcKey).map(x=>({x,s:tbal(T,x.id).s})).filter(d=>d.s>0).sort((a,c)=>c.s-a.s);for(const d of donors){if(left<=0)break;const take=Math.min(left,d.s);T.tx.push({id:'T'+T.seq++,type:'tpoolout',tank:d.x.id,liters:take,when:o.when||nowL(),by:T.settings.user,at:new Date().toISOString(),void:null,note:'تأمین از مخزن هم‌پروژه برای '+k.name,bid:o.bid||''});left-=take}const borrowed=short-left;if(borrowed>0)T.tx.push({id:'T'+T.seq++,type:'tpoolin',tank:k.id,liters:borrowed,when:o.when||nowL(),by:T.settings.user,at:new Date().toISOString(),void:null,note:'دریافت از مخازن هم‌پروژه',bid:o.bid||''})}}
+  const t={id:'T'+T.seq++,at:new Date().toISOString(),by:T.settings.user,void:null,bs:b.s,bk:b.k,...o};T.tx.push(t);const a=tbal(T,k.id);t.as=a.s;t.ak=a.k;commit(T);return null}
 const ttile=k=>{const b=tbal(S,k.id),pc=k.cap?Math.max(0,Math.min(100,Math.round(b.k/k.cap*100))):0,lo=k.cap?b.k/k.cap<=.15:b.k<=S.settings.low;return`<div class="card tank-card${lo?' low':''}" onclick="go('tdet','${k.id}')" style="cursor:pointer"><div class="row" style="justify-content:space-between"><b>${esc(k.name)}</b><span class="tg">${esc(k.code)}</span></div><small>${esc(k.project)}${k.active?'':'، غیرفعال'}</small>${k.cap?`<div style="background:var(--line);border-radius:4px;height:12px;margin:8px 0"><div style="width:${pc}%;height:100%;background:${lo?'var(--err)':'var(--ok)'};border-radius:4px"></div></div>`:''}<div class="row"><div><small>سهمیه مرکز</small><br><b>${fn(b.s)}</b> ل</div><div><small>موجودی مخزن</small><br><b class="${lo?'bad':''}">${fn(b.k)}</b> ل${k.cap?' از '+fn(k.cap):''}</div></div></div>`};
 function tInfo(){const k=S.tanks.find(x=>x.id==$('#tk').value);if(!k){$('#tinf').innerHTML='';return}const b=tbal(S,k.id),v=tval(S,k.id);$('#tinf').innerHTML=`<div class="card">سهمیه مرکز: <b>${fn(b.s)}</b> ل، موجودی مخزن: <b>${fn(b.k)}</b>${k.cap?' از '+fn(k.cap):''} ل<br>میانگین قیمت موجودی: <b>${rl(Math.round(v.avg))}</b> برای هر لیتر</div>`}
 function tOp(ty,id){const T={tquota:'شارژ ماهانه سهمیه مرکز مخزن',tfill:'شارژ مخزن (انتقال از سهمیه به مخزن)',tdraw:'برداشت از مخزن',tmeas:'اندازه‌گیری فیزیکی مخزن',tsettle:'تعیین تکلیف پایان ماه مخزن'}[ty];
@@ -2618,7 +2619,7 @@ window.tOp=function(ty,id){
  if(ty!=='tfill')return _tOp.apply(this,arguments);
  const tanks=S.tanks.filter(k=>k.active);
  if(!tanks.length)return toast('مخزن فعالی وجود ندارد',1);
- const rows=tanks.map(k=>{const b=tbal(S,k.id);return '<div class="mc-it" style="padding:8px 10px;display:flex;align-items:center;gap:8px"><div style="flex:1;min-width:0"><b>'+esc(k.name)+'</b><small style="display:block;color:var(--muted)">مانده سهمیه مرکز: '+fn(Math.round(b.s*10)/10)+' ل'+(k.cap>0?' · ظرفیت '+fn(k.cap)+' ل':'')+' · نرخ: '+fn(k.rate>0?k.rate:(S.settings.price||0))+' ریال</small></div><input class="tl" data-id="'+k.id+'" data-max="'+b.s+'" inputmode="decimal" placeholder="لیتر" style="width:110px" oninput="tlTotal()"></div>'}).join('');
+ const rows=tanks.map(k=>{const b=tbal(S,k.id);return '<div class="mc-it" style="padding:8px 10px;display:flex;align-items:center;gap:8px"><div style="flex:1;min-width:0"><b>'+esc(k.name)+'</b><small style="display:block;color:var(--muted)">مانده مرکز پروژه: '+fn(Math.round(tpoolBal(S,k.id)*10)/10)+' ل'+(k.cap>0?' · ظرفیت '+fn(k.cap)+' ل':'')+' · نرخ: '+fn(k.rate>0?k.rate:(S.settings.price||0))+' ریال</small></div><input class="tl" data-id="'+k.id+'" data-max="'+b.s+'" inputmode="decimal" placeholder="لیتر" style="width:110px" oninput="tlTotal()"></div>'}).join('');
  const cs=carrierList();
  modal('<h3>تحویل سوخت به مخزن‌ها</h3>'
   +'<label>تاریخ و ساعت تحویل</label><input id="tm_w" type="datetime-local" value="'+nowL()+'">'
@@ -2646,7 +2647,7 @@ window.tmSave=function(){
  let trips=0,rate=0;
  if(withFreight){trips=N(document.getElementById('tm_t').value)||0;rate=N(document.getElementById('tm_pr').value)||0;if(!(trips>0))return toast('تعداد سفر را وارد کنید',1);if(!(rate>0))return toast('کرایه هر سفر را وارد کنید',1)}
  const when=document.getElementById('tm_w').value||nowL();const bid='DL'+(S.seq||0);
- const o={type:'tfill',when,receipt:(document.getElementById('tm_r').value||'').trim(),note:(document.getElementById('tm_n').value||'').trim(),person,payer:'company',src:'حمل‌کننده: '+cr.name,bid,carrier:cid};
+ const srcSel=document.getElementById('tm_src');const o={type:'tfill',when,receipt:(document.getElementById('tm_r').value||'').trim(),note:(document.getElementById('tm_n').value||'').trim(),person,payer:'company',src:'حمل‌کننده: '+cr.name,bid,carrier:cid,srcKey:srcSel?srcSel.value:''};
  const snap=clone(S);
  for(const r of rows){const e=addTx({...o,tank:r.id,liters:r.l});if(e){commit(snap);return toast(e+' (هیچ مخزنی ثبت نشد)',1)}}
  if(withFreight){const T=clone(S);T.freights=T.freights||[];const tot=rows.reduce((a,r)=>a+r.l,0);
@@ -2914,6 +2915,138 @@ window.drvOpts=function(ref){
  return '<option value="">انتخاب کنید…</option>'+L.map(n=>'<option'+(n===d?' selected':'')+'>'+esc(n)+'</option>').join('');
 };
 render();
+})();
+</script>
+<script>
+
+/* ===== Road Care V55.0: نرخ سوخت هر کارت داخل شناسنامهٔ کارت سوخت ===== */
+(function(){
+'use strict';
+function cardRate(c){return c&&c.rate>0?c.rate:(S.settings.price||0)}
+function place(){
+ const main=document.getElementById('main');if(!main||view!=='det')return;
+ const card=(S.cards||[]).find(c=>c.id===arg);if(!card)return;
+ // remove the separate top bar
+ [...main.querySelectorAll('.card')].forEach(el=>{if(el.textContent.includes('نرخ سوخت:')&&el.querySelector('button')&&el.innerText.length<140&&!el.querySelector('.rate-in'))el.remove()});
+ if(main.querySelector('.rate-in'))return;
+ // find the card-passport block (the element that shows the max per-refuel cap)
+ let target=null,best=1e9;
+ main.querySelectorAll('*').forEach(e=>{if(e.children.length<8&&e.textContent.includes('سقف هر سوخت‌گیری')&&e.textContent.length<600&&e.textContent.length<best){best=e.textContent.length;target=e}});
+ if(!target)return;
+ const d=document.createElement('div');d.className='rate-in';d.style.cssText='margin-top:8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap';
+ d.innerHTML='<span>نرخ سوخت: <b>'+fn(cardRate(card))+'</b> ریال در لیتر'+(card.rate>0?'':' <small class="mut">(نرخ عمومی)</small>')+'</span><button class="btn g" style="min-height:36px" onclick="rateForm(\'card\',\''+card.id+'\')">تغییر نرخ</button>';
+ target.appendChild(d);
+}
+const _render=window.render;
+window.render=function(){_render.apply(this,arguments);if(view==='det')place()};
+render();
+})();
+</script>
+<script>
+
+/* ===== Road Care V57.0: مانده مرکز متعلق به پروژه؛ تحویل از استخر مشترک پروژه ===== */
+(function(){
+'use strict';
+window.tpoolKey=function(k){const p=String(k.project||'').trim();return p?'P:'+p:'T:'+k.id};
+window.tpoolBalKey=function(T,key){return T.tanks.filter(x=>x.active!==false&&tpoolKey(x)===key).reduce((a,x)=>a+tbal(T,x.id).s,0)};
+window.tpoolBal=function(T,id){const k=T.tanks.find(x=>x.id==id);if(!k)return 0;const key=tpoolKey(k);return T.tanks.filter(x=>x.active!==false&&tpoolKey(x)===key).reduce((a,x)=>a+tbal(T,x.id).s,0)};
+if(typeof TY!=='undefined'){TY.tpoolin='دریافت از مخزن هم‌پروژه';TY.tpoolout='تأمین از مخزن هم‌پروژه'}
+})();
+</script>
+<script>
+
+/* ===== Road Care V58.0: اصلاح ثبت‌های حمل‌کننده (ویرایش با علت و تاریخچه، یا ابطال) ===== */
+(function(){
+'use strict';
+const who=()=>S.settings.user||'';
+const cr=id=>(S.carriers||[]).find(x=>x.id===id);
+function paidFor(cid,excludeId){return (S.carrierPays||[]).filter(x=>!x.void&&x.carrier===cid&&x.id!==excludeId).reduce((a,x)=>a+(x.amount||0),0)}
+function owedFor(cid,excludeId){return (S.freights||[]).filter(x=>!x.void&&x.carrier===cid&&x.id!==excludeId).reduce((a,x)=>a+(x.amount||0),0)}
+window.carrierRecs=function(cid){
+ const c=cr(cid);if(!c)return;
+ const fr=(S.freights||[]).filter(x=>x.carrier===cid).slice().reverse();
+ const pp=(S.carrierPays||[]).filter(x=>x.carrier===cid).slice().reverse();
+ const row=(x,kind)=>'<div class="mrow" style="cursor:default;align-items:flex-start"><span style="min-width:0">'
+  +(kind==='freight'?'کرایه: '+fn(x.trips)+' سفر × '+fn(x.rate)+' = '+fn(x.amount)+' ریال':'پرداخت: '+fn(x.amount)+' ریال از '+esc(x.src||''))
+  +'<small style="display:block" class="mut">'+fd(x.when)+(x.receipt?' · رسید: '+esc(x.receipt):'')+(x.cargo?' · '+esc(x.cargo):'')+(x.vehicle?' · '+esc(x.vehicle):'')+'</small>'
+  +(x.hist&&x.hist.length?'<small style="display:block;color:var(--warn)">اصلاح شده ('+fn(x.hist.length)+' بار)</small>':'')
+  +(x.void?'<small style="display:block;color:var(--err)">باطل: '+esc(x.void.reason)+'</small>':'')+'</span>'
+  +(x.void?'':'<span class="row np" style="gap:6px;flex:none"><button class="btn g" style="min-height:36px" onclick="carrierEditForm(\''+kind+'\',\''+x.id+'\')">ویرایش</button><button class="btn d" style="min-height:36px" onclick="carrierVoidAsk(\''+kind+'\',\''+x.id+'\')">ابطال</button></span>')+'</div>';
+ main_html=('<div class="card"><div class="row np" style="margin-bottom:8px"><button class="btn g" onclick="go(\'carriers\')">← حمل‌کنندگان</button></div><h3>اصلاح ثبت‌های «'+esc(c.name)+'»</h3><p class="mut" style="font-size:.85rem">هر ویرایش یا ابطال نیاز به علت دارد و در تاریخچه می‌ماند. بدهی نمی‌تواند از مجموع پرداخت‌ها کمتر شود.</p></div>')
+  +'<h3>کرایه‌ها</h3>'+(fr.map(x=>row(x,'freight')).join('')||'<div class="card">کرایه‌ای ثبت نشده است.</div>')
+  +'<h3>پرداخت‌ها</h3>'+(pp.map(x=>row(x,'pay')).join('')||'<div class="card">پرداختی ثبت نشده است.</div>');
+ return main_html;
+};
+let main_html='';
+const _cv=V.carriers;
+V.carriers=function(){let h=_cv.apply(this,arguments);
+ const list=(S.carriers||[]);
+ if(list.length)h+='<div class="card" style="margin-top:10px"><b>اصلاح ثبت‌ها</b><p class="mut" style="font-size:.85rem;margin:4px 0">برای ویرایش یا ابطال اشتباه ثبت کرایه یا پرداخت، حمل‌کننده را انتخاب کنید.</p><div class="row np">'+list.map(c=>'<button class="btn g" style="min-height:40px" onclick="go(\'carrierrec\',\''+c.id+'\')">'+esc(c.name)+'</button>').join('')+'</div></div>';
+ return h;
+};
+V.carrierrec=function(){return window.carrierRecs(String(arg||''))||'<div class="card">حمل‌کننده پیدا نشد.</div>'};
+window.carrierEditForm=function(kind,id){
+ const x=(kind==='freight'?S.freights:S.carrierPays||[]).find(y=>y.id===id);if(!x)return;
+ const isF=kind==='freight';
+ modal('<h3>ویرایش '+(isF?'کرایه':'پرداخت')+'</h3>'
+  +'<label>تاریخ و ساعت</label><input id="ce_w" type="datetime-local" value="'+esc(x.when)+'">'
+  +(isF?'<label>تعداد سفر</label><input id="ce_t" inputmode="decimal" value="'+x.trips+'" oninput="ceAmt()"><label>کرایه هر سفر (ریال)</label><input id="ce_p" inputmode="decimal" value="'+x.rate+'" oninput="ceAmt()"><div class="card" style="margin-top:6px"><b>مبلغ جدید: <span id="ce_a">'+fn(x.amount)+'</span> ریال</b></div><label>نوع بار (اختیاری)</label><input id="ce_c" value="'+esc(x.cargo||'')+'">'
+   :'<label>مبلغ پرداخت (ریال)</label><input id="ce_a" inputmode="decimal" value="'+x.amount+'"><label>شمارهٔ رسید (اختیاری)</label><input id="ce_r" value="'+esc(x.receipt||'')+'">')
+  +'<label>علت اصلاح (الزامی)</label><input id="ce_why">'
+  +'<br><button class="btn" onclick="carrierEditSave(\''+kind+'\',\''+id+'\')">ذخیره اصلاح</button> <button class="btn g" onclick="modal()">انصراف</button>');
+};
+window.ceAmt=function(){const t=N(document.getElementById('ce_t').value)||0,p=N(document.getElementById('ce_p').value)||0;document.getElementById('ce_a').textContent=fn(Math.round(t*p))};
+window.carrierEditSave=function(kind,id){
+ const why=(document.getElementById('ce_why').value||'').trim();if(!why)return toast('علت اصلاح را بنویسید',1);
+ const T=clone(S);const isF=kind==='freight';const list=isF?T.freights:T.carrierPays;const x=(list||[]).find(y=>y.id===id);if(!x||x.void)return;
+ const before={when:x.when,amount:x.amount,trips:x.trips,rate:x.rate,cargo:x.cargo,receipt:x.receipt};
+ const newWhen=document.getElementById('ce_w').value||x.when;
+ let patch={when:newWhen};
+ if(isF){const t=N(document.getElementById('ce_t').value),p=N(document.getElementById('ce_p').value);if(!(t>0)||!(p>0))return toast('تعداد سفر و کرایه معتبر وارد کنید',1);patch.trips=t;patch.rate=p;patch.amount=Math.round(t*p);patch.cargo=(document.getElementById('ce_c').value||'').trim();
+  const pays=paidFor(x.carrier,null);const owed=owedFor(x.carrier,x.id)+patch.amount;if(pays>owed)return toast('با این مبلغ، بدهی کمتر از پرداخت‌های ثبت‌شده می‌شود',1)}
+ else{const a=N(document.getElementById('ce_a').value);if(!(a>0))return toast('مبلغ معتبر وارد کنید',1);const others=paidFor(x.carrier,x.id);if(others+a>owedFor(x.carrier,null))return toast('مجموع پرداخت‌ها از بدهی بیشتر می‌شود',1);patch.amount=a;patch.receipt=(document.getElementById('ce_r').value||'').trim()}
+ Object.assign(x,patch);
+ (x.hist=x.hist||[]).push({at:new Date().toISOString(),by:T.settings.user,reason:why,before});
+ commit(T);modal();toast('اصلاح ثبت شد');go('carrierrec',x.carrier);
+};
+window.carrierVoidAsk=function(kind,id){
+ modal('<h3>ابطال ثبت</h3><p class="mut">ثبت باطل‌شده در تاریخچه می‌ماند و از بدهی کم می‌شود.</p><label>علت ابطال (الزامی)</label><input id="cv_why"><br><br><button class="btn d" onclick="carrierVoidRun(\''+kind+'\',\''+id+'\')">ابطال</button> <button class="btn g" onclick="modal()">انصراف</button>');
+};
+window.carrierVoidRun=function(kind,id){
+ const why=(document.getElementById('cv_why').value||'').trim();if(!why)return toast('علت ابطال الزامی است',1);
+ const T=clone(S);const list=kind==='freight'?T.freights:T.carrierPays;const x=(list||[]).find(y=>y.id===id);if(!x||x.void)return;
+ if(kind==='freight'){const pays=paidFor(x.carrier,null);const owed=owedFor(x.carrier,x.id);if(pays>owed)return toast('ابطال این کرایه باعث می‌شود پرداخت‌ها بیشتر از بدهی شوند',1)}
+ x.void={reason:why,by:T.settings.user,at:new Date().toISOString()};
+ commit(T);modal();toast('ابطال ثبت شد');go('carrierrec',x.carrier);
+};
+})();
+</script>
+<script>
+
+/* ===== Road Care V60.0: انتخاب پروژهٔ مبدأ مانده مرکز در فرم تحویل سوخت ===== */
+(function(){
+'use strict';
+const _tOp=window.tOp;
+function srcChoices(){
+ const seen={};const out=[];
+ (S.tanks||[]).filter(k=>k.active!==false).forEach(k=>{const key=tpoolKey(k);if(seen[key])return;seen[key]=1;
+  const label=key.startsWith('P:')?('پروژه '+key.slice(2)):('مخزن '+k.name+' (بدون پروژه)');
+  out.push({key,label,bal:tpoolBalKey(S,key)})});
+ return out;
+}
+window.tOp=function(ty,id){
+ const r=_tOp.apply(this,arguments);
+ if(ty!=='tfill')return r;
+ const lab=[...document.querySelectorAll('#m label')].find(l=>l.textContent.includes('حمل‌کننده (شخص یا شرکت)'));
+ if(!lab||document.getElementById('tm_src'))return r;
+ const ch=srcChoices();if(!ch.length)return r;
+ const best=ch.slice().sort((a,b)=>b.bal-a.bal)[0].key;
+ const wrap=document.createElement('div');
+ wrap.innerHTML='<label>مانده مرکز از کدام پروژه برداشته شود؟</label><select id="tm_src" onchange="tmSrcInfo()">'+ch.map(c=>'<option value="'+esc(c.key)+'"'+(c.key===best?' selected':'')+'>'+esc(c.label)+' · مانده: '+fn(Math.round(c.bal*10)/10)+' ل</option>').join('')+'</select><small class="mut" style="display:block;margin-bottom:6px">مخزن‌های مقصد می‌توانند پروژهٔ دیگری داشته باشند؛ تحویل از مانده‌ی پروژهٔ انتخاب‌شده برداشته می‌شود.</small>';
+ lab.parentNode.insertBefore(wrap,lab);
+ return r;
+};
+window.tmSrcInfo=function(){};
 })();
 </script>
 </body></html>
