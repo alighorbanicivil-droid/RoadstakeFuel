@@ -2317,10 +2317,11 @@ render();
 (function(){
 'use strict';
 if(!document.getElementById('v39css')){const st=document.createElement('style');st.id='v39css';st.textContent=`
-.tnow-wrap{position:relative;display:block;width:100%}
-.tnow-wrap input[type=time]{padding-inline-end:44px}
-.tnow{position:absolute;top:50%;transform:translateY(-50%);inset-inline-end:6px;width:34px;height:34px;min-height:0;padding:0;border:1px solid var(--line);border-radius:9px;background:var(--axis-soft);color:var(--primary);display:grid;place-items:center;cursor:pointer}
-.tnow:active{transform:translateY(-50%) scale(.94)}
+.tnow-wrap{display:flex;align-items:center;gap:6px;width:100%}
+.tnow-wrap input[type=time]{flex:1;min-width:0;width:auto;padding-inline-end:10px}
+input[type=time]::-webkit-calendar-picker-indicator{display:none;-webkit-appearance:none}
+.tnow{flex:none;width:38px;height:38px;min-height:0;padding:0;border:1px solid var(--line);border-radius:10px;background:var(--axis-soft);color:var(--primary);display:grid;place-items:center;cursor:pointer}
+.tnow:active{transform:scale(.94)}
 `;document.head.appendChild(st)}
 const ICON='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>';
 function nowHM(){const d=new Date();return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')}
@@ -2363,6 +2364,7 @@ function decorateAttend(){
   row.appendChild(d);
  });
 }
+window.decorateAttend=decorateAttend;
 function absentOn(name,date){
  const a=(S.attend||[]).find(x=>!x.superseded&&x.name===name&&String(x.date).slice(0,10)===date);
  return a&&(a.state==='absent'||a.state==='leave')?a.state:'';
@@ -2376,7 +2378,7 @@ function warnWork(){
  const first=main.querySelector('.card');(first?first.insertAdjacentElement('beforebegin',w):main.prepend(w));
 }
 const _render=window.render;
-window.render=function(){_render.apply(this,arguments);if(view==='attend')decorateAttend();if(view==='work')warnWork()};
+window.render=function(){_render.apply(this,arguments);};
 render();
 })();
 </script>
@@ -3047,6 +3049,276 @@ window.tOp=function(ty,id){
  return r;
 };
 window.tmSrcInfo=function(){};
+})();
+</script>
+<script>
+
+/* ===== Road Care V61.0: نرخ سوخت کارت مثل مخزن: خط نرخ در اطلاعات صفحه و دکمهٔ نرخ در نوار عملیات ===== */
+(function(){
+'use strict';
+const RATE_ICON='<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M16 7H10a3 3 0 0 0 0 6h4a3 3 0 0 1 0 6H6"/></svg>';
+function rateNow(list,id){const x=list.find(y=>y.id===id);return x&&x.rate>0?x.rate:(S.settings.price||0)}
+function infoCardFor(needle){return [...document.querySelectorAll('#main .card')].find(c=>c.innerText.includes(needle)&&!c.querySelector('.cact-row'))||null}
+function decorate(){
+ const main=document.getElementById('main');if(!main)return;
+ if(view==='det'){
+  const c=S.cards.find(x=>x.id===arg);if(!c)return;
+  if(!main.querySelector('.rate-line')){
+   const card=infoCardFor(c.serial)||infoCardFor(c.name);
+   if(card){const d=document.createElement('div');d.className='rate-line';d.style.cssText='margin-top:8px;font-size:.95rem';d.innerHTML='<b>نرخ سوخت:</b> '+fn(rateNow(S.cards,c.id))+' ریال در لیتر'+(c.rate>0?'':' <small class="mut">(نرخ عمومی)</small>');card.appendChild(d)}
+  }
+  const bar=main.querySelector('.cact-row');
+  if(bar&&!bar.querySelector('[data-rate]')){
+   const b=document.createElement('button');b.className='cact';b.dataset.rate='1';b.title='نرخ سوخت';b.setAttribute('aria-label','نرخ سوخت');b.innerHTML=RATE_ICON+'<span>نرخ</span>';
+   b.setAttribute('onclick',"rateForm('card','"+c.id+"')");
+   const edit=[...bar.querySelectorAll('button')].find(x=>/ویرایش/.test(x.textContent));
+   bar.insertBefore(b,edit||bar.firstChild);
+   bar.style.setProperty('--n',String(bar.children.length));
+  }
+ }
+ if(view==='tdet'){
+  const k=S.tanks.find(x=>x.id===arg);if(!k)return;
+  if(!main.querySelector('.rate-line')){
+   const card=infoCardFor(k.name)||infoCardFor(k.code);
+   if(card){const d=document.createElement('div');d.className='rate-line';d.style.cssText='margin-top:8px;font-size:.95rem';d.innerHTML='<b>نرخ سوخت:</b> '+fn(rateNow(S.tanks,k.id))+' ریال در لیتر'+(k.rate>0?'':' <small class="mut">(نرخ عمومی)</small>');card.appendChild(d)}
+  }
+ }
+}
+const _render=window.render;
+window.render=function(){_render.apply(this,arguments);decorate()};
+render();
+})();
+</script>
+<script>
+
+/* ===== Road Care V63.0: نمایش ساعت به شکل ساعت:دقیقه (مبنای ۶۰ دقیقه) ===== */
+(function(){
+'use strict';
+const FA='۰۱۲۳۴۵۶۷۸۹';
+const toFa=x=>String(x).replace(/\d/g,d=>FA[+d]);
+const toEn=x=>String(x).replace(/[۰-۹]/g,d=>FA.indexOf(d)).replace(/٫/g,'.');
+window.hmFmt=function(h){if(h===null||h===undefined||h===''||isNaN(+h))return'';const m=Math.round(+h*60);const H=Math.floor(m/60),M=m%60;return toFa(H)+':'+toFa(String(M).padStart(2,'0'))};
+const _wk=window.wkCalc;
+window.wkCalc=function(){_wk.apply(this,arguments);const el=document.getElementById('wk2_h');if(el&&el.value!=='')el.value=hmFmt(parseFloat(toEn(el.value)))};
+const _atTm=window.atTm;
+window.atTm=function(){_atTm.apply(this,arguments);const r=document.querySelector('[id^="atr"]');document.querySelectorAll('#main .ah').forEach(el=>{if(el.value!=='')el.value=hmFmt(parseFloat(toEn(el.value)))})};
+function fixReports(){
+ document.querySelectorAll('#main .report-table').forEach(t=>{
+  const hr=t.rows[0];if(!hr)return;
+  const cols=[...hr.cells].map((c,i)=>/ساعت/.test(c.textContent)&&!/ورود|خروج/.test(c.textContent)?i:-1).filter(i=>i>=0);
+  if(!cols.length)return;
+  [...t.rows].slice(1).forEach(r=>{cols.forEach(i=>{const c=r.cells[i];if(!c)return;const raw=toEn(c.textContent.trim());if(/^-?\d+(\.\d+)?$/.test(raw)){c.textContent=hmFmt(parseFloat(raw))}})});
+ });
+}
+const _render=window.render;
+window.render=function(){_render.apply(this,arguments);fixReports()};
+render();
+})();
+</script>
+<script>
+
+/* ===== Road Care V64.0: وضعیت روزانهٔ خودرو بر اساس حضور راننده؛ با تأیید کاربر ===== */
+(function(){
+'use strict';
+const isOn=m=>m.active!==false;
+function dayVehicles(name){
+ return [...(S.cards||[]).filter(c=>!c.archived&&c.active&&c.driver===name).map(c=>({ref:'c:'+c.id,name:c.name,code:c.code||c.serial,rented:!!c.rented,susp:!!(c.susp&&c.susp.from)})),
+  ...(S.machines||[]).filter(m=>isOn(m)&&m.driver===name).map(m=>({ref:'m:'+m.id,name:m.name,code:m.code||'',rented:!!m.rented,susp:!!(m.susp&&m.susp.from)}))]
+  .filter(v=>!v.rented&&!v.susp);
+}
+function stateOf(name,date){const a=(S.attend||[]).find(x=>!x.superseded&&x.name===name&&String(x.date).slice(0,10)===date);return a?a.state:''}
+function askDayStatus(date,people){
+ const rows=[];
+ people.forEach(name=>{const st=stateOf(name,date);dayVehicles(name).forEach(v=>{
+  const prev=((S.vehDay||{})[date]||{})[v.ref];
+  const defOn=prev?prev.on:(st==='present');
+  rows.push({...v,name2:name,st,defOn,reason:prev&&!prev.on?prev.reason:(st==='absent'||st==='leave'?'راننده '+(st==='absent'?'غایب':'مرخصی'):'')})})});
+ if(!rows.length)return;
+ modal('<h3>وضعیت خودروها در '+esc(fd(date+'T12:00').split(/[,،]/)[0])+'</h3><p class="mut" style="font-size:.85rem;margin:0 0 8px">پیش‌فرض بر اساس حضور راننده است. اگر خودرو با وجود حضور راننده در تعمیر است، «غیرفعال» را انتخاب و علت را بنویسید. این وضعیت فقط برای همین روز است.</p>'
+  +rows.map((r,i)=>'<div class="mc-it" style="padding:8px 10px"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><div><b>'+esc(r.name)+'</b> <small class="mut">'+esc(r.code)+'</small><small style="display:block" class="mut">راننده: '+esc(r.name2)+' · '+(r.st==='present'?'حاضر':r.st==='absent'?'غایب':r.st==='leave'?'مرخصی':'بدون حضور ثبت‌شده')+'</small></div>'
+   +'<div class="mc-seg"><label class="ok"><input type="radio" name="dv'+i+'" value="1"'+(r.defOn?' checked':'')+' onchange="dvToggle('+i+')"><span>فعال</span></label><label class="kp"><input type="radio" name="dv'+i+'" value="0"'+(!r.defOn?' checked':'')+' onchange="dvToggle('+i+')"><span>غیرفعال</span></label></div></div>'
+   +'<input id="dvr'+i+'" placeholder="علت غیرفعال بودن" value="'+esc(r.reason)+'" style="margin-top:6px;display:'+(!r.defOn?'block':'none')+'"><input type="hidden" id="dvref'+i+'" value="'+r.ref+'"></div>').join('')
+  +'<br><button class="btn" onclick="dvSave(\''+date+'\','+rows.length+')">ذخیرهٔ وضعیت روز</button> <button class="btn g" onclick="modal()">بعداً</button>');
+}
+window.askDayStatus=askDayStatus;
+window.dvToggle=i=>{const on=document.querySelector('input[name="dv'+i+'"]:checked').value==='1';document.getElementById('dvr'+i).style.display=on?'none':'block'};
+window.dvSave=(date,n)=>{
+ const T=clone(S);T.vehDay=T.vehDay||{};T.vehDay[date]=T.vehDay[date]||{};const at=new Date().toISOString(),by=T.settings.user;
+ for(let i=0;i<n;i++){const ref=document.getElementById('dvref'+i).value;const on=document.querySelector('input[name="dv'+i+'"]:checked').value==='1';const why=(document.getElementById('dvr'+i).value||'').trim();
+  if(!on&&!why)return toast('برای غیرفعال بودن علت بنویسید',1);
+  T.vehDay[date][ref]={on,reason:on?'':why,by,at}}
+ commit(T);modal();toast('وضعیت روز ذخیره شد');render();
+};
+const _atSave=window.atSave;
+window.atSave=function(){
+ const date=R.adate;const before=(S.attend||[]).length;
+ const r=_atSave.apply(this,arguments);
+ const names=[...new Set((S.attend||[]).filter(a=>!a.superseded&&String(a.date).slice(0,10)===date).map(a=>a.name))];
+ 
+ return r;
+};
+const _render=window.render;
+window.render=function(){_render.apply(this,arguments);
+ if(false){const ref=R.wsel;const d=R.wd;const st=((S.vehDay||{})[d]||{})[ref];const cb=document.getElementById('wk2_off');
+  if(st&&cb&&!st.on&&!cb.checked&&!(S.work||[]).some(w=>!w.superseded&&w.ref===ref&&String(w.date).slice(0,10)===d)){cb.checked=true;if(window.wkOffT)window.wkOffT();const rs=document.getElementById('wk2_rs');}
+ }
+};
+render();
+})();
+</script>
+<script>
+
+/* ===== Road Care V65.0: وضعیت روزانهٔ خودرو (از حضور راننده) در داشبورد و فهرست کارکرد هم اعمال شود ===== */
+(function(){
+'use strict';
+function dayOffRefs(date){
+ const m=(S.vehDay||{})[date]||{};
+ return Object.keys(m).filter(ref=>m[ref]&&m[ref].on===false);
+}
+function todayISO(){return nowL().slice(0,10)}
+/* داشبورد: خودروهای غیرفعال امروز = کارکرد غیرفعال ثبت‌شده + وضعیت روزانهٔ حضور */
+const _addCard=window.addCardKpi;
+const _render=window.render;
+window.render=function(){
+ _render.apply(this,arguments);
+ if(view==='dash'){
+  const main=document.getElementById('main');if(!main)return;
+  const src=[...main.querySelectorAll('.kpi')].find(k=>k.textContent.includes('ماشین‌آلات فعال'));
+  const dst=[...main.querySelectorAll('.kpi')].find(k=>k.dataset.kind==='inactive');
+  if(!src||!dst)return;
+  const td=todayISO();
+  const cards=S.cards.filter(c=>!c.archived),machs=S.machines||[];
+  const total=cards.length+machs.length;
+  const permRefs=[...cards.filter(c=>!c.active).map(c=>'c:'+c.id),...machs.filter(m=>m.active===false).map(m=>'m:'+m.id)];
+  const dayRefs=[...new Set([...(S.work||[]).filter(w=>!w.superseded&&w.off&&String(w.date).slice(0,10)===td).map(w=>w.ref),...[]])];
+  const offSet=new Set([...permRefs,...dayRefs]);
+  const inactiveN=offSet.size,activeN=total-inactiveN;
+  const dayOnly=dayRefs.filter(r=>!permRefs.includes(r)).length;
+  src.querySelector('strong').innerHTML=fn(activeN)+' <small>دستگاه</small>';
+  src.lastElementChild.textContent=fn(inactiveN)+' دستگاه غیرفعال از جمع '+fn(total);
+  dst.querySelector('strong').innerHTML=fn(inactiveN)+' <small>دستگاه</small>';
+  dst.lastElementChild.textContent=fn(permRefs.length)+' دائمی · '+fn(dayOnly)+' امروز (روزانه)';
+ }
+ if(false){
+  const d=R.wd||todayISO();const off=dayOffRefs(d);
+  document.querySelectorAll('#main .mc-row').forEach(row=>{
+   const m=(row.getAttribute('onclick')||'').match(/wkPick\('([^']+)'\)/);if(!m)return;
+   const ref=m[1];if(!off.includes(ref))return;
+   if((S.work||[]).some(w=>!w.superseded&&w.ref===ref&&String(w.date).slice(0,10)===d))return;
+   const chip=row.querySelector('.chip');const reason=((S.vehDay||{})[d]||{})[ref].reason||'غیرفعال';
+   if(chip){chip.textContent='غیرفعال: '+reason;chip.className='chip over'}
+  });
+ }
+};
+render();
+})();
+</script>
+<script>
+
+/* ===== Road Care V66.0: کارت نفرات حاضر امروز در داشبورد ===== */
+(function(){
+'use strict';
+const _render=window.render;
+window.render=function(){
+ _render.apply(this,arguments);
+ if(view!=='dash')return;
+ const main=document.getElementById('main');if(!main)return;
+ const src=[...main.querySelectorAll('.kpi')].find(k=>k.textContent.includes('ماشین‌آلات فعال'));
+ if(!src)return;
+ const td=nowL().slice(0,10);
+ const last={};
+ (S.attend||[]).filter(a=>!a.superseded&&String(a.date).slice(0,10)===td).forEach(a=>{last[a.name]=a.state});
+ const vals=Object.values(last);
+ const present=vals.filter(x=>x==='present').length,absent=vals.filter(x=>x==='absent').length,leave=vals.filter(x=>x==='leave').length;
+ let dst=[...main.querySelectorAll('.kpi')].find(k=>k.dataset.kind==='attend');
+ if(!dst){dst=src.cloneNode(true);dst.dataset.kind='attend';dst.classList.remove('gold');dst.classList.add('green');dst.style.borderInlineStartColor='var(--ok)';
+  const inact=[...main.querySelectorAll('.kpi')].find(k=>k.dataset.kind==='inactive');(inact||src).insertAdjacentElement('afterend',dst)}
+ dst.querySelector('span').textContent='نفرات حاضر امروز';
+ dst.querySelector('.kpi-icon').textContent='👷';
+ dst.querySelector('strong').innerHTML=fn(present)+' <small>نفر</small>';
+ dst.lastElementChild.textContent=fn(absent)+' غایب · '+fn(leave)+' مرخصی';
+};
+render();
+})();
+</script>
+<script>
+
+/* ===== Road Care V67.0: حذف نرخ تکراری از صفحهٔ کارت سوخت؛ نرخ فقط در نوار عملیات (دکمهٔ نرخ) ===== */
+(function(){
+'use strict';
+const _render=window.render;
+window.render=function(){
+ _render.apply(this,arguments);
+ if(view!=='det')return;
+ const main=document.getElementById('main');if(!main)return;
+ main.querySelectorAll('.rate-line').forEach(n=>n.remove());
+ main.querySelectorAll('.card').forEach(c=>{
+  if(c.querySelector('.cact-row'))return;
+  const hasBtn=[...c.querySelectorAll('button')].some(b=>b.textContent.trim()==='تغییر نرخ');
+  const hasTxt=c.innerText.includes('نرخ سوخت:');
+  if(hasBtn||hasTxt)c.remove();
+ });
+};
+render();
+})();
+</script>
+<script>
+
+/* ===== Road Care V68.0: کادر ساعت کاملاً خوانا؛ دکمهٔ ساعت کوچک‌تر و کنار کادر ===== */
+(function(){
+'use strict';
+if(!document.getElementById('v68css')){const st=document.createElement('style');st.id='v68css';st.textContent=`
+input[type=time]{-webkit-appearance:none;appearance:none;direction:ltr;text-align:center;font-size:14px;letter-spacing:.2px}
+input[type=time]::-webkit-calendar-picker-indicator{display:none!important;-webkit-appearance:none}
+input[type=time]::-webkit-datetime-edit{padding:0}
+.tnow-wrap{display:flex;align-items:center;gap:4px;width:100%;min-width:0}
+.tnow-wrap input[type=time]{flex:1;min-width:0;width:auto;padding:0 4px}
+.tnow{flex:none;width:30px;height:38px;min-height:0;padding:0;border:1px solid var(--line);border-radius:9px;background:var(--axis-soft);color:var(--primary);display:grid;place-items:center;cursor:pointer}
+.tnow svg{width:16px;height:16px}
+`;document.head.appendChild(st)}
+})();
+</script>
+<script>
+
+/* ===== Road Care V69.0: حضور راننده از ساعت ورود و خروج کارکرد خودروی فعال ===== */
+(function(){
+'use strict';
+const pad=n=>String(n).padStart(2,'0');
+function grossH(a,b){if(!a||!b)return null;const p=x=>{const q=String(x).split(':');return +q[0]*60+ +q[1]};let d=p(b)-p(a);if(d<=0)d+=1440;return Math.round(d/60*100)/100}
+function syncAttend(T,work){
+ const name=work.operator;if(!name||!work.tin||!work.tout)return false;
+ const person=(T.persons||[]).find(p=>p.name===name&&p.active);if(!person)return false;
+ const date=String(work.date).slice(0,10);
+ const prev=(T.attend||[]).find(a=>!a.superseded&&a.name===name&&String(a.date).slice(0,10)===date)||null;
+ if(prev&&prev.state==='present'&&prev.tin===work.tin&&prev.tout===work.tout)return false;
+ const at=new Date().toISOString(),by=T.settings.user;
+ if(prev)prev.superseded={reason:'از ساعت ورود و خروج کارکرد روزانه',by,at};
+ T.attend=T.attend||[];
+ T.attend.push({id:'AT'+T.seq++,date,pid:person.id,name,state:'present',tin:work.tin,tout:work.tout,hours:grossH(work.tin,work.tout),ot:null,note:'',by,at,superseded:null,fromWork:work.id});
+ return true;
+}
+const _wkOne=window.wkOne;
+window.wkOne=function(ref){
+ const before=new Set((S.work||[]).map(w=>w.id));
+ const r=_wkOne.apply(this,arguments);
+ const added=(S.work||[]).filter(w=>!before.has(w.id)&&!w.superseded&&!w.off&&w.operator&&w.tin&&w.tout);
+ return r;
+ const T=clone(S);let changed=false;
+ added.forEach(w=>{if(syncAttend(T,w))changed=true});
+ if(changed){commit(T);render();toast('حضور راننده از ساعت کارکرد ثبت شد')}
+ return r;
+};
+render();
+})();
+</script>
+<script>
+
+/* ===== Road Care V71.0: نمایش اطلاعاتی خودروهای راننده در حضور و غیاب (بدون تأثیر روی حضور یا وضعیت خودرو) ===== */
+(function(){
+'use strict';
+const _render=window.render;
+window.render=function(){_render.apply(this,arguments);if(view==='attend'&&typeof decorateAttend==='function')decorateAttend()};
+render();
 })();
 </script>
 </body></html>
