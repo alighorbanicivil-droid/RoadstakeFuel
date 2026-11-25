@@ -251,7 +251,7 @@ img.report-brand-mark{border:0;padding:0;background:none;object-fit:cover;border
 </style>
 </head><body>
 <div id="splash" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" aria-hidden="true"><defs><linearGradient id="sbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#14344a"/><stop offset="1" stop-color="#0a1c2b"/></linearGradient><linearGradient id="sgold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd76a"/><stop offset="1" stop-color="#e9a620"/></linearGradient><linearGradient id="ssh" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".10"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/></linearGradient></defs><rect width="512" height="512" rx="116" fill="url(#sbg)"/><rect width="512" height="512" rx="116" fill="url(#ssh)"/><path d="M84 400 Q256 346 428 400" fill="none" stroke="#e8f1f6" stroke-width="9" stroke-linecap="round"/><path d="M84 430 H428" stroke="#e8f1f6" stroke-opacity=".28" stroke-width="5" stroke-linecap="round"/><rect x="118" y="336" width="150" height="22" rx="8" fill="url(#sgold)"/><rect x="138" y="104" width="110" height="240" rx="16" fill="url(#sgold)"/><rect x="156" y="126" width="74" height="62" rx="8" fill="#0a1c2b"/><path d="M193 214 q-25 33 -25 50 a25 25 0 0 0 50 0 q0 -17 -25 -50z" fill="#0a1c2b"/><mask id="jw"><rect width="512" height="512" fill="#fff"/><rect x="326" y="110" width="28" height="62" fill="#000"/></mask><mask id="hl"><rect width="512" height="512" fill="#fff"/><circle cx="340" cy="372" r="9" fill="#000"/></mask><g transform="translate(18 -4) rotate(32 340 270)"><rect x="326" y="190" width="28" height="170" rx="14" fill="url(#sgold)"/><circle cx="340" cy="170" r="44" fill="url(#sgold)" mask="url(#jw)"/><circle cx="340" cy="372" r="24" fill="url(#sgold)" mask="url(#hl)"/></g></svg><h1>Road<b>Care</b></h1><div class="by">By AliGhorbani</div></div>
-<aside id="desktopSide"><div class="brand"><div class="brand-mark">RC</div><div><strong>Road <b>Care</b></strong><small>FUEL & FLEET MANAGEMENT</small></div></div><div class="side-caption">مدیریت ناوگان</div><nav id="sideNav"></nav><div class="side-foot"><span class="side-dot"></span><span>سامانه مدیریت فعال</span><small>نسخه V91.0 · Road Care</small></div></aside>
+<aside id="desktopSide"><div class="brand"><div class="brand-mark">RC</div><div><strong>Road <b>Care</b></strong><small>FUEL & FLEET MANAGEMENT</small></div></div><div class="side-caption">مدیریت ناوگان</div><nav id="sideNav"></nav><div class="side-foot"><span class="side-dot"></span><span>سامانه مدیریت فعال</span><small>نسخه V99.0 · Road Care</small></div></aside>
 <header id="top"><button id="hb" aria-label="منو" onclick="drawer(1)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button><button id="backBtn" aria-label="بازگشت" onclick="appBack()" hidden><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M14 6l6 6-6 6"/></svg></button><div class="title"><span id="pt"></span><small>مدیریت سوخت، ماشین‌آلات و نگهداری</small></div><button id="sb" aria-label="جست‌وجو" onclick="sbar()"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></button></header>
 <div id="sbar"><input id="q" placeholder="جست‌وجو: سریال، ماشین، کد، پلاک، راننده، پروژه" oninput="q=this.value;if(view!='cards')view='cards';render()"></div>
 <div id="dr" onclick="if(event.target==this)drawer(0)"><nav id="nav"></nav></div><main id="main"></main><div id="m" onclick="if(event.target==this)modal()"></div><div id="t"></div>
@@ -3927,6 +3927,314 @@ window.render=function(){
  row.setAttribute('onclick',"dashDetail('fuelalert')");
  row.innerHTML='<span><b>خودروهای بدون سوخت‌گیری</b><small>بیش از حد تعیین‌شده سوخت نگرفته‌اند</small></span><span class="badge'+(n?' danger':'')+'">'+fn(n)+' مورد</span>';
  list.appendChild(row);
+};
+render();
+})();
+</script>
+<script>
+
+/* ===== Road Care V92.0: «فعال» فقط با ثبت فعال امروز؛ بقیه تعیین‌نشده ===== */
+(function(){
+'use strict';
+const today=()=>nowL().slice(0,10);
+function classify(){
+ const td=today();
+ const all=[...(S.cards||[]).filter(c=>!c.archived).map(c=>({ref:'c:'+c.id,name:c.name,code:c.code||c.serial,perm:!c.active})),
+  ...(S.machines||[]).map(m=>({ref:'m:'+m.id,name:m.name,code:m.code||'',perm:m.active===false}))];
+ const todays=(S.work||[]).filter(w=>!w.superseded&&String(w.date).slice(0,10)===td);
+ const confirmedOn=new Set(todays.filter(w=>!w.off).map(w=>w.ref));
+ const dayOffSet=new Set(todays.filter(w=>w.off).map(w=>w.ref));
+ const vd=((S.vehDay||{})[td])||{};
+ Object.keys(vd).forEach(r=>{if(vd[r]&&vd[r].on===true)confirmedOn.add(r);if(vd[r]&&vd[r].on===false)dayOffSet.add(r)});
+ all.forEach(x=>{
+  const why=offReasonOn(x.ref,td);
+  x.reason=x.perm?'دائمی':(why||(dayOffSet.has(x.ref)?'امروز غیرفعال':''));
+  x.inactive=x.perm||!!why||dayOffSet.has(x.ref);
+  x.active=!x.inactive&&confirmedOn.has(x.ref);
+  x.undet=!x.inactive&&!x.active;
+ });
+ return all;
+}
+function openList(){const td=today();return (S.work||[]).filter(w=>!w.superseded&&!w.off&&w.tin&&!w.tout&&String(w.date).slice(0,10)===td)}
+const _render=window.render;
+window.render=function(){
+ _render.apply(this,arguments);
+ if(view!=='dash')return;
+ const main=document.getElementById('main');if(!main)return;
+ const veh=[...main.querySelectorAll('.kpi')].find(k=>(k.getAttribute('onclick')||'').includes("dashDetail('veh')"));
+ if(!veh)return;
+ const all=classify();
+ const act=all.filter(x=>x.active).length,ina=all.filter(x=>x.inactive).length,und=all.filter(x=>x.undet).length;
+ const op=openList().length;
+ const strong=veh.querySelector('strong');if(strong)strong.innerHTML='<span>'+fn(act)+' <small>فعال</small></span>';
+ const sm=[...veh.children].find(c=>c.tagName==='SMALL');
+ if(sm)sm.textContent=fn(ina)+' غیرفعال · '+fn(und)+' تعیین‌نشده'+(op?' · '+fn(op)+' ورود بدون خروج':'');
+};
+const _dd=window.dashDetail;
+window.dashDetail=function(k){
+ if(k!=='veh')return _dd.apply(this,arguments);
+ const all=classify();
+ const sec=(t,rows,empty)=>'<div style="font-weight:700;margin:12px 0 6px">'+t+' <span style="color:var(--muted);font-weight:600">('+fn(rows.length)+')</span></div>'+(rows.map(x=>'<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;padding:7px 9px;border:1px solid var(--line);border-radius:10px;margin-bottom:6px"><span><b style="font-size:.85rem">'+esc(x.name)+'</b><small style="display:block;color:var(--muted);font-size:.72rem">'+esc(x.code||'')+'</small></span><small style="color:var(--muted);font-size:.72rem">'+esc(x.reason||'')+'</small></div>').join('')||'<div style="color:var(--muted);font-size:.8rem;padding:6px">'+empty+'</div>');
+ modal('<div style="font-weight:800;font-size:1rem;margin-bottom:2px">ماشین‌آلات امروز</div><div style="color:var(--muted);font-size:.78rem">فقط خودروهایی فعال‌اند که برای امروز ثبت فعال دارند</div>'
+  +sec('فعال',all.filter(x=>x.active),'خودروی فعال ثبت‌شده‌ای برای امروز نیست')
+  +sec('غیرفعال',all.filter(x=>x.inactive),'خودروی غیرفعالی نیست')
+  +sec('تعیین‌نشده',all.filter(x=>x.undet),'همهٔ خودروها برای امروز تعیین‌شده‌اند'));
+};
+render();
+})();
+</script>
+<script>
+
+/* ===== Road Care V93.0: کارت نفرات؛ افراد بدون وضعیت امروز به‌عنوان «تعیین‌نشده» ===== */
+(function(){
+'use strict';
+const today=()=>nowL().slice(0,10);
+function attLast(){const td=today(),last={};(S.attend||[]).filter(a=>!a.superseded&&String(a.date).slice(0,10)===td).forEach(a=>{last[a.name]=a});return last}
+function peopleSets(){
+ const last=attLast();
+ const act=(S.persons||[]).filter(p=>p.active!==false);
+ const rows=act.map(p=>{const a=last[p.name];return{name:p.name,role:p.role||'',state:a?a.state:'',tin:a?a.tin:'',tout:a?a.tout:'',undet:!a}});
+ return rows;
+}
+const _render=window.render;
+window.render=function(){
+ _render.apply(this,arguments);
+ if(view!=='dash')return;
+ const main=document.getElementById('main');if(!main)return;
+ const pe=[...main.querySelectorAll('.kpi')].find(k=>(k.getAttribute('onclick')||'').includes("dashDetail('people')"));
+ if(!pe)return;
+ const rows=peopleSets();
+ const present=rows.filter(r=>r.state==='present').length;
+ const absent=rows.filter(r=>r.state==='absent').length;
+ const leave=rows.filter(r=>r.state==='leave').length;
+ const und=rows.filter(r=>r.undet).length;
+ const open=rows.filter(r=>r.state==='present'&&r.tin&&!r.tout).length;
+ const strong=pe.querySelector('strong');if(strong)strong.innerHTML='<span>'+fn(present)+' <small>حاضر</small></span>';
+ const sm=[...pe.children].find(c=>c.tagName==='SMALL');
+ if(sm)sm.textContent=fn(absent)+' غایب · '+fn(leave)+' مرخصی · '+fn(und)+' تعیین‌نشده'+(open?' · '+fn(open)+' ورود بدون خروج':'');
+};
+const _dd=window.dashDetail;
+window.dashDetail=function(k){
+ if(k!=='people')return _dd.apply(this,arguments);
+ const rows=peopleSets();
+ const sec=(t,list,tone,chip)=>'<div style="font-weight:700;margin:12px 0 6px">'+t+' <span style="color:var(--muted);font-weight:600">('+fn(list.length)+')</span></div>'+(list.map(x=>'<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;padding:7px 9px;border:1px solid var(--line);border-radius:10px;margin-bottom:6px"><span><b style="font-size:.85rem">'+esc(x.name)+'</b><small style="display:block;color:var(--muted);font-size:.72rem">'+esc(x.role||'')+(x.tin?' · ورود '+esc(x.tin):'')+'</small></span><small style="color:'+tone+';font-size:.72rem;font-weight:700">'+chip+'</small></div>').join('')||'<div style="color:var(--muted);font-size:.8rem;padding:6px">موردی نیست</div>');
+ modal('<div style="font-weight:800;font-size:1rem;margin-bottom:2px">نفرات امروز</div><div style="color:var(--muted);font-size:.78rem">فقط افرادی حاضرند که برای امروز حضور ثبت شده باشد</div>'
+  +sec('حاضر',rows.filter(r=>r.state==='present'),'var(--ok)','حاضر')
+  +sec('غایب و مرخصی',rows.filter(r=>r.state==='absent'||r.state==='leave'),'var(--err)',rows.filter(r=>r.state==='absent'||r.state==='leave')[0]?'':'')
+  +sec('تعیین‌نشده',rows.filter(r=>r.undet),'var(--muted)','بدون وضعیت'));
+};
+render();
+})();
+</script>
+<script>
+
+/* ===== Road Care V94.0: دکمه‌های فعال/غیرفعال در ثبت جدید خنثی؛ رنگ فقط بعد از لمس ===== */
+(function(){
+'use strict';
+const _render=window.render;
+window.render=function(){
+ _render.apply(this,arguments);
+ if(view!=='work'||!R.wsel)return;
+ const seg=document.getElementById('wk2seg');if(!seg)return;
+ const main=document.getElementById('main');
+ const isNew=!!main&&main.innerText.includes('ثبت جدید برای این روز');
+ if(!seg.dataset.v94){
+  seg.dataset.v94='1';
+  seg.addEventListener('click',e=>{if(e.target&&e.target.dataset&&e.target.dataset.v!==undefined)seg.dataset.touched='1'},true);
+ }
+ if(isNew&&!seg.dataset.touched){
+  seg.querySelectorAll('button').forEach(b=>{b.style.background='var(--card)';b.style.color='var(--ink)'});
+ }
+};
+render();
+})();
+</script>
+<script>
+
+/* ===== Road Care V95.0: ثبت کارکرد جدید بدون انتخاب فعال/غیرفعال ممکن نیست ===== */
+(function(){
+'use strict';
+const _wk=window.wkOne;
+window.wkOne=function(ref){
+ const seg=document.getElementById('wk2seg');
+ const main=document.getElementById('main');
+ const isNew=!!main&&main.innerText.includes('ثبت جدید برای این روز');
+ if(seg&&isNew&&!seg.dataset.touched){
+  toast('وضعیت خودرو را انتخاب کنید: فعال یا غیرفعال',1);
+  return;
+ }
+ return _wk.apply(this,arguments);
+};
+render();
+})();
+</script>
+<script>
+
+/* ===== Road Care V96.0: علت اصلاح ثبت قبلی با کادر جدا پرسیده می‌شود؛ کادر علت در فرم حذف شد ===== */
+(function(){
+'use strict';
+const _wk=window.wkOne;
+const hasPrev=()=>{const m=document.getElementById('main');return !!m&&m.innerText.includes('ثبت قبلی برای این روز')};
+window.wkOne=function(ref){
+ const why=document.getElementById('wk2_why');
+ if(hasPrev()&&why&&!why.value.trim()){
+  modal('<div style="font-weight:800;font-size:1rem;margin-bottom:4px">علت اصلاح ثبت قبلی این روز</div><div style="color:var(--muted);font-size:.8rem;margin-bottom:10px">برای ثبت تغییر، نوشتن علت لازم است.</div>'
+   +'<textarea id="rs_txt" rows="3" placeholder="مثلاً ساعت ورود اشتباه بود" style="width:100%;font-size:.9rem"></textarea>'
+   +'<div style="display:flex;gap:8px;margin-top:10px"><button class="btn" style="flex:1" onclick="rsConfirm(\''+ref+'\')">ثبت</button><button class="btn g" style="flex:1" onclick="modal()">انصراف</button></div>');
+  setTimeout(()=>{const t=document.getElementById('rs_txt');if(t)t.focus()},50);
+  return;
+ }
+ return _wk.apply(this,arguments);
+};
+window.rsConfirm=function(ref){
+ const t=((document.getElementById('rs_txt')||{}).value||'').trim();
+ if(!t)return toast('علت را بنویسید',1);
+ const why=document.getElementById('wk2_why');if(why)why.value=t;
+ modal();
+ window.wkOne(ref);
+};
+const _render=window.render;
+window.render=function(){
+ _render.apply(this,arguments);
+ if(view!=='work'||!R.wsel)return;
+ const main=document.getElementById('main');if(!main)return;
+ const lab=[...main.querySelectorAll('label')].find(l=>l.textContent.includes('علت اصلاح'));
+ if(lab){lab.style.display='none';const nx=lab.nextElementSibling;if(nx)nx.style.display='none'}
+ const why=document.getElementById('wk2_why');if(why)why.style.display='none';
+};
+render();
+})();
+</script>
+<script>
+
+/* ===== Road Care V97.0: کادر علت کوچک‌تر؛ اگر تغییری نباشد، ثبت بدون پرسیدن علت ===== */
+(function(){
+'use strict';
+if(!document.getElementById('v97css')){const st=document.createElement('style');st.id='v97css';st.textContent=`
+#m .box.rs-box{max-width:min(340px,90vw);padding:12px!important}
+#m .rs-t{font-weight:800;font-size:.9rem;margin-bottom:2px}
+#m .rs-s{color:var(--muted);font-size:.74rem;margin-bottom:8px}
+#m #rs_txt{font-size:.8rem;padding:6px 8px;min-height:0}
+#m .rs-b{font-size:.8rem;min-height:36px!important;padding:6px 10px!important}
+`;document.head.appendChild(st)}
+const _wk=window.wkOne;
+const hasPrev=()=>{const m=document.getElementById('main');return !!m&&m.innerText.includes('ثبت قبلی برای این روز')};
+const val=id=>{const e=document.getElementById(id);if(!e)return '';return e.type==='checkbox'?(e.checked?'1':'0'):String(e.value||'').trim()};
+function currentRec(ref,day){return (S.work||[]).filter(w=>!w.superseded&&w.ref===ref&&String(w.date).slice(0,10)===day).pop()||null}
+function unchanged(ref){
+ const day=R.wd||nowL().slice(0,10);const r=currentRec(ref,day);if(!r)return false;
+ const off=val('wk2_off')==='1';
+ const same=(a,b)=>String(a==null?'':a).trim()===String(b==null?'':b).trim();
+ return off===!!r.off && same(val('wk2_in'),r.tin) && same(val('wk2_out'),r.tout) && same(val('wk2_op'),r.operator)
+  && same(val('wk2_v1'),r.volume) && (r.volume==null||r.volume===''?true:same(val('wk2_u1'),r.unit)) && same(val('wk2_m'),r.meter);
+}
+window.wkOne=function(ref){
+ const why=document.getElementById('wk2_why');
+ if(hasPrev()&&why&&!why.value.trim()){
+  if(unchanged(ref)){why.value='بدون تغییر';return _wk.apply(this,arguments)}
+  modal('<div class="rs-t">علت اصلاح</div><div class="rs-s">برای ثبت تغییر، علت را بنویسید.</div>'
+   +'<textarea id="rs_txt" rows="2" placeholder="مثلاً ساعت ورود اشتباه بود"></textarea>'
+   +'<div style="display:flex;gap:6px;margin-top:8px"><button class="btn rs-b" style="flex:1" onclick="rsConfirm(\''+ref+'\')">ثبت</button><button class="btn g rs-b" style="flex:1" onclick="modal()">انصراف</button></div>');
+  const bx=document.querySelector('#m .box');if(bx)bx.classList.add('rs-box');
+  setTimeout(()=>{const t=document.getElementById('rs_txt');if(t)t.focus()},50);
+  return;
+ }
+ return _wk.apply(this,arguments);
+};
+window.rsConfirm=function(ref){
+ const t=((document.getElementById('rs_txt')||{}).value||'').trim();
+ if(!t)return toast('علت را بنویسید',1);
+ const why=document.getElementById('wk2_why');if(why)why.value=t;
+ modal();
+ window.wkOne(ref);
+};
+render();
+})();
+</script>
+<script>
+
+/* ===== Road Care V98.0: تأیید کوتاه به‌جای پرسیدن علت برای تغییر ثبت قبلی ===== */
+(function(){
+'use strict';
+const _prev=window.wkOne;
+const hasPrev=()=>{const m=document.getElementById('main');return !!m&&m.innerText.includes('ثبت قبلی برای این روز')};
+const val=id=>{const e=document.getElementById(id);if(!e)return '';return e.type==='checkbox'?(e.checked?'1':'0'):String(e.value||'').trim()};
+const same=(a,b)=>String(a==null?'':a).trim()===String(b==null?'':b).trim();
+function currentRec(ref,day){return (S.work||[]).filter(w=>!w.superseded&&w.ref===ref&&String(w.date).slice(0,10)===day).pop()||null}
+function unchanged(ref){
+ const day=R.wd||nowL().slice(0,10);const r=currentRec(ref,day);if(!r)return false;
+ const off=val('wk2_off')==='1';
+ return off===!!r.off && same(val('wk2_in'),r.tin) && same(val('wk2_out'),r.tout) && same(val('wk2_op'),r.operator)
+  && same(val('wk2_v1'),r.volume) && (r.volume==null||r.volume===''?true:same(val('wk2_u1'),r.unit)) && same(val('wk2_m'),r.meter);
+}
+window.wkOne=function(ref){
+ const why=document.getElementById('wk2_why');
+ if(hasPrev()&&why&&!why.value.trim()&&!unchanged(ref)){
+  modal('<div class="rs-t">تأیید تغییر</div><div class="rs-s">این تغییر ثبت قبلی این روز را جایگزین می‌کند. ادامه می‌دهید؟</div>'
+   +'<div style="display:flex;gap:6px;margin-top:8px"><button class="btn rs-b" style="flex:1" onclick="confirmChange(\''+ref+'\')">ادامه</button><button class="btn g rs-b" style="flex:1" onclick="modal()">انصراف</button></div>');
+  const bx=document.querySelector('#m .box');if(bx)bx.classList.add('rs-box');
+  return;
+ }
+ if(hasPrev()&&why&&!why.value.trim())why.value='اصلاح ثبت قبلی';
+ return _prev.apply(this,arguments);
+};
+window.confirmChange=function(ref){
+ const why=document.getElementById('wk2_why');if(why)why.value='اصلاح ثبت قبلی';
+ modal();
+ window.wkOne(ref);
+};
+render();
+})();
+</script>
+<script>
+
+/* ===== Road Care V99.0: حضور و غیاب؛ تأیید کوتاه به‌جای پرسیدن علت برای تغییر ثبت قبلی ===== */
+(function(){
+'use strict';
+const _at=window.atSave;
+const txt=(el)=>el?String(el.value||'').trim():'';
+function attendChanged(){
+ const d=R.adate;let changed=false;
+ document.querySelectorAll('.at-row').forEach(row=>{
+  const st=(row.querySelector('input[type=radio]:checked')||{}).value;if(!st)return;
+  const p=(S.persons||[]).find(x=>x.id==row.dataset.pid);if(!p)return;
+  const old=(S.attend||[]).find(a=>!a.superseded&&a.pid==p.id&&a.date==d);if(!old)return;
+  const pres=st==='present';
+  const same=(a,b)=>String(a==null?'':a).trim()===String(b==null?'':b).trim();
+  if(old.state!==st){changed=true;return}
+  if(pres){
+   if(!same(txt(row.querySelector('.ai')),old.tin))changed=true;
+   if(!same(txt(row.querySelector('.ao')),old.tout))changed=true;
+  }else{
+   if(!same(txt(row.querySelector('.an')),old.note))changed=true;
+  }
+ });
+ return changed;
+}
+window.atSave=function(){
+ const why=document.getElementById('at_why');
+ if(why&&!why.value.trim()&&attendChanged()){
+  modal('<div class="rs-t">تأیید تغییر</div><div class="rs-s">این تغییر ثبت قبلی این روز را جایگزین می‌کند. ادامه می‌دهید؟</div>'
+   +'<div style="display:flex;gap:6px;margin-top:8px"><button class="btn rs-b" style="flex:1" onclick="atConfirm()">ادامه</button><button class="btn g rs-b" style="flex:1" onclick="modal()">انصراف</button></div>');
+  const bx=document.querySelector('#m .box');if(bx)bx.classList.add('rs-box');
+  return;
+ }
+ if(why&&!why.value.trim())why.value='اصلاح ثبت قبلی';
+ return _at.apply(this,arguments);
+};
+window.atConfirm=function(){
+ const why=document.getElementById('at_why');if(why)why.value='اصلاح ثبت قبلی';
+ modal();
+ window.atSave();
+};
+const _render=window.render;
+window.render=function(){
+ _render.apply(this,arguments);
+ if(view!=='attend')return;
+ const main=document.getElementById('main');if(!main)return;
+ const lab=[...main.querySelectorAll('label')].find(l=>l.textContent.includes('علت اصلاح'));
+ if(lab){lab.style.display='none';const nx=lab.nextElementSibling;if(nx)nx.style.display='none'}
+ const w=document.getElementById('at_why');if(w)w.style.display='none';
 };
 render();
 })();
