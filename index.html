@@ -187,7 +187,19 @@ table{border-collapse:separate;border-spacing:0;width:100%;font-size:13px}th{bac
 
 .report-filters{grid-template-columns:1fr!important}.report-filters>div{border-left:0!important}.report-machine-cell{display:flex;align-items:center;gap:6px;min-width:0}.report-machine-cell .r-icon{flex:none}.report-machine-cell .r-icon svg{width:25px;height:25px}.report-machine-cell small{display:block;color:#82939d;font-size:8px}
 .check-item,.check-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 0;border-bottom:1px solid #edf1f4}.check-item:last-child,.check-row:last-child{border-bottom:0}.check-item small{display:block;color:#8a9aa4;font-size:10px;margin-top:4px}.check-row{display:block}.check-row>div{display:flex;gap:14px;flex-wrap:wrap;margin:9px 0}.check-row label{font-size:11px;color:#526a7b}.check-note{width:100%;box-sizing:border-box;border:1px solid #e2e9ee;border-radius:8px;padding:8px;font:inherit;font-size:11px}.check-item .btn{font-size:10px;padding:7px 9px}@media(max-width:560px){.check-item{align-items:flex-start;flex-direction:column}.check-row>div{gap:8px}}
-</style><style id="roadcare-v6-3-fixes">
+
+.fleet-edit{flex:none;width:30px;height:30px;min-height:0;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--primary);display:grid;place-items:center;font-size:13px;cursor:pointer;padding:0;margin-inline-start:6px}
+.fleet-edit:active{transform:scale(.94)}
+#m .box{padding:14px 16px;border-radius:16px;max-width:min(380px,92vw)}
+#m .box h3{font-size:1rem;font-weight:800;margin:0 0 6px;line-height:1.4}
+#m .box p{font-size:.84rem;line-height:1.7;margin:4px 0;color:var(--ink)}
+#m .box .mut{font-size:.78rem;line-height:1.6}
+#m .box label{font-size:.8rem;margin:8px 0 4px;display:block;color:var(--muted)}
+#m .box input,#m .box select,#m .box textarea{font-size:.86rem;padding:8px 10px;border-radius:10px}
+#m .box .btn{font-size:.84rem;min-height:38px;padding:8px 14px;border-radius:12px}
+
+.brk-sec{border:1px solid var(--line);border-radius:14px;background:var(--card);padding:0;margin-top:10px}.brk-sec>summary{cursor:pointer;list-style:none;padding:10px 14px;font-weight:800;font-size:.92rem;display:flex;justify-content:space-between;align-items:center}.brk-sec>summary::-webkit-details-marker{display:none}.brk-sec>summary:after{content:'▾';font-size:.9rem;color:var(--muted);transition:.2s}.brk-sec[open]>summary:after{transform:rotate(180deg)}.brk-body{padding:0 14px 12px}.brk-w{display:grid;grid-template-columns:1fr 1fr auto;gap:6px;align-items:end;margin:6px 0;padding:8px;border:1px solid var(--line);border-radius:10px}.brk-w label{font-size:.72rem;color:var(--muted);margin:0 0 2px;display:block}.brk-w input{font-size:.82rem;padding:6px 8px;border-radius:8px;min-height:34px}.brk-del{font-size:.74rem;min-height:34px;padding:0 10px;border-radius:8px;border:1px solid #f1c7c7;background:#fff5f5;color:#b42318;cursor:pointer}.brk-add{font-size:.8rem;min-height:36px;padding:6px 12px;margin-top:4px}
+.brk-w{grid-template-columns:1fr 1fr auto}.set-card{padding:0!important;overflow:hidden}.set-card>.brk-sec{border:0;border-radius:0;margin:0}.brk-w{display:grid;grid-template-columns:1fr 1fr auto;gap:6px;align-items:center;margin:6px 0;padding:6px 8px}.brk-w label{display:none}.brk-w input{min-height:34px}</style><style id="roadcare-v6-3-fixes">
 .nav-dashboard-group{margin-bottom:14px}
 .nav-dashboard-group .sh-b svg{stroke:#e8b83d!important}
 .nav-quick-btn svg{stroke:#f4b82f!important}
@@ -251,7 +263,7 @@ img.report-brand-mark{border:0;padding:0;background:none;object-fit:cover;border
 </style>
 </head><body>
 <div id="splash" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" aria-hidden="true"><defs><linearGradient id="sbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#14344a"/><stop offset="1" stop-color="#0a1c2b"/></linearGradient><linearGradient id="sgold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd76a"/><stop offset="1" stop-color="#e9a620"/></linearGradient><linearGradient id="ssh" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".10"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/></linearGradient></defs><rect width="512" height="512" rx="116" fill="url(#sbg)"/><rect width="512" height="512" rx="116" fill="url(#ssh)"/><path d="M84 400 Q256 346 428 400" fill="none" stroke="#e8f1f6" stroke-width="9" stroke-linecap="round"/><path d="M84 430 H428" stroke="#e8f1f6" stroke-opacity=".28" stroke-width="5" stroke-linecap="round"/><rect x="118" y="336" width="150" height="22" rx="8" fill="url(#sgold)"/><rect x="138" y="104" width="110" height="240" rx="16" fill="url(#sgold)"/><rect x="156" y="126" width="74" height="62" rx="8" fill="#0a1c2b"/><path d="M193 214 q-25 33 -25 50 a25 25 0 0 0 50 0 q0 -17 -25 -50z" fill="#0a1c2b"/><mask id="jw"><rect width="512" height="512" fill="#fff"/><rect x="326" y="110" width="28" height="62" fill="#000"/></mask><mask id="hl"><rect width="512" height="512" fill="#fff"/><circle cx="340" cy="372" r="9" fill="#000"/></mask><g transform="translate(18 -4) rotate(32 340 270)"><rect x="326" y="190" width="28" height="170" rx="14" fill="url(#sgold)"/><circle cx="340" cy="170" r="44" fill="url(#sgold)" mask="url(#jw)"/><circle cx="340" cy="372" r="24" fill="url(#sgold)" mask="url(#hl)"/></g></svg><h1>Road<b>Care</b></h1><div class="by">By AliGhorbani</div></div>
-<aside id="desktopSide"><div class="brand"><div class="brand-mark">RC</div><div><strong>Road <b>Care</b></strong><small>FUEL & FLEET MANAGEMENT</small></div></div><div class="side-caption">مدیریت ناوگان</div><nav id="sideNav"></nav><div class="side-foot"><span class="side-dot"></span><span>سامانه مدیریت فعال</span><small>نسخه V99.0 · Road Care</small></div></aside>
+<aside id="desktopSide"><div class="brand"><div class="brand-mark">RC</div><div><strong>Road <b>Care</b></strong><small>FUEL & FLEET MANAGEMENT</small></div></div><div class="side-caption">مدیریت ناوگان</div><nav id="sideNav"></nav><div class="side-foot"><span class="side-dot"></span><span>سامانه مدیریت فعال</span><small>نسخه V124.0 · Road Care</small></div></aside>
 <header id="top"><button id="hb" aria-label="منو" onclick="drawer(1)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button><button id="backBtn" aria-label="بازگشت" onclick="appBack()" hidden><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M14 6l6 6-6 6"/></svg></button><div class="title"><span id="pt"></span><small>مدیریت سوخت، ماشین‌آلات و نگهداری</small></div><button id="sb" aria-label="جست‌وجو" onclick="sbar()"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></button></header>
 <div id="sbar"><input id="q" placeholder="جست‌وجو: سریال، ماشین، کد، پلاک، راننده، پروژه" oninput="q=this.value;if(view!='cards')view='cards';render()"></div>
 <div id="dr" onclick="if(event.target==this)drawer(0)"><nav id="nav"></nav></div><main id="main"></main><div id="m" onclick="if(event.target==this)modal()"></div><div id="t"></div>
@@ -345,7 +357,7 @@ function subTx(ty,force){const f=ty=='fuel',o={type:ty,card:$('#fc').value,liter
  const e=addTx(o);if(e)return toast(e,1);const b=bal(S,o.card);toast('ثبت شد. سهمیه مرکز: '+fn(b.s)+'، قابل تحویل: '+fn(b.k)+' لیتر');go('det',o.card)}
 function payForm(id){modal(`<h3>تسویه پرداخت شخصی</h3><label>تاریخ و ساعت تسویه</label><input id="yw" type="datetime-local" value="${nowL()}">${yk((S.tx.find(x=>x.id==id)||{}).payPerson)}<label>توضیح (مثلاً شماره پرداخت)</label><textarea id="yn" rows="2"></textarea><br><br><button class="btn" onclick="doPay('${id}')">ثبت تسویه</button> <button class="btn g" onclick="modal()">انصراف</button>`)}
 function doPay(id){const T=clone(S),t=T.tx.find(x=>x.id==id);if(!t||t.void||t.payer!='person'||t.settled)return toast('این عملیات قابل تسویه نیست',1);t.settled={when:$('#yw').value||nowL(),at:new Date().toISOString(),by:T.settings.user,note:$('#yn').value,card:cardSnap()};commit(T);modal();toast('تسویه ثبت شد');render()}
-function togSrc(i){const T=clone(S);T.settings.sources[i].active=!T.settings.sources[i].active;commit(T);render()}
+function srcEdit(i){const x=S.settings.sources[i];if(!x)return;modal('<h3>ویرایش منبع پرداخت</h3><label>نام منبع</label><input id=\"se_n\" value=\"'+esc(x.name)+'\"><div style=\"display:flex;gap:8px;margin-top:12px\"><button class=\"btn\" onclick=\"srcSave('+i+')\">ذخیره</button><button class=\"btn g\" onclick=\"modal()\">انصراف</button></div>')}function srcSave(i){const n=(document.getElementById('se_n').value||'').trim();if(!n)return toast('نام منبع را وارد کنید',1);const old=S.settings.sources[i].name;if(n!==old&&S.settings.sources.some(x=>x.name===n))return toast('این منبع قبلاً ثبت شده است',1);const T=clone(S);T.settings.sources[i].name=n;T.tx.forEach(t=>{if(t.srcName===old)t.srcName=n});commit(T);modal();toast('منبع به‌روز شد');render()}function srcUsed(name){return S.tx.filter(t=>!t.void&&(t.srcName===name||(t.src&&String(t.src).indexOf(name)>=0))).length}function srcDel(i){const x=S.settings.sources[i];if(!x)return;const n=srcUsed(x.name);if(n)return modal('<h3>حذف ممکن نیست</h3><p>این منبع در <b>'+fn(n)+'</b> ثبت پرداخت استفاده شده است.</p><p class=\"mut\">ابتدا این ثبت‌ها را ابطال کنید، سپس منبع را حذف کنید.</p><button class=\"btn g\" onclick=\"modal()\">بستن</button>');modal('<h3>حذف منبع</h3><p>«'+esc(x.name)+'» حذف شود؟</p><label>علت حذف</label><input id=\"sd_why\" placeholder=\"مثلاً دیگر استفاده نمی‌شود\"><div style=\"display:flex;gap:8px;margin-top:12px\"><button class=\"btn d\" onclick=\"srcDelConfirm('+i+')\">حذف</button><button class=\"btn g\" onclick=\"modal()\">انصراف</button></div>')}function srcDelConfirm(i){const why=((document.getElementById('sd_why')||{}).value||'').trim();if(!why)return toast('علت حذف را بنویسید',1);const x=S.settings.sources[i];if(!x)return;const T=clone(S);T.settings.sources.splice(i,1);(T.deletions=T.deletions||[]).push({at:new Date().toISOString(),by:T.settings.user,kind:'منبع پرداخت',name:x.name,why});commit(T);modal();toast('منبع حذف شد');render()}function togSrc(i){const T=clone(S);T.settings.sources[i].active=!T.settings.sources[i].active;commit(T);render()}
 function addSrc(){const n=$('#sn2').value.trim();if(!n)return;if(S.settings.sources.some(x=>x.name==n))return toast('این منبع قبلاً ثبت شده است',1);const T=clone(S);T.settings.sources.push({name:n,active:true});commit(T);render()}
 function settleForm(id){const b=bal(S,id);modal(`<h3>تعیین تکلیف پایان ماه</h3><p>سهمیه مانده در مرکز: <b>${fn(b.s)}</b> لیتر</p><label>وضعیت</label><select id="sm" onchange="$('#sb').style.display=this.value=='burn'?'block':'none'"><option value="carry">منتقل به ماه بعد</option><option value="burn">سوخت‌شد (از بین رفت)</option></select><div id="sb" style="display:none"><label>مقدار سوخت‌شده (لیتر)</label><input id="sq" inputmode="decimal" value="${b.s}"></div><label>تاریخ و ساعت</label><input id="sw" type="datetime-local" value="${nowL()}"><label>علت یا توضیح (الزامی)</label><textarea id="sn" rows="2"></textarea><br><br><button class="btn" onclick="subSettle('${id}')">ثبت</button> <button class="btn g" onclick="modal()">انصراف</button>`)}
 function subSettle(id){const m=$('#sm').value,n=$('#sn').value.trim();if(!n)return toast('علت الزامی است',1);const e=addTx({type:'settle',mode:m,card:id,liters:m=='burn'?N($('#sq').value):0,when:$('#sw').value||nowL(),person:'',receipt:'',note:n});if(e)return toast(e,1);modal();toast('ثبت شد');render()}
@@ -460,8 +472,8 @@ det(){const c=S.cards.find(x=>x.id==arg);if(!c)return'';const b=bal(S,c.id),all=
 fuel(){return ff('fuel')},charge(){return ff('charge')},
 pers(){return`<button class="btn" onclick="persForm()">+ شخص جدید</button><br><br><div class="card"><div class="sc"><table><tr><th>نام<th>کد<th>سمت<th>تماس<th>وضعیت<th></tr>${S.persons.map(p=>`<tr><td>${esc(p.name)}<td>${esc(p.code)}<td>${esc(p.role)}<td>${esc(p.phone)}<td><a style="color:var(--ink)" onclick="togP('${p.id}')">${p.active?'فعال':'غیرفعال'}</a><td><a style="color:var(--ink)" onclick="B.p=S.persons.find(x=>x.id=='${p.id}').name;go('stm')">صورتحساب</a> <a onclick="delForm('pers','${p.id}')">حذف</a>`).join('')}</table></div></div>`},
 rep(){const d=repData();lastRep=d;const title=(RT.find(x=>x[0]===R.t)||['','گزارش'])[1],from=R.from?faDate(R.from):'—',to=R.to?faDate(R.to):'—',machine=R.m?mname(R.m):'',tank=R.k?(S.tanks.find(x=>x.id===R.k)||{}).name||'':'',project=R.m?((S.cards.find(x=>x.id===R.m)||S.machines.find(x=>x.id===R.m)||{}).project||''):'',filters=[machine?'ماشین: '+machine:'',tank?'مخزن: '+tank:'',project?'پروژه: '+project:''].filter(Boolean),filterLine=filters.length?filters.join(' · '):'بدون فیلتر اضافی',totalLit=d.tot!=null?fn(d.tot):'—',totalMoney=d.totR!=null?rl(d.totR):'—',machineCol=d.h.findIndex(x=>x.includes('ماشین'));const cell=(value,index)=>{if(index!==machineCol)return esc(value==null?'':value);const m=[...S.cards,...S.machines].find(x=>x.name===value);return `<span class="report-machine-cell"><span class="r-icon">${vehicleIcon(m?.type||'سایر')}</span><span>${esc(value==null?'':value)}${m?.code?`<small>${esc(m.code)}</small>`:''}</span></span>`};return`<div class="report-controls card np"><div class="report-control-title">تنظیمات گزارش</div><label>نوع گزارش</label><select onchange="R.t=this.value;render()">${rtOpts()}</select><div class="row"><div><label>از تاریخ</label>${jdSel('from',R.from)}</div><div><label>تا تاریخ</label>${jdSel('to',R.to)}</div></div>${R.t=='fuel'||R.t=='mach'||R.t=='work'?`<label>ماشین (اختیاری)</label><select onchange="R.m=this.value;render()"><option value="">همه</option>${machOpts(R.m)}</select>`:''}${R.t=='tled'?`<label>مخزن (اختیاری)</label><select onchange="R.k=this.value;render()"><option value="">همه</option>${opts(S.tanks,R.k,k=>k.name)}</select>`:''}</div><div class="report-sheet" dir="rtl"><header class="report-head"><div class="report-brand"><span class="report-brand-mark">RC</span><div><b>ROAD CARE</b><small>Fleet Management & Maintenance</small></div></div><div class="report-head-title"><small>گزارش مدیریتی سامانه</small><h1>${esc(title)}</h1><span>مدیریت سوخت، ماشین‌آلات و نگهداری</span></div></header><section class="report-meta"><div><i class="r-icon">${reportIcon('calendar')}</i><span>تاریخ تهیه گزارش</span><b>${faDate(new Date().toISOString().slice(0,10))}</b></div><div><i class="r-icon">${reportIcon('period')}</i><span>دوره گزارش</span><b>از ${from} تا ${to}</b></div><div><i class="r-icon">${reportIcon('doc')}</i><span>نوع گزارش</span><b>${esc(title)}</b></div></section>${filters.length?`<section class="report-filters"><div><i class="r-icon">${reportIcon('machine')}</i><span>فیلتر اعمال‌شده</span><b>${esc(filterLine)}</b></div></section>`:''}<section class="report-table-section"><div class="report-section-title"><span class="r-icon">${reportIcon('table')}</span><h2>جزئیات ${esc(title)}</h2></div><div class="report-table-wrap">${d.r.length?`<table class="report-table"><thead><tr>${d.h.map(x=>`<th>${esc(x)}</th>`).join('')}</tr></thead><tbody>${d.r.map(r=>`<tr>${r.map((x,i)=>`<td>${cell(x,i)}</td>`).join('')}</tr>`).join('')}</tbody></table>`:'<p class="report-empty">داده‌ای در این بازه ثبت نشده است.</p>'}</div>${d.tot!=null?`<p style="margin:9px 2px 0;color:#29495e;font-size:10px"><b>جمع کل: ${fn(d.tot)} لیتر${d.totR!=null?' · '+rl(d.totR):''}</b></p>`:''}</section><section class="report-summary"><div class="report-section-title"><span class="r-icon">${reportIcon('summary')}</span><h2>خلاصه گزارش</h2></div><div class="report-summary-grid"><div><i class="r-icon">${reportIcon('rows')}</i><span>تعداد ردیف‌ها</span><b>${fn(d.r.length)}</b></div><div><i class="r-icon">${reportIcon('fuel')}</i><span>مجموع لیتر</span><b>${totalLit}</b></div><div><i class="r-icon">${reportIcon('money')}</i><span>مجموع مبلغ</span><b>${totalMoney}</b></div></div></section><footer class="report-footer"><span>ROAD CARE · سامانه مدیریت ناوگان</span><span>تاریخ چاپ: ${faDate(new Date().toISOString().slice(0,10))}</span><span>صفحه ۱</span></footer></div><div class="row np report-actions"><button class="btn g" onclick="copyRep()">کپی برای Excel</button><button class="btn" onclick="if(!R.from||!R.to){toast('بازه زمانی گزارش را کامل کنید',1);return}window.print()">چاپ یا ذخیره PDF</button></div>`},
-set(){const s=S.settings;return`<div class="card"><h3>کاربر و دسترسی</h3><label>نام کاربر ثبت‌کننده</label><input id="su" value="${esc(s.user)}"><label>سطح دسترسی</label><select id="sr"><option value="admin"${s.role=='admin'?' selected':''}>مدیر (تعیین تکلیف پایان ماه مجاز)</option><option value="fuel"${s.role=='fuel'?' selected':''}>مسئول سوخت</option></select><label>آستانه هشدار موجودی کم (لیتر)</label><input id="sl" inputmode="decimal" value="${s.low}"><br><br><button class="btn" onclick="saveSet()">ذخیره</button><p class="mut">دسترسی‌ها فقط یک کلید محلی روی همین دستگاه هستند و احراز هویت واقعی نیستند.</p></div>
-<div class="card"><h3>منابع پرداخت شرکت</h3>${s.sources.map((x,i)=>`<p>${esc(x.name)}، <a style="color:var(--ink)" onclick="togSrc(${i})">${x.active?'فعال':'غیرفعال'}</a></p>`).join('')}<div class="row"><input id="sn2" placeholder="منبع جدید"><button class="btn g" onclick="addSrc()">افزودن</button></div></div><div class="card"><h3>تاریخچه قیمت</h3>${s.prices.length?s.prices.map(p=>`<p>${fd(p.at)}، ${esc(p.by)}: ${fn(p.from)} به ${fn(p.to)} ریال</p>`).join(''):'<p class="mut">تغییری ثبت نشده است. قیمت هر سوخت‌گیری در لحظهٔ ثبت روی همان عملیات می‌ماند.</p>'}</div><div class="card"><h3>ذخیره‌سازی و پشتیبان</h3><p>${persist?'داده‌ها در حافظه مرورگر همین دستگاه (localStorage) ذخیره می‌شوند و پس از بستن و بازکردن برنامه می‌مانند.':'<b class="bad">ذخیره‌سازی مرورگر در دسترس نیست؛ داده‌ها فقط تا بستن صفحه می‌مانند.</b>'} پاک‌کردن اطلاعات مرورگر، داده‌ها را حذف می‌کند؛ پس مرتب پشتیبان بگیرید.</p><button class="btn g" onclick="bkOut()">تهیه پشتیبان (فایل JSON)</button><button class="btn g" onclick="$('#bkf').click()">بازیابی از فایل</button><input id="bkf" type="file" accept=".json,application/json" style="display:none" onchange="bkPick(this.files[0]);this.value=''"></div></div>`}};
+set(){const s=S.settings;return`<div class="card"><h3>کاربر و دسترسی</h3><label>نام کاربر ثبت‌کننده</label><input id="su" value="${esc(s.user)}"><label>سطح دسترسی</label><select id="sr"><option value="admin"${s.role=='admin'?' selected':''}>مدیر (تعیین تکلیف پایان ماه مجاز)</option><option value="fuel"${s.role=='fuel'?' selected':''}>مسئول سوخت</option></select><label>آستانه هشدار موجودی کم (لیتر)</label><input id="sl" inputmode="decimal" value="${s.low}"><br><br><p class="mut">دسترسی‌ها فقط یک کلید محلی روی همین دستگاه هستند و احراز هویت واقعی نیستند.</p></div>
+<div class="card"><h3>منابع پرداخت شرکت</h3>${s.sources.map((x,i)=>`<div class="mrow" style="cursor:default"><span>${esc(x.name)}${x.active?'':' <small class="mut">(غیرفعال)</small>'}</span><span><a style="color:var(--primary);cursor:pointer" onclick="srcEdit(${i})">ویرایش</a> <a style="color:var(--err);cursor:pointer" onclick="srcDel(${i})">حذف</a> <a style="color:var(--ink);cursor:pointer" onclick="togSrc(${i})">${x.active?'فعال':'غیرفعال'}</a></span></div>`).join('')}<div class="row"><input id="sn2" placeholder="منبع جدید"><button class="btn g" onclick="addSrc()">افزودن</button></div></div><div class="card"><h3>تاریخچه قیمت</h3>${s.prices.length?s.prices.map(p=>`<p>${fd(p.at)}، ${esc(p.by)}: ${fn(p.from)} به ${fn(p.to)} ریال</p>`).join(''):'<p class="mut">تغییری ثبت نشده است. قیمت هر سوخت‌گیری در لحظهٔ ثبت روی همان عملیات می‌ماند.</p>'}</div><div class="card"><h3>ذخیره‌سازی و پشتیبان</h3><p>${persist?'داده‌ها در حافظه مرورگر همین دستگاه (localStorage) ذخیره می‌شوند و پس از بستن و بازکردن برنامه می‌مانند.':'<b class="bad">ذخیره‌سازی مرورگر در دسترس نیست؛ داده‌ها فقط تا بستن صفحه می‌مانند.</b>'} پاک‌کردن اطلاعات مرورگر، داده‌ها را حذف می‌کند؛ پس مرتب پشتیبان بگیرید.</p><button class="btn g" onclick="bkOut()">تهیه پشتیبان (فایل JSON)</button><button class="btn g" onclick="$('#bkf').click()">بازیابی از فایل</button><input id="bkf" type="file" accept=".json,application/json" style="display:none" onchange="bkPick(this.files[0]);this.value=''"></div></div>`}};
 let B={p:'',from:'',to:''};
 const payers=()=>[...new Set([...S.persons.map(p=>p.name),...S.tx.filter(t=>t.payer=='person').map(t=>t.payPerson)])];
 const stmRows=()=>S.tx.filter(t=>(t.type=='fuel'||t.type=='tfill')&&!t.void&&t.payer=='person'&&t.payPerson==B.p&&(!B.from||t.when.slice(0,10)>=B.from)&&(!B.to||t.when.slice(0,10)<=B.to)).sort((a,b)=>a.when.localeCompare(b.when));
@@ -514,7 +526,7 @@ function doTank(id){const T=clone(S),v={name:$('#tf_name').value.trim(),code:$('
  else{const s0=N($('#tf_sys0').value),t0=N($('#tf_tank0').value);if(s0<0||t0<0)return toast('مقادیر اولیه نمی‌تواند منفی باشد',1);T.tanks.push({id:'K'+T.seq++,active:true,date:new Date().toISOString(),sys0:s0,tank0:t0,p0:0,...v})}
  commit(T);modal();toast('ذخیره شد');render()}
 function togTank(id){const T=clone(S),k=T.tanks.find(x=>x.id==id);k.active=!k.active;T.edits.push({card:id,at:new Date().toISOString(),by:T.settings.user,changes:'مخزن، '+(k.active?'فعال شد':'غیرفعال شد')});commit(T);render()}
-function machForm(id){const m=id?S.machines.find(x=>x.id==id):{type:TYPES[0]};const code=m.code||'';modal(`<div class="fleet-form-head"><h3>${id?'ویرایش ماشین‌آلات':'ثبت ماشین‌آلات جدید'}</h3><small>شناسه یکتا به‌صورت خودکار توسط Road Care اختصاص داده می‌شود.</small></div><div class="fleet-form-grid"><div><label>نام دستگاه <b class="req">*</b></label><input id="mf_name" value="${esc(m.name||'')}" placeholder="مثلاً لودر کوماتسو WA470"></div><div><label>نوع ماشین‌آلات <b class="req">*</b></label><select id="mf_type">${opts(TYPES,m.type||TYPES[0])}</select></div><div><label>کد اختصاصی دستگاه</label><input id="mf_code" value="${esc(code)}" readonly placeholder="پس از ذخیره خودکار ساخته می‌شود"><small class="fleet-hint">کد پس از ذخیره ثابت می‌ماند و مجدداً استفاده نمی‌شود.</small></div><div><label>شماره پلاک <span class="fleet-optional">(اختیاری)</span></label><input id="mf_plate" value="${esc(m.plate||'')}" placeholder="در صورت داشتن پلاک"></div><div><label>راننده / اپراتور <span class="fleet-optional">(اختیاری)</span></label><input id="mf_driver" value="${esc(m.driver||'')}" placeholder="نام راننده یا اپراتور"></div><div><label>پروژه / کارگاه <span class="fleet-optional">(اختیاری)</span></label><input id="mf_project" value="${esc(m.project||'')}" placeholder="نام پروژه یا کارگاه"></div></div><div class="fleet-form-actions"><button class="btn" onclick="doMach('${id||''}')">ذخیره دستگاه</button><button class="btn g" onclick="modal()">انصراف</button>${id?`<button class="btn d" onclick="delForm('mach','${id}')">حذف</button>`:''}</div>`)}
+function machForm(id){const m=id?S.machines.find(x=>x.id==id):{type:TYPES[0]};const code=m.code||'';modal(`<div class="fleet-form-head"><h3>${id?'ویرایش ماشین‌آلات':'ثبت ماشین‌آلات جدید'}</h3><small>شناسه یکتا به‌صورت خودکار توسط Road Care اختصاص داده می‌شود.</small></div><div class="fleet-form-grid"><div><label>نام دستگاه <b class="req">*</b></label><input id="mf_name" value="${esc(m.name||'')}" placeholder="مثلاً لودر کوماتسو WA470"></div><div><label>نوع ماشین‌آلات <b class="req">*</b></label><select id="mf_type">${opts(TYPES,m.type||TYPES[0])}</select></div><div><label>کد اختصاصی دستگاه</label><input id="mf_code" value="${esc(code)}" readonly placeholder="پس از ذخیره خودکار ساخته می‌شود"><small class="fleet-hint">کد پس از ذخیره ثابت می‌ماند و مجدداً استفاده نمی‌شود.</small></div><div><label>شماره پلاک <span class="fleet-optional">(اختیاری)</span></label><input id="mf_plate" value="${esc(m.plate||'')}" placeholder="در صورت داشتن پلاک"></div><div><label>راننده / اپراتور <span class="fleet-optional">(اختیاری)</span></label><input id="mf_driver" value="${esc(m.driver||'')}" placeholder="نام راننده یا اپراتور"></div><div><label>پروژه / کارگاه <span class="fleet-optional">(اختیاری)</span></label><input id="mf_project" value="${esc(m.project||'')}" placeholder="نام پروژه یا کارگاه"></div></div><div class="fleet-form-actions"><button class="btn" onclick="doMach('${id||''}')">ذخیره دستگاه</button><button class="btn g" onclick="modal()">انصراف</button>${id?`<button class="btn d" onclick="machDelForm('m:${id}')">حذف</button>`:''}</div>`)}
 function doMach(id){const T=clone(S),v={};for(const f of['name','code','plate','driver','project','type'])v[f]=$('#mf_'+f).value;if(!v.name.trim())return toast('نام الزامی است',1);
  if(!String(v.code||'').trim())v.code=id?(T.machines.find(x=>x.id==id)||{}).code||nextMachineCode(T,v.type):nextMachineCode(T,v.type);
  if(id){const m=T.machines.find(x=>x.id==id),ch=[];for(const f in v)if((m[f]||'')!=v[f])ch.push(f+': «'+(m[f]||'')+'» به «'+v[f]+'»');if(!ch.length)return toast('تغییری وجود ندارد',1);Object.assign(m,v);T.edits.push({card:id,at:new Date().toISOString(),by:T.settings.user,changes:'ماشین، '+ch.join('، ')})}else T.machines.push({id:'M'+T.seq++,active:true,note:'',...v});commit(T);modal();toast('ذخیره شد');render()}
@@ -618,7 +630,7 @@ V.mdet=()=>{const ref=arg,m=mget(ref);if(!m.id)return'<p>ماشین پیدا ن�
 <h3>سابقهٔ سرویس</h3><div class="card">${sv.length?svT(sv.slice(0,8),1):'<p class="mut">سرویسی ثبت نشده است.</p>'}</div><h3>سابقهٔ خرابی</h3><div class="card">${fl.length?flT(fl.slice(0,8),1):'<p class="mut">خرابی‌ای ثبت نشده است.</p>'}</div>
 <h3>آخرین ثبت‌های کارکرد</h3><div class="card">${rd.length?rd.map(x=>`<div class="mrow" style="cursor:default"><span>${fn(x.val)} ${u}<small>${fd(x.when)} ${esc(x.note)}</small></span><a onclick="voidM('read','${x.id}')">ابطال</a></div>`).join(''):'<p class="mut">ثبت نشده است.</p>'}</div>`};
 V.mach=()=>{const rows=[...S.cards.map(c=>({...c,ref:'c:'+c.id,src:'دارای کارت سوخت'})),...S.machines.map(m=>({...m,ref:'m:'+m.id,src:'تأمین از مخزن'}))].filter(m=>!q||D([m.name,m.code,m.plate,m.driver,m.project,m.type].join(' ')).includes(D(q))),active=rows.filter(m=>m.active!==false).length,inactive=rows.length-active,needs=rows.filter(m=>worst(m.ref)=='over').length,open=rows.filter(m=>S.faults.some(f=>f.ref==m.ref&&!f.void&&f.status!='done')).length;const groups={};rows.forEach(m=>(groups[m.type||'سایر']=groups[m.type||'سایر']||[]).push(m));
- const machineCard=m=>{const w=worst(m.ref),isCard=m.ref.startsWith('c:'),meter=curVal(m.ref),u=UN[unit(m.ref)]||'',plans=S.plans.filter(p=>p.ref==m.ref&&p.active!==false),faults=S.faults.filter(f=>f.ref==m.ref&&!f.void&&f.status!='done'),last=S.reads.filter(r=>r.ref==m.ref&&!r.void).sort((a,b)=>b.when.localeCompare(a.when))[0],maintLabel=w?STL[w]:'وضعیت سرویس عادی';return `<article class="fleet-card" onclick="go('mdet','${m.ref}')"><div class="fleet-card-top"><span class="fleet-type">${esc(m.type||'سایر')}</span><span class="fleet-state ${m.active===false?'off':faults.length?'warn':'on'}">${m.active===false?'غیرفعال':faults.length?'دارای خرابی':'فعال'}</span></div><div class="fleet-name-row"><span class="fleet-icon">${vehicleIcon(m.type||'سایر')}</span><div class="fleet-name"><b>${esc(m.name||'بدون نام')}</b><small><span class="fleet-code">${esc(m.code||'کد تخصیص‌نیافته')}</span>${m.plate?' · پلاک '+esc(m.plate):' · <span class="fleet-optional">بدون پلاک</span>'}</small></div></div><div class="fleet-meta"><div><small>راننده / اپراتور</small><b>${esc(m.driver||'تعریف نشده')}</b></div><div><small>پروژه / کارگاه</small><b>${esc(m.project||'تعریف نشده')}</b></div></div><div class="fleet-metrics"><div><small>کارکرد ثبت‌شده</small><b>${meter==null?'—':fn(meter)+' '+u}</b></div><div><small>برنامه سرویس فعال</small><b>${fn(plans.length)} مورد</b></div><div><small>خرابی باز</small><b class="${faults.length?'fleet-red':''}">${fn(faults.length)} مورد</b></div></div><div class="fleet-card-foot"><span class="fleet-source">${isCard?'دارای کارت سوخت':'تأمین از مخزن'}</span><span class="fleet-maint ${w||'ok'}">${maintLabel}</span><span class="fleet-arrow">←</span></div></article>`};
+ const machineCard=m=>{const w=worst(m.ref),isCard=m.ref.startsWith('c:'),meter=curVal(m.ref),u=UN[unit(m.ref)]||'',plans=S.plans.filter(p=>p.ref==m.ref&&p.active!==false),faults=S.faults.filter(f=>f.ref==m.ref&&!f.void&&f.status!='done'),last=S.reads.filter(r=>r.ref==m.ref&&!r.void).sort((a,b)=>b.when.localeCompare(a.when))[0],maintLabel=w?STL[w]:'وضعیت سرویس عادی';return `<article class="fleet-card" onclick="go('mdet','${m.ref}')"><div class="fleet-card-top"><span class="fleet-type">${esc(m.type||'سایر')}</span><button class="fleet-edit" title="ویرایش" aria-label="ویرایش" onclick="event.stopPropagation();fleetEdit('${m.ref}')">&#9998;</button><span class="fleet-state ${m.active===false?'off':faults.length?'warn':'on'}">${m.active===false?'غیرفعال':faults.length?'دارای خرابی':'فعال'}</span></div><div class="fleet-name-row"><span class="fleet-icon">${vehicleIcon(m.type||'سایر')}</span><div class="fleet-name"><b>${esc(m.name||'بدون نام')}</b><small><span class="fleet-code">${esc(m.code||'کد تخصیص‌نیافته')}</span>${m.plate?' · پلاک '+esc(m.plate):' · <span class="fleet-optional">بدون پلاک</span>'}</small></div></div><div class="fleet-meta"><div><small>راننده / اپراتور</small><b>${esc(m.driver||'تعریف نشده')}</b></div><div><small>پروژه / کارگاه</small><b>${esc(m.project||'تعریف نشده')}</b></div></div><div class="fleet-metrics"><div><small>کارکرد ثبت‌شده</small><b>${meter==null?'—':fn(meter)+' '+u}</b></div><div><small>برنامه سرویس فعال</small><b>${fn(plans.length)} مورد</b></div><div><small>خرابی باز</small><b class="${faults.length?'fleet-red':''}">${fn(faults.length)} مورد</b></div></div><div class="fleet-card-foot"><span class="fleet-source">${isCard?'دارای کارت سوخت':'تأمین از مخزن'}</span><span class="fleet-maint ${w||'ok'}">${maintLabel}</span><span class="fleet-arrow">←</span></div></article>`};
  return `<div class="fleet-page"><div class="fleet-hero"><div><h2>مدیریت ماشین‌آلات</h2><p>شناسنامه ناوگان، کدگذاری خودکار، کارکرد و وضعیت نگهداری</p></div><button class="btn" onclick="machForm()">＋ ثبت ماشین جدید</button></div><div class="fleet-kpis"><div class="fleet-kpi"><div class="fleet-kpi-label"><i class="fleet-kpi-dot"></i><small>کل ماشین‌آلات</small></div><b>${fn(rows.length)}</b></div><div class="fleet-kpi"><div class="fleet-kpi-label"><i class="fleet-kpi-dot" style="background:#35a477"></i><small>ماشین فعال</small></div><b>${fn(active)}</b></div><div class="fleet-kpi"><div class="fleet-kpi-label"><i class="fleet-kpi-dot" style="background:#9aa8b1"></i><small>غیرفعال</small></div><b>${fn(inactive)}</b></div><div class="fleet-kpi"><div class="fleet-kpi-label"><i class="fleet-kpi-dot" style="background:#d94b4b"></i><small>سرویس عقب‌افتاده</small></div><b class="${needs?'fleet-red':''}">${fn(needs)}</b></div></div><div class="fleet-toolbar"><div><b>فهرست ناوگان</b><small>${fn(rows.length)} دستگاه · ${fn(open)} خرابی باز</small></div><div class="fleet-tools"><input class="fleet-search" value="${esc(q)}" placeholder="جست‌وجو نام، کد، پلاک، راننده..." oninput="q=this.value;render()"><button class="btn g" onclick="machForm()">＋ ماشین بدون کارت</button></div></div>`+(Object.keys(groups).sort().map(t=>`<section class="fleet-group"><div class="fleet-group-title"><h3>${esc(t)}</h3><span>${fn(groups[t].length)} دستگاه</span></div><div class="fleet-grid">${groups[t].map(machineCard).join('')}</div></section>`).join('')||'<div class="card fleet-empty">ماشینی مطابق جست‌وجوی شما پیدا نشد. برای شروع، «ثبت ماشین جدید» را انتخاب کنید.</div>')+'</div>'};
 
 
@@ -1050,7 +1062,7 @@ const num=v=>String(v).trim()===''?NaN:N(v),r1=x=>(Math.round(x*10)/10).toLocale
 const BASE_OPS=['متر مکعب','تعداد سرویس','لیتر'],ops=()=>[...new Set([...BASE_OPS,...(S.workOps||[])])],REASONS=['خراب یا در تعمیر','بدون کار','بدون راننده','تعطیل','سایر'],rolesOK=['مسئول کارگاه','مدیر'];
 const isTruck=t=>/کامیون|کمپرسی|تریلی|میکسر|کفی|وانت/.test(t||''),isWater=t=>/آب‌?پاش|آبپاش|تانکر/.test(t||'');
 const unitOf=t=>(S.workUnits||{})[t]||(isWater(t)?'لیتر':isTruck(t)?'تعداد سرویس':'متر مکعب');
-const mach=()=>checkMachines().filter(m=>m.active!==false).map(m=>({ref:(m._kind=='card'?'c:':'m:')+m.id,m}));
+const mach=()=>checkMachines().map(m=>({ref:(m._kind=='card'?'c:':'m:')+m.id,m}));
 const recOf=(date,ref)=>(S.work||[]).find(w=>w.date==date&&w.ref==ref&&!w.superseded)||null;
 const opsOf=w=>{const a=[];if(w.volume>0)a.push([w.unit||'متر مکعب',w.volume]);if(w.trips>0)a.push(['تعداد سرویس',w.trips]);if(w.volume2>0)a.push([w.unit2||'متر مکعب',w.volume2]);return a};
 const volStr=l=>{const g={};l.forEach(w=>opsOf(w).forEach(([u,v])=>g[u]=(g[u]||0)+v));const k=Object.keys(g);return k.length?k.map(u=>r1(g[u])+' '+u).join('، '):'—'};
@@ -1239,7 +1251,7 @@ window.csSave=()=>{const t=csGrab().trim();if(!t)return toast('عنوان مور
  if(o.length<2||o.length>4)return toast('تعداد دکمه‌ها باید ۲ تا ۴ باشد',1);if(o.some(p=>!p.label))return toast('نام همهٔ دکمه‌ها را بنویسید',1);if(new Set(o.map(p=>p.label)).size!=o.length)return toast('نام دکمه‌ها نباید تکراری باشد',1);
  const dup=listOf(CS.type).some(x=>x.title==t&&x.id!=CE.id);if(dup)return toast('این مورد قبلاً در چک‌لیست هست',1);const id=CE.id;modal();csMut((l,T)=>{if(id){const x=l.find(y=>y.id==id);if(x){x.title=t;x.opts=o}}else l.push({id:'U'+T.seq++,title:t,active:true,opts:o})})};
 /* ===== حضور و غیاب (همهٔ اشخاص) ===== */
-const AS={present:'حاضر',absent:'غایب',leave:'مرخصی'},hrs=(a,b)=>{if(!a||!b)return null;const p=x=>{const q=x.split(':');return +q[0]*60+ +q[1]},d=p(b)-p(a);const dm=(d<0?d+1440:d);const c=brkCfg();const ov=c.on?brkOverlap(p(a),dm,c.min):0;return Math.round(((dm-ov)/60)*100)/100};
+const AS={present:'حاضر',absent:'غایب',leave:'مرخصی'},hrs=(a,b)=>{if(!a||!b)return null;const p=x=>{const q=x.split(':');return +q[0]*60+ +q[1]},d=p(b)-p(a);const dm=(d<0?d+1440:d);const c=brkCfg();const ov=c.on?brkOverlap(p(a),dm):0;return Math.round(((dm-ov)/60)*100)/100};
 window.hrsPub=hrs;
 const aRec=(pid,d)=>(S.attend||[]).find(a=>!a.superseded&&a.pid==pid&&a.date==d)||null;
 const AREC=['مسئول کارگاه','مدیر'];
@@ -1263,7 +1275,7 @@ window.atSave=()=>{const by=$('#at_by').value;if(!by)return toast('ثبت‌کن
 /* گزارش حضور و غیاب + منو */
 function attReport(kind){const inR=x=>x>=R.from&&x<=R.to,A=(S.attend||[]).filter(a=>!a.superseded&&inR(a.date));
  if(kind=='attendday'){const l=A.sort((a,b)=>a.date.localeCompare(b.date)||a.name.localeCompare(b.name));return{h:['تاریخ','شخص','وضعیت','ورود','خروج','ساعت حضور','اضافه‌کار','توضیح','ثبت‌کننده'],r:l.map(a=>[fd(a.date+'T12:00').split(/[,،]/)[0],a.name,AS[a.state],a.tin||'—',a.tout||'—',a.hours!=null?fn(a.hours):'—',a.ot?fn(a.ot):'—',a.note||'',a.by])}}
- const ids=[...new Set(A.map(a=>a.pid))],rows=ids.map(id=>{const w=A.filter(a=>a.pid==id),c=k=>w.filter(a=>a.state==k).length,h=w.reduce((s,a)=>s+(a.hours||0),0),o=w.reduce((s,a)=>s+(a.ot||0),0),p=S.persons.find(x=>x.id==id)||{name:w[0].name};return[p.name,p.role||'',c('present'),c('absent'),c('leave'),h?(Math.round(h*10)/10).toLocaleString('fa-IR'):'—',o?(Math.round(o*10)/10).toLocaleString('fa-IR'):'—',w.length]}).sort((a,b)=>a[0].localeCompare(b[0]));
+ const ids=[...new Set(A.map(a=>a.pid))],rows=ids.map(id=>{const w=A.filter(a=>a.pid==id),c=k=>w.filter(a=>a.state==k).length,h=w.reduce((s,a)=>s+Math.round((a.hours||0)*60),0)/60,o=w.reduce((s,a)=>s+(a.ot||0),0),p=S.persons.find(x=>x.id==id)||{name:w[0].name};return[p.name,p.role||'',c('present'),c('absent'),c('leave'),h?hmFmt(h):'—',o?(Math.round(o*10)/10).toLocaleString('fa-IR'):'—',w.length]}).sort((a,b)=>a[0].localeCompare(b[0]));
  const sm=i=>rows.reduce((s,r)=>s+(+r[i]||0),0);return{h:['شخص','نقش','روز حاضر','روز غایب','روز مرخصی','ساعت حضور','اضافه‌کار (ساعت)','روزهای ثبت‌شده'],r:rows.length?[...rows.map(r=>r.map((v,i)=>i>=2&&i!=5&&i!=6?fn(v):v)),['جمع','',fn(sm(2)),fn(sm(3)),fn(sm(4)),'','',fn(sm(7))]]:[]}}
 const _rd=window.repData;window.repData=function(){return(R.t==='attend'||R.t==='attendday')?attReport(R.t):_rd.apply(this,arguments)};
 if(!RT.some(x=>x[0]=='attend')){RT.push(['attend','حضور و غیاب ماهانه']);RT.push(['attendday','حضور و غیاب روزانه'])}
@@ -1300,8 +1312,8 @@ window.wkCalc=()=>{const h=netH($('#wk2_in').value,$('#wk2_out').value,$('#wk2_b
 window.wkOffT=()=>{const o=$('#wk2_off').checked;$('#wk2_on').style.display=o?'none':'block';$('#wk2_r').style.display=o?'block':'none'};
 window.wkX=()=>{$('#wk2_x').style.display='block';$('#wk2_xa').style.display='none'};
 V.work=()=>{if(!R.wd)R.wd=today();const d=R.wd;
- if(R.wsel){const x=machines().find(y=>y.ref==R.wsel);if(x)return wkForm(x,d);R.wsel=null}
- const q=(R.wq||'').trim(),L=machines().filter(x=>!q||[x.m.name,x.m.code,x.m.driver,x.m.plate,x.m.project].join(' ').includes(q)),all=machines(),done=all.filter(x=>recFor(d,x.ref)).length;
+ if(R.wsel){const x=checkMachines().map(m=>({ref:(m._kind=='card'?'c:':'m:')+m.id,m})).find(y=>y.ref==R.wsel);if(x)return wkForm(x,d);R.wsel=null}
+ const q=(R.wq||'').trim(),L=checkMachines().map(m=>({ref:(m._kind=='card'?'c:':'m:')+m.id,m})).filter(x=>!q||[x.m.name,x.m.code,x.m.driver,x.m.plate,x.m.project].join(' ').includes(q)),all=checkMachines().map(m=>({ref:(m._kind=='card'?'c:':'m:')+m.id,m})),done=all.filter(x=>recFor(d,x.ref)).length;
  return '<div class="card"><label>تاریخ</label>'+jdSel('wd',d)+'<input type="search" placeholder="جست‌وجوی ماشین…" value="'+esc(q)+'" oninput="wkSearch(this.value)" style="margin-top:8px"></div>'
  +'<p class="mut" style="margin:6px 2px">'+fn(done)+' از '+fn(all.length)+' ماشین برای این روز ثبت شده. روی هر ماشین بزنید تا فرم همان ماشین باز شود. ماشینی که کار نکرده لازم نیست ثبت شود.</p>'
  +(L.length?L.map(x=>{const r=recFor(d,x.ref);const txt=!r?'ثبت نشده':r.off?'غیرفعال: '+(r.reason||''):(r.hours!=null?fn(r.hours)+' ساعت':'ثبت شده');const cls=!r?'unk':r.off?'over':'ok';const col=!r?'amber':r.off?'red':'green';
@@ -1505,7 +1517,7 @@ render();
 /* ===== Road Care V10.0: کسر استراحت، چاپ بدون سرریز، منوی گزارش‌ها، لوگو RC ===== */
 (function(){
 'use strict';
-window.netH=(a,b,on,mins)=>{if(!a||!b)return null;const p=x=>{const q=String(x).split(':');return +q[0]*60+ +q[1]};let d=p(b)-p(a);if(d<0)d+=1440;const ov=on?brkOverlap(p(a),d,+String(mins).replace(/[^\d.]/g,'')||0):0;return Math.max(0,Math.round((d-ov)/60*100)/100)};
+window.netH=(a,b,on,mins)=>{if(!a||!b)return null;const p=x=>{const q=String(x).split(':');return +q[0]*60+ +q[1]};let d=p(b)-p(a);if(d<0)d+=1440;const ov=on?brkOverlap(p(a),d):0;return Math.max(0,Math.round((d-ov)/60*100)/100)};
 if(!document.getElementById('v10css')){const st=document.createElement('style');st.id='v10css';st.textContent=`
 .report-controls select{font-size:13px;min-height:42px;padding:6px 8px}
 .report-controls select option{font-size:13px}
@@ -1891,11 +1903,7 @@ const FA='۰۱۲۳۴۵۶۷۸۹',toFa=s=>String(s).replace(/\d/g,d=>FA[+d]),toEn=
 const norm=s=>String(s||'').replace(/\u200c/g,'').replace(/\s+/g,' ').trim();
 const ITEM=/^(ماشین|شخص|راننده|راننده یا اپراتور|پرداخت‌کننده و منبع|پرداخت‌کننده|مخزن|منبع|سریال)$/;
 const SKIP=/تاریخ|زمان|روز هفته|وضعیت|ورود|خروج|کد|پلاک|توضیح|ثبت|سریال|کارت|منبع|راننده|پرداخت|مخزن|موجودی|بر |نقش|نام|شخص|ماشین|سوخت‌گیرنده|مبلغ \(ریال\) ?$/;
-function parsePieces(text){
- const out=[];norm(text).split('،').forEach(p=>{const m=toEn(norm(p)).match(/^(-?[\d.,٬٫]+)\s*(.*)$/);if(!m)return;const v=parseFloat(m[1].replace(/[,٬]/g,'').replace('٫','.'));if(isNaN(v))return;out.push({v,u:(m[2]||'').trim()})});
- return out;
-}
-function fmt(x){return toFa((Math.round(x*10)/10).toLocaleString('en-US'))}
+function parsePieces(text){  const out=[];norm(text).split('،').forEach(p=>{const t=toEn(norm(p)).trim();const hm=t.match(/^(\d+):(\d{2})$/);if(hm){out.push({v:(+hm[1])*60+(+hm[2]),u:'__min'});return}const m=t.match(/^(-?[\d.,٬٫]+)\s*(.*)$/);if(!m)return;const v=parseFloat(m[1].replace(/[,٬]/g,'').replace('٫','.'));if(isNaN(v))return;out.push({v,u:(m[2]||'').trim()})});  return out; } function fmt(x){return toFa((Math.round(x*10)/10).toLocaleString('en-US'))}
 function run(){
  document.querySelectorAll('#main .report-table').forEach(t=>{
   const hr=t.rows[0];if(!hr)return;const heads=[...hr.cells].map(c=>norm(c.textContent));const n=heads.length;
@@ -1919,7 +1927,7 @@ function run(){
    heads.forEach((h,i)=>{const td=document.createElement('td');
     if(i===0)td.textContent='مجموع';
     else if(numCols[i]){const acc={};rows.forEach(r=>parsePieces(r.cells[i].textContent).forEach(({v,u})=>acc[u]=(acc[u]||0)+v));
-     td.textContent=Object.entries(acc).map(([u,v])=>fmt(v)+(u?' '+u:'')).join('، ')||'—'}
+     td.textContent=Object.entries(acc).map(([u,v])=>u==='__min'?hmFmt(v/60):fmt(v)+(u?' '+u:'')).join('، ')||'—'}
     tr.appendChild(td)});
    parent.appendChild(tr);
   });
@@ -2059,16 +2067,13 @@ window.roleAdd=function(){
  if(roles().includes(v))return toast('این سمت قبلاً وجود دارد',1);
  const T=clone(S);T.settings.roles=[...(T.settings.roles||[]),v];commit(T);toast('سمت افزوده شد');render();
 };
-window.roleDel=function(r){
- if(DEF_ROLES.includes(r))return toast('سمت‌های پیش‌فرض قابل حذف نیستند',1);
- if(inUse(r))return toast('این سمت برای اشخاص استفاده شده و قابل حذف نیست',1);
- const T=clone(S);T.settings.roles=(T.settings.roles||[]).filter(x=>x!==r);commit(T);toast('سمت حذف شد');render();
-};
+window.roleEdit=function(r){if(DEF_ROLES.includes(r))return toast('سمت‌های پیش‌فرض قابل ویرایش نیستند',1);modal('<h3>ویرایش سمت</h3><label>نام سمت</label><input id="re_n" value="'+esc(r)+'"><div style="display:flex;gap:8px;margin-top:12px"><button class="btn" onclick="roleSave(\''+r.replace(/'/g,'')+'\')">ذخیره</button><button class="btn g" onclick="modal()">انصراف</button></div>')};
+window.roleSave=function(old){const n=(document.getElementById('re_n').value||'').trim();if(!n)return toast('نام سمت را وارد کنید',1);if(n!==old&&roles().includes(n))return toast('این سمت قبلاً ثبت شده است',1);const T=clone(S);T.settings.roles=(T.settings.roles||[]).map(x=>x===old?n:x);T.persons.forEach(p=>{if(p.role===old)p.role=n});commit(T);modal();toast('سمت به‌روز شد');render()};
+window.roleDel=function(r){if(DEF_ROLES.includes(r))return toast('سمت‌های پیش‌فرض قابل حذف نیستند',1);const n=S.persons.filter(p=>p.role===r).length;if(n)return modal('<h3>حذف ممکن نیست</h3><p>این سمت برای <b>'+fn(n)+'</b> شخص استفاده شده است.</p><p class="mut">ابتدا سمت آن‌ها را تغییر دهید، سپس سمت را حذف کنید.</p><button class="btn g" onclick="modal()">بستن</button>');const T=clone(S);T.settings.roles=(T.settings.roles||[]).filter(x=>x!==r);commit(T);toast('سمت حذف شد');render();};
 function rolesCard(){
  return '<div class="card"><h3>سمت‌های اشخاص</h3><p class="mut" style="margin:4px 0">سمت‌های جدید را اضافه کنید. سمت‌های پیش‌فرض و سمتی که برای شخصی استفاده شده، قابل حذف نیستند.</p>'
  +'<div class="row" style="margin-bottom:8px"><input id="rl_new" placeholder="نام سمت جدید، مثلاً سرپرست انبار"><button class="btn" onclick="roleAdd()" style="flex:none">افزودن سمت</button></div>'
- +roles().map(r=>'<div class="mrow" style="cursor:default"><span>'+esc(r)+(DEF_ROLES.includes(r)?' <small class="mut">(پیش‌فرض)</small>':'')+(inUse(r)?' <small class="mut">(در استفاده)</small>':'')+'</span>'
- +((DEF_ROLES.includes(r)||inUse(r))?'':'<a onclick="roleDel(\''+esc(r).replace(/\'/g,'')+'\')" style="color:var(--err);cursor:pointer">حذف</a>')+'</div>').join('')+'</div>';
+ +roles().map(r=>'<div class="mrow" style="cursor:default"><span>'+esc(r)+(DEF_ROLES.includes(r)?' <small class="mut">(پیش‌فرض)</small>':'')+'</span><span>'+(DEF_ROLES.includes(r)?'':'<a onclick="roleEdit(\''+esc(r).replace(/\'/g,'')+'\')" style="color:var(--primary);cursor:pointer;margin-inline-start:6px">ویرایش</a><a onclick="roleDel(\''+esc(r).replace(/\'/g,'')+'\')" style="color:var(--err);cursor:pointer;margin-inline-start:6px">حذف</a>')+'</span></div>').join('')+'</div>'+'<div class="card"><h3>اشخاص</h3>'+S.persons.map(p=>'<div class="mrow" style="cursor:default"><span>'+esc(p.name)+' <small class="mut">'+esc(p.role||'')+'</small></span><span><a onclick="persEdit(\''+esc(p.id)+'\')" style="color:var(--primary);cursor:pointer;margin-inline-start:6px">ویرایش</a><a onclick="persDelete(\''+esc(p.id)+'\')" style="color:var(--err);cursor:pointer;margin-inline-start:6px">حذف</a></span></div>').join('')+'</div>';
 }
 const _set=V.set;
 V.set=function(){return _set.apply(this,arguments)+rolesCard()};
@@ -2117,6 +2122,14 @@ function renameEverywhere(T,oldN,newN){
  const st=T.settings;['lastRecorder','lastInsp','lastAtt','lastWk','user'].forEach(k=>{if(st[k]===oldN){st[k]=newN;n++}});
  return n;
 }
+window.persDelete=function(id){
+ if(!CAN())return toast('فقط مدیر و مسئول کارگاه می‌توانند اشخاص را حذف کنند',1);
+ const p=S.persons.find(x=>x.id===id);if(!p)return;
+ const used=(S.attend||[]).filter(a=>!a.superseded&&a.pid===id).length+(S.work||[]).filter(w=>!w.superseded&&(w.operator===p.name||w.by===p.name)).length+(S.tx||[]).filter(t=>!t.void&&(t.person===p.name||t.payer===p.name)).length;
+ if(used)return modal('<h3>حذف ممکن نیست</h3><p>این شخص در <b>'+fn(used)+'</b> ثبت عملیات یا حضور دارد.</p><p class="mut">ابتدا این ثبت‌ها را ابطال کنید، سپس شخص را حذف کنید.</p><button class="btn g" onclick="modal()">بستن</button>');
+ modal('<h3>حذف شخص</h3><p>«'+esc(p.name)+'» از فهرست اشخاص حذف شود؟</p><label>علت حذف</label><input id="pd_why" placeholder="مثلاً خروج از پروژه"><div style="display:flex;gap:8px;margin-top:12px"><button class="btn d" onclick="persDeleteConfirm(\''+id+'\')">حذف</button><button class="btn g" onclick="modal()">انصراف</button></div>');
+};
+window.persDeleteConfirm=function(id){const why=((document.getElementById('pd_why')||{}).value||'').trim();if(!why)return toast('علت حذف را بنویسید',1);const name=(S.persons.find(x=>x.id===id)||{}).name||'';const T=clone(S);T.persons=T.persons.filter(x=>x.id!==id);(T.deletions=T.deletions||[]).push({at:new Date().toISOString(),by:T.settings.user,kind:'شخص',name,why});commit(T);modal();toast('شخص حذف شد');render();};
 window.persEdit=function(id){
  if(!CAN())return toast('فقط مدیر و مسئول کارگاه می‌توانند اشخاص را ویرایش کنند',1);
  const p=S.persons.find(x=>x.id===id);if(!p)return;
@@ -2137,7 +2150,7 @@ window.persSave=function(id){
 };
 const _pers=V.pers;
 V.pers=function(){let h=_pers.apply(this,arguments);
- h=h.replace(/<a style="color:var\(--ink\)" onclick="togP\('([^']+)'\)">/g,(m,id)=>'<a style="color:var(--primary);margin-inline-start:6px;cursor:pointer" onclick="persEdit(\''+id+'\')">ویرایش</a> '+m);
+ h=h.replace(/<a style="color:var\(--ink\)" onclick="togP\('([^']+)'\)">/g,(m,id)=>'<a style="color:var(--primary);margin-inline-start:6px;cursor:pointer" onclick="persEdit(\''+id+'\')">ویرایش</a> <a style="color:var(--err);margin-inline-start:6px;cursor:pointer" onclick="persDelete(\''+id+'\')">حذف</a> '+m);
  const hist=S.persons.filter(p=>(p.hist||[]).length);
  if(hist.length)h+='<h3>تاریخچهٔ تغییرات اشخاص</h3><div class="card">'+hist.map(p=>'<div style="margin-bottom:8px"><b>'+esc(p.name)+'</b>'+p.hist.slice().reverse().map(x=>'<div class="mrow" style="cursor:default"><span>'+esc(x.changes)+'<small style="display:block" class="mut">'+fd(x.at)+'، '+esc(x.by||'')+'</small></span></div>').join('')+'</div>').join('')+'</div>';
  return h;
@@ -2151,7 +2164,7 @@ render();
 </script>
 <script>
 
-/* ===== Road Care V29.0: وضعیت خودرو: استیجاری (مالکیت خارجی) و توقف موقت از بازرسی و سرویس ===== */
+/* ===== Road Care V29.0: وضعیت خودرو: استیجاری (مالکیت خارجی) و توقف بازرسی و سرویس ===== */
 (function(){
 'use strict';
 const todayS=()=>nowL().slice(0,10);
@@ -2161,7 +2174,7 @@ const suspActive=v=>!!(v&&v.susp&&v.susp.from&&todayS()>=v.susp.from&&(!v.susp.t
 window.vehOff=function(ref){const v=recOf(String(ref||'').replace(/^card:/,'c:').replace(/^machine:/,'m:'));if(!v)return false;return !!v.rented||suspActive(v)};
 window.vehStatusCard=function(ref){const v=recOf(ref);if(!v)return'';const off=vehOff(ref);const chips=[];
  if(v.rented)chips.push('استیجاری'+(v.rentOwner?' ('+esc(v.rentOwner)+')':''));
- if(suspActive(v))chips.push('توقف: '+esc(v.susp.reason)+(v.susp.to?' تا '+esc(faDate(v.susp.to)):' تا اطلاع بعدی'));
+ if(suspActive(v))chips.push('توقف بازرسی و سرویس'+(v.susp.to?' تا '+esc(faDate(v.susp.to)):' تا اطلاع بعدی'));
  return '<div class="card" style="border-right:5px solid '+(off?'var(--warn)':'var(--ok)')+'"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap"><div><b>وضعیت خودرو</b> '+(chips.length?chips.map(c=>'<span class="chip unk">'+c+'</span>').join(' '):'<span class="chip ok">عادی</span>')+'</div><button class="btn g" style="min-height:40px" onclick="vehStatusForm(\''+ref+'\')">تغییر وضعیت</button></div>'+(off?'<p class="mut" style="margin:6px 0 0;font-size:.85rem">بازرسی و هشدارهای سرویس و خرابی این خودرو موقتاً غیرفعال است؛ کارکرد و سوخت ثبت می‌شود.</p>':'')+'</div>'};
 window.vehStatusForm=function(ref){const v=recOf(ref);if(!v)return;
  R.vs_from=(v.susp&&v.susp.from)||todayS();R.vs_to=(v.susp&&v.susp.to)||todayS();
@@ -2170,7 +2183,7 @@ window.vehStatusForm=function(ref){const v=recOf(ref);if(!v)return;
  +'<label style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="vs_rent" '+(v.rented?'checked':'')+' style="width:20px;min-height:20px"> خودروی استیجاری است</label>'
  +'<p class="mut" style="font-size:.85rem;margin:2px 0 6px">بازرسی و سرویس این خودرو با طرف قرارداد است.</p>'
  +'<label>مالک یا شرکت طرف قرارداد (اختیاری)</label><input id="vs_owner" value="'+esc(v.rentOwner||'')+'">'
- +'<label>توقف موقت از بازرسی و سرویس</label><select id="vs_r"><option value="">ندارد</option>'+reasons.map(o=>'<option'+((isOther?'سایر':cur)==o?' selected':'')+'>'+o+'</option>').join('')+'</select>'
+ +'<label>توقف بازرسی و سرویس</label><select id="vs_r"><option value="">ندارد</option>'+reasons.map(o=>'<option'+((isOther?'سایر':cur)==o?' selected':'')+'>'+o+'</option>').join('')+'</select>'
  +'<input id="vs_rx" placeholder="دلیل توقف" value="'+esc(isOther?cur:'')+'" style="margin-top:6px;display:'+(isOther||cur==='سایر'?'block':'none')+'">'
  +'<div id="vs_dates" style="display:'+(cur||true?'block':'none')+'"><label>از تاریخ</label>'+jdSel('vs_from',R.vs_from)+'<label style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="vs_end" '+(v.susp&&v.susp.to?'checked':'')+' style="width:20px;min-height:20px"> تاریخ پایان دارد</label><div id="vs_todiv" style="display:'+(v.susp&&v.susp.to?'block':'none')+'">'+jdSel('vs_to',R.vs_to)+'</div></div>'
  +'<p class="mut" style="font-size:.85rem">بعد از پایان توقف یا با حذف توقف، برنامه‌های سرویس همین خودرو از همان جای قبل ادامه پیدا می‌کنند.</p>'
@@ -2862,13 +2875,14 @@ function opsOf(ref){
 }
 function summarize(o){return{total:o.tx.length+o.work.length+o.svc.length+o.faults.length+o.reads.length}}
 function ownerOf(x){return x.by||''}
+window.fleetEdit=function(ref){if(String(ref).startsWith('c:'))return cardForm(String(ref).slice(2));return machForm(String(ref).slice(2))};
 window.machDelForm=function(ref){
  if(!ALLOWED())return toast('فقط مدیر و مسئول کارگاه می‌توانند ماشین را حذف کنند',1);
  const m=(S.machines||[]).find(x=>'m:'+x.id===ref);if(!m)return;
  const o=opsOf(ref),n=summarize(o).total;
  const others=[...o.tx,...o.work,...o.svc,...o.faults,...o.reads].filter(x=>ownerOf(x)!==who());
  if(others.length)return modal('<h3>حذف ممکن نیست</h3><p><b>'+esc(m.name)+'</b> دارای <b>'+fn(others.length)+'</b> عملیات ثبت‌شده توسط کاربران دیگر است.</p><p class="mut">حذف فقط وقتی ممکن است که عملیات‌ها توسط همان کاربر ثبت شده باشند؛ کاربران دیگر باید عملیات خودشان را ابطال کنند.</p><button class="btn g" onclick="modal()">بستن</button>');
- const body=n?'<p>این ماشین <b>'+fn(n)+'</b> عملیات فعال دارد که همه توسط شما ثبت شده‌اند. برای حذف، این عملیات‌ها ابطال می‌شوند.</p>':'<p class="mut">این ماشین عملیات فعالی ندارد.</p>';
+ if(n)return modal('<h3>حذف ممکن نیست</h3><p>این ماشین <b>'+fn(n)+'</b> عملیات دارد. ابتدا عملیات‌ها را ابطال کنید، سپس ماشین را حذف کنید.</p><button class="btn g" onclick="modal()">بستن</button>');const body='<p class="mut">این ماشین عملیات فعالی ندارد.</p>';
  modal('<h3>حذف ماشین</h3><p><b>'+esc(m.name)+'</b> <span class="tg">'+esc(m.code||'')+'</span></p>'+body
   +'<label>علت حذف (الزامی)</label><input id="md_why">'
   +'<p class="mut" style="font-size:.85rem">قبل از حذف یک فایل پشتیبان دانلود می‌شود و حذف در گزارش مغایرت ثبت می‌شود.</p>'
@@ -2899,7 +2913,7 @@ window.machDelRun=function(ref){
 const _md=V.mdet;
 V.mdet=function(){let h=_md.apply(this,arguments);const ref=String(arg||'');
  if(ref.startsWith('m:')&&ALLOWED()&&(S.machines||[]).some(x=>'m:'+x.id===ref)){
-  h='<div class="row np" style="margin-bottom:8px"><button class="btn d" onclick="machDelForm(\''+ref+'\')">حذف ماشین</button></div>'+h}
+  h=h}
  return h;
 };
 render();
@@ -3112,7 +3126,7 @@ function fixReports(){
  });
 }
 const _render=window.render;
-window.render=function(){_render.apply(this,arguments);fixReports()};
+window.render=function(){_render.apply(this,arguments);fixReports();if(view==='work'){const hh=document.getElementById('wk2_h');if(hh&&hh.value!==''&&/^[\d.]+$/.test(toEn(hh.value)))hh.value=hmFmt(parseFloat(toEn(hh.value)))}};
 render();
 })();
 </script>
@@ -3357,7 +3371,7 @@ window.render=function(){
   dst.lastElementChild.textContent=fn(perm)+' دائمی · '+fn(dayOff)+' امروز (روزانه)';
  }
  if(view==='work'&&R.wsel&&!R.wsel.startsWith('x')){
-  const ref=R.wsel,day=R.wd||d;const why=offReasonOn(ref,day);
+  const ref=R.wsel,day=R.wd||d;const _rv=recOfRef(ref);const why=(_rv&&_rv.active===false)?(_rv.inactiveReason||'غیرفعال'):offReasonOn(ref,day);
   const cb=document.getElementById('wk2_off');
   if(why&&cb&&!hasRec(ref,day)&&!cb.checked){cb.checked=true;const sb=document.querySelector('#wk2seg button[data-v="1"]');if(sb)sb.click();if(window.wkOffT)window.wkOffT();const sel=document.getElementById('wk2_rs');if(sel)[...sel.options].forEach(o=>{if(o.value===why||o.textContent===why)sel.value=o.value})}
  }
@@ -3379,7 +3393,7 @@ render();
 (function(){
 'use strict';
 window.brkCfg=function(){const st=S.settings||{};return{on:st.brkOn!==false,min:(st.brkMin===undefined||st.brkMin==='')?60:+st.brkMin}};
-function brkRows(){const on=document.getElementById('wk2_bk'),mn=document.getElementById('wk2_bm');return[on,mn]}
+function collapseSetCards(main){[...main.querySelectorAll('.card')].forEach(c=>{if(c.querySelector(':scope > details'))return;const h=c.querySelector(':scope > h3');if(!h)return;const d=document.createElement('details');d.className='brk-sec';d.open=false;const sm=document.createElement('summary');sm.textContent=h.textContent.trim();const body=document.createElement('div');body.className='brk-body';[...c.childNodes].forEach(n=>{if(n!==h)body.appendChild(n)});d.appendChild(sm);d.appendChild(body);c.innerHTML='';c.appendChild(d);c.classList.add('set-card')}); }window.saveAllSettings=function(){if(document.getElementById('su'))saveSet();if(document.getElementById('brk_on'))brkSave()};function brkRows(){const on=document.getElementById('wk2_bk'),mn=document.getElementById('wk2_bm');return[on,mn]}
 const _render=window.render;
 window.render=function(){
  _render.apply(this,arguments);
@@ -3389,22 +3403,14 @@ window.render=function(){
   if(mn){mn.value=c.min;const row=mn.closest('label')||mn.parentElement;if(row)row.style.display='none';const lab=mn.previousElementSibling;if(lab&&lab.tagName==='LABEL')lab.style.display='none'}
  }
  if(view==='set'){
-  const main=document.getElementById('main');if(!main||main.querySelector('#brkCard'))return;
+  const main=document.getElementById('main');if(!main)return;collapseSetCards(main);const bk=[...main.querySelectorAll('.card')].find(c=>(c.querySelector('summary')||{}).textContent==='ذخیره‌سازی و پشتیبان'||(c.querySelector('h3')||{}).textContent==='ذخیره‌سازی و پشتیبان');main.querySelectorAll('.set-save-all').forEach(n=>n.remove());main.insertAdjacentHTML('beforeend','<div class="set-save-all" style="margin:12px 0 4px"><button type="button" class="btn" style="width:100%" onclick="saveAllSettings()">ذخیره تنظیمات</button></div>');if(main.querySelector('#brkCard'))return;
   const c=brkCfg();
   const card=document.createElement('div');card.id='brkCard';card.className='card';card.style.marginTop='10px';
-  card.innerHTML='<h3 style="margin:0 0 6px">کسر تایم استراحت</h3><p class="mut" style="font-size:.85rem;margin:0 0 8px">اگر فعال باشد، در همه‌ی محاسبه‌های ساعت حضور و کارکرد، این مدت از ساعت کار کسر می‌شود.</p>'
-   +'<label style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="brk_on" '+(c.on?'checked':'')+' style="width:20px;min-height:20px"> کسر تایم استراحت</label>'
-   +'<label>ساعت شروع استراحت</label><input id="brk_start" type="time" value="'+c.start+'">'+'<label>مدت استراحت (دقیقه)</label><input id="brk_min" inputmode="numeric" value="'+c.min+'">'
-   +'<br><button class="btn" onclick="brkSave()">ذخیره تنظیم استراحت</button>';
-  main.appendChild(card);
+  const _tM=x=>{const q=String(x).split(':');return (+q[0])*60+(+q[1]||0)};const _hm=n=>String(Math.floor(n/60)).padStart(2,'0')+':'+String(n%60).padStart(2,'0');const W=((Array.isArray(S.settings.brks)&&S.settings.brks.length)?S.settings.brks:[{start:c.start,min:c.min}]).map(w=>({start:w.start,end:w.end||_hm((_tM(w.start)+(+w.min||0))%1440)}));card.innerHTML='<details class=\"brk-sec\"><summary>تنظیم زمان استراحت</summary><div class=\"brk-body\">'+'<div class=\"vs-sw\"><div><b>تنظیم زمان استراحت</b><small>روشن: زمان استراحت از ساعت کار کسر می‌شود</small></div><label class=\"vs-tg\"><input type=\"checkbox\" id=\"brk_on\" '+(c.on?'checked':'')+'><span></span></label></div>'+'<div id=\"brk_list\">'+W.map(w=>'<div class=\"brk-w\"><label>از ساعت</label><input type=\"time\" class=\"brk-s\" value=\"'+w.start+'\"><label>تا ساعت</label><input type=\"time\" class=\"brk-e\" value=\"'+w.end+'\"><button type=\"button\" class=\"brk-del\" onclick=\"brkDelWin(this)\">حذف</button></div>').join('')+'</div>'+'<button type=\"button\" class=\"btn g brk-add\" onclick=\"brkAddWin()\">+ افزودن بازهٔ استراحت</button>'+'</div></details>';
+  main.appendChild(card);if(bk)main.appendChild(bk);main.querySelectorAll('.set-save-all').forEach(n=>main.appendChild(n));
  }
 };
-window.brkSave=function(){
- const on=!!document.getElementById('brk_on').checked;const mn=parseInt(String(document.getElementById('brk_min').value).replace(/[^\d]/g,''),10);
- if(on&&!(mn>=0))return toast('مدت استراحت را معتبر وارد کنید',1);
- const T=clone(S);T.settings.brkOn=on;T.settings.brkMin=isNaN(mn)?60:mn;T.settings.brkStart=(document.getElementById('brk_start')||{value:'12:00'}).value||'12:00';
- commit(T);toast('تنظیم استراحت ذخیره شد');render();
-};
+window.brkAddWin=function(){const list=document.getElementById('brk_list');if(!list)return;const d=document.createElement('div');d.className='brk-w';d.innerHTML='<label>از ساعت</label><input type=\"time\" class=\"brk-s\" value=\"12:00\"><label>تا ساعت</label><input type=\"time\" class=\"brk-e\" value=\"13:00\"><button type=\"button\" class=\"brk-del\" onclick=\"brkDelWin(this)\">حذف</button>';list.appendChild(d)};window.brkDelWin=function(btn){const list=document.getElementById('brk_list');if(list.querySelectorAll('.brk-w').length<=1)return toast('حداقل یک بازهٔ استراحت لازم است',1);btn.closest('.brk-w').remove()};window.brkSave=function(){const on=!!document.getElementById('brk_on').checked;const wins=[...document.querySelectorAll('#brk_list .brk-w')].map(r=>({start:(r.querySelector('.brk-s').value||''),end:(r.querySelector('.brk-e').value||'')}));if(on&&(!wins.length||wins.some(w=>!w.start||!w.end||w.start===w.end)))return toast('ساعت شروع و پایان هر بازه را کامل و متفاوت وارد کنید',1);const q=x=>{const t=x.split(':');return (+t[0])*60+(+t[1]||0)};const len=w=>(q(w.end)-q(w.start)+1440)%1440;const T=clone(S);T.settings.brkOn=on;T.settings.brks=wins;T.settings.brkStart=wins[0]?wins[0].start:'12:00';T.settings.brkMin=wins[0]?len(wins[0]):60;commit(T);toast('تنظیمات ذخیره شد');render();};
 render();
 })();
 </script>
@@ -3464,12 +3470,8 @@ render();
 (function(){
 'use strict';
 const toMin=x=>{const q=String(x||'12:00').split(':');return (+q[0]||0)*60+(+q[1]||0)};
-window.brkCfg=function(){const st=S.settings||{};return{on:st.brkOn!==false,min:(st.brkMin===undefined||st.brkMin==='')?60:+st.brkMin,start:st.brkStart||'12:00'}};
-window.brkOverlap=function(s,dm,mins){
- const bs=toMin(brkCfg().start);let tot=0;
- for(const sh of [-1440,0,1440]){const b0=bs+sh,b1=b0+(+mins||0);const o=Math.max(0,Math.min(s+dm,b1)-Math.max(s,b0));if(o>tot)tot=o}
- return Math.min(tot,dm);
-};
+window.brkCfg=function(){const st=S.settings||{};const W=(Array.isArray(st.brks)&&st.brks.length)?st.brks:[{start:st.brkStart||'12:00',min:(st.brkMin===undefined||st.brkMin==='')?60:+st.brkMin}];return{on:st.brkOn!==false,min:+W[0].min||0,start:W[0].start,wins:W.map(x=>{const b=toMin(x.start);const len=x.end?(toMin(x.end)-b+1440)%1440:(+x.min||0);return{s:b,len}})}};
+window.brkOverlap=function(s,dm){const W=brkCfg().wins||[];let tot=0;for(const w of W){for(const sh of [-1440,0,1440]){const b0=w.s+sh,b1=b0+w.len;tot+=Math.max(0,Math.min(s+dm,b1)-Math.max(s,b0))}}return Math.min(tot,dm);};
 const _render=window.render;
 window.render=function(){
  _render.apply(this,arguments);
@@ -3948,7 +3950,7 @@ function classify(){
  Object.keys(vd).forEach(r=>{if(vd[r]&&vd[r].on===true)confirmedOn.add(r);if(vd[r]&&vd[r].on===false)dayOffSet.add(r)});
  all.forEach(x=>{
   const why=offReasonOn(x.ref,td);
-  x.reason=x.perm?'دائمی':(why||(dayOffSet.has(x.ref)?'امروز غیرفعال':''));
+  x.rentedFlag=String(x.ref)[0]==='c'?!!((S.cards||[]).find(c=>'c:'+c.id===x.ref)||{}).rented:!!((S.machines||[]).find(m=>'m:'+m.id===x.ref)||{}).rented;const _rec=String(x.ref)[0]==='c'?(S.cards||[]).find(c=>'c:'+c.id===x.ref):(S.machines||[]).find(m=>'m:'+m.id===x.ref);const _s=_rec&&_rec.susp;const _sr=(_s&&_s.from&&td>=_s.from&&(!_s.to||td<=_s.to))?_s.reason:'';x.reason=x.perm?'دائمی':[x.rentedFlag?'استیجاری':'',_sr?'توقف بازرسی و سرویس':'',(!x.rentedFlag&&!_sr&&why)?why:'',(!why&&dayOffSet.has(x.ref))?'امروز غیرفعال':''].filter(Boolean).join(' · ');
   x.inactive=x.perm||!!why||dayOffSet.has(x.ref);
   x.active=!x.inactive&&confirmedOn.has(x.ref);
   x.undet=!x.inactive&&!x.active;
@@ -4042,7 +4044,7 @@ window.render=function(){
   seg.dataset.v94='1';
   seg.addEventListener('click',e=>{if(e.target&&e.target.dataset&&e.target.dataset.v!==undefined)seg.dataset.touched='1'},true);
  }
- if(isNew&&!seg.dataset.touched){
+ const _cbo=document.getElementById('wk2_off');if(isNew&&!seg.dataset.touched&&!(_cbo&&_cbo.checked)){
   seg.querySelectorAll('button').forEach(b=>{b.style.background='var(--card)';b.style.color='var(--ink)'});
  }
 };
@@ -4235,6 +4237,391 @@ window.render=function(){
  const lab=[...main.querySelectorAll('label')].find(l=>l.textContent.includes('علت اصلاح'));
  if(lab){lab.style.display='none';const nx=lab.nextElementSibling;if(nx)nx.style.display='none'}
  const w=document.getElementById('at_why');if(w)w.style.display='none';
+};
+render();
+})();
+</script>
+<script>
+
+/* ===== Road Care V100.0: برچسب واحد غیرفعال در فهرست کارکرد با اولویت ثابت (استیجاری > توقف > وضعیت روزانه) ===== */
+(function(){
+'use strict';
+const recOf=ref=>{const id=String(ref).slice(2);return String(ref)[0]==='c'?(S.cards||[]).find(x=>x.id==id):(S.machines||[]).find(x=>x.id==id)};
+function susp(rec,day){const s=rec&&rec.susp;return !!(s&&s.from&&day>=s.from&&(!s.to||day<=s.to))?(s.reason||'غیرفعال'):''}
+function reasonFor(ref,day){
+ const rec=recOf(ref);if(!rec)return '';
+ if(rec.rented)return 'استیجاری';
+ const s=susp(rec,day);if(s)return s;
+ const vd=((S.vehDay||{})[day]||{})[ref];
+ if(vd&&vd.on===false)return vd.reason||'غیرفعال';
+ return '';
+}
+const _render=window.render;
+window.render=function(){
+ _render.apply(this,arguments);
+ if(view!=='work'||R.wsel)return;
+ const main=document.getElementById('main');if(!main)return;
+ const day=R.wd||nowL().slice(0,10);
+ main.querySelectorAll('.mc-row').forEach(row=>{
+  const m=(row.getAttribute('onclick')||'').match(/wkPick\('([^']+)'\)/);if(!m)return;
+  const ref=m[1];
+  if((S.work||[]).some(w=>!w.superseded&&w.ref===ref&&String(w.date).slice(0,10)===day))return;
+  const why=reasonFor(ref,day);if(!why)return;
+  const chip=row.querySelector('.chip');if(chip){chip.textContent='غیرفعال: '+why;chip.className='chip over';chip.style.background='';chip.style.color=''}
+ });
+};
+render();
+})();
+</script>
+<script>
+
+/* ===== Road Care V101.0: استیجاری و دلیل توقف جدا؛ هر کدام برچسب خودش در فهرست کارکرد ===== */
+(function(){
+'use strict';
+if(!document.getElementById('v101css')){const st=document.createElement('style');st.id='v101css';st.textContent=`
+.tags2{display:inline-flex;flex-direction:column;align-items:flex-end;gap:3px}
+.tags2 .tg{font-size:.68rem;font-weight:700;border-radius:999px;padding:2px 8px;white-space:nowrap;line-height:1.5}
+.tags2 .tg.rent{background:#e6eefb;color:#1d4f91}
+.tags2 .tg.stop{background:#fde8e8;color:#b42318}
+.tags2 .tg.day{background:#fdf3d6;color:#8a6100}
+`;document.head.appendChild(st)}
+const recOf=ref=>{const id=String(ref).slice(2);return String(ref)[0]==='c'?(S.cards||[]).find(x=>x.id==id):(S.machines||[]).find(x=>x.id==id)};
+function parts(ref,day){
+ const rec=recOf(ref)||{};const s=rec.susp;
+ const stop=(s&&s.from&&day>=s.from&&(!s.to||day<=s.to))?'توقف بازرسی و سرویس':'';
+ const vd=((S.vehDay||{})[day]||{})[ref];
+ return{rent:false,stop:'',off:(rec.active===false)?(rec.inactiveReason||'بدون دلیل'):'',day:(!stop&&vd&&vd.on===false)?(vd.reason||'غیرفعال'):''};
+}
+const _render=window.render;
+window.render=function(){
+ _render.apply(this,arguments);
+ if(view!=='work'||R.wsel)return;
+ const main=document.getElementById('main');if(!main)return;
+ const day=R.wd||nowL().slice(0,10);
+ main.querySelectorAll('.mc-row').forEach(row=>{
+  const m=(row.getAttribute('onclick')||'').match(/wkPick\('([^']+)'\)/);if(!m)return;
+  const ref=m[1];
+  row.querySelectorAll('.tags2').forEach(n=>n.remove());
+  if((S.work||[]).some(w=>!w.superseded&&w.ref===ref&&String(w.date).slice(0,10)===day))return;
+  const p=parts(ref,day);
+  const _c=row.querySelector('.chip');if(_c)_c.style.display='none';
+  if(!p.off&&!p.day)return;
+  const chip=row.querySelector('.chip');
+  const box=document.createElement('div');box.className='tags2';
+  if(p.off)box.insertAdjacentHTML('beforeend','<span class="tg day">غیرفعال: '+esc(p.off)+'</span>');
+  if(!p.off&&!p.stop&&p.day)box.insertAdjacentHTML('beforeend','<span class="tg day">'+esc(p.day)+'</span>');
+  if(chip){chip.style.display='none';chip.parentNode.insertBefore(box,chip)}
+ });
+};
+render();
+})();
+</script>
+<script>
+
+/* ===== Road Care V104.0: فعال/غیرفعال با کلید روشن-خاموش در تب تغییر وضعیت ===== */
+(function(){
+'use strict';
+if(!document.getElementById('v104css')){const st=document.createElement('style');st.id='v104css';st.textContent=`
+.sw-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;margin-bottom:10px;background:var(--card)}
+.sw-row b{font-size:.92rem}
+.sw-row small{display:block;color:var(--muted);font-size:.74rem;margin-top:2px}
+.sw-tgl{position:relative;width:52px;height:30px;flex:none}
+.sw-tgl input{opacity:0;width:0;height:0;position:absolute}
+.sw-tgl span{position:absolute;inset:0;background:#c9d2dc;border-radius:99px;transition:.2s;cursor:pointer}
+.sw-tgl span:before{content:"";position:absolute;width:24px;height:24px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.2s;box-shadow:0 1px 3px rgba(0,0,0,.25)}
+.sw-tgl input:checked + span{background:var(--ok)}
+.sw-tgl input:checked + span:before{transform:translateX(22px)}
+`;document.head.appendChild(st)}
+const recOfRef=ref=>{const id=String(ref).slice(2);return String(ref)[0]==='c'?(S.cards||[]).find(x=>x.id==id):(S.machines||[]).find(x=>x.id==id)};
+const listOf=(T,ref)=>String(ref)[0]==='c'?T.cards:T.machines;
+const _form=window.vehStatusForm;
+window.vehStatusForm=function(ref){
+ const rv=recOfRef(ref);
+ _form.apply(this,arguments);
+ const box=document.querySelector('#m .box');if(!box||!rv)return;
+ const on=rv.active!==false;
+ const row=document.createElement('div');row.className='sw-row';row.id='vs_activeRow';
+ row.innerHTML='<div><b>خودرو فعال است</b><small>خاموش کردن، خودرو را غیرفعال می‌کند</small></div>'
+  +'<label class="sw-tgl"><input type="checkbox" id="vs_active"'+(on?' checked':'')+' onchange="vsActiveToggle()"><span></span></label>';
+ const offBox=document.createElement('div');offBox.id='vs_activeWhy';offBox.style.display=on?'none':'block';
+ offBox.innerHTML='<label>دلیل غیرفعال بودن</label><input id="vs_activeReason" placeholder="مثلاً فروخته‌شده یا برگشت به طرف قرارداد" value="'+String(rv.inactiveReason||'').replace(/"/g,'&quot;')+'">';
+ const h=box.querySelector('.rs-s')||box.firstElementChild;
+ if(h&&h.parentNode)h.parentNode.insertBefore(row,h.nextSibling);else box.insertBefore(row,box.firstChild);
+ row.parentNode.insertBefore(offBox,row.nextSibling);
+};
+window.vsActiveToggle=function(){
+ const on=document.getElementById('vs_active').checked;
+ const w=document.getElementById('vs_activeWhy');if(w)w.style.display=on?'none':'block';
+};
+const _save=window.vehStatusSave;
+window.vehStatusSave=function(ref){
+ const tg=document.getElementById('vs_active');
+ const want=tg?tg.checked:null;
+ const why=((document.getElementById('vs_activeReason')||{}).value||'').trim();
+ if(want===false&&!why)return toast('دلیل غیرفعال بودن را بنویسید',1);
+ _save.apply(this,arguments);
+ if(want===null)return;
+ const rv=recOfRef(ref);if(!rv)return;
+ if((rv.active!==false)===want&&(want||!rv.inactiveReason&&!why))return;
+ const T=clone(S);const x=listOf(T,ref).find(y=>y.id===String(ref).slice(2));if(!x)return;
+ x.active=want;
+ if(!want){x.inactiveReason=why;x.inactiveFrom=nowL().slice(0,10)}else{x.inactiveReason='';x.inactiveFrom=''}
+ (x.statusHist=x.statusHist||[]).push({at:new Date().toISOString(),by:T.settings.user,changes:want?'فعال شد':'غیرفعال شد: '+why});
+ commit(T);render();
+};
+const _render=window.render;
+window.render=function(){
+ _render.apply(this,arguments);
+ const main=document.getElementById('main');if(!main)return;
+ if(view==='det'||view==='mdet'){
+  main.querySelectorAll('button').forEach(b=>{if(/togMachine\(|toggleCard\(/.test(b.getAttribute('onclick')||''))b.style.display='none'});
+ }
+};
+render();
+})();
+</script>
+<script>
+
+/* ===== Road Care V105.0: استیجاری فقط مالکیت است؛ توقف موقت با کلید و دلیل؛ کلیدهای یکدست ===== */
+(function(){
+'use strict';
+const today=()=>nowL().slice(0,10);
+const yest=()=>{const d=new Date(today()+'T12:00:00Z');d.setUTCDate(d.getUTCDate()-1);return d.toISOString().slice(0,10)};
+const recOfRef=ref=>{const id=String(ref).slice(2);return String(ref)[0]==='c'?(S.cards||[]).find(x=>x.id==id):(S.machines||[]).find(x=>x.id==id)};
+const listOf=(T,ref)=>String(ref)[0]==='c'?T.cards:T.machines;
+const STOPS=['تعمیرات اساسی','پایان کار','سایر'];
+const suspOn=(v,d)=>{const s=v&&v.susp;return !!(s&&s.from&&d>=s.from&&(!s.to||d<=s.to))};
+/* ---- استیجاری دیگر خودرو را از سرویس و بازرسی خارج نمی‌کند ---- */
+window.vehOff=function(ref){const v=recOfRef(ref);if(!v)return false;return suspOn(v,today())};
+window.offReasonOn=function(ref,date){const v=recOfRef(ref);if(!v)return'';const s=v.susp;return (s&&s.from&&date>=s.from&&(!s.to||date<=s.to))?(s.reason||'غیرفعال'):''};
+/* ---- استایل یکدست کلیدها ---- */
+if(!document.getElementById('v105css')){const st=document.createElement('style');st.id='v105css';st.textContent=`
+.vs-sw{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:7px 10px;border:1px solid var(--line);border-radius:10px;margin:6px 0;background:var(--card)}
+.vs-sw b{font-size:.8rem;display:block;font-weight:700}
+.vs-sw small{display:block;color:var(--muted);font-size:.68rem;margin-top:1px;line-height:1.4}
+.vs-tg{position:relative;width:52px;height:30px;flex:none}
+.vs-tg input{opacity:0;width:0;height:0;position:absolute}
+.vs-tg span{position:absolute;inset:0;background:#c9d2dc;border-radius:99px;transition:.2s;cursor:pointer}
+.vs-tg span:before{content:"";position:absolute;width:24px;height:24px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.2s;box-shadow:0 1px 3px rgba(0,0,0,.25)}
+.vs-tg input:checked + span{background:var(--ok)}
+.vs-tg input:checked + span:before{transform:translateX(22px)}
+.vs-box{margin:0 0 6px;padding:2px 2px 0}
+`;document.head.appendChild(st)}
+function sw(id,title,sub,on,boxId){
+ return '<div class="vs-sw"><div><b>'+title+'</b>'+(sub?'<small>'+sub+'</small>':'')+'</div><label class="vs-tg"><input type="checkbox" id="'+id+'"'+(on?' checked':'')+' onchange="vsSwitch(this,\''+boxId+'\')"><span></span></label></div>';
+}
+window.vsSwitch=function(cb,boxId){if(!boxId)return;const b=document.getElementById(boxId);if(b)b.style.display=cb.checked?'block':'none'};
+/* ---- فرم یکپارچه ---- */
+window.vehStatusForm=function(ref){
+ const v=recOfRef(ref);if(!v)return;
+ const active=v.active!==false;
+ const s=v.susp;const stopOn=!!(s&&s.from&&(!s.to||s.to>=today()));
+ const stopCur=s&&s.reason?(STOPS.includes(s.reason)?s.reason:'سایر'):'تعمیرات اساسی';
+ const other=s&&s.reason&&!STOPS.includes(s.reason)?s.reason:'';
+ const endOn=!!(s&&s.to);
+ R.vs_from=(s&&s.from)||today();R.vs_to=(s&&s.to)||today();
+ modal('<div class="rs-t">وضعیت خودرو</div><div class="rs-s">'+esc(v.name)+'</div>'
+  +sw('vs_active','خودرو فعال است','خاموش کردن، خودرو را غیرفعال می‌کند',active,'vs_activeWhy')
+  +'<div id="vs_activeWhy" class="vs-box" style="display:'+(active?'none':'block')+'"><label>دلیل غیرفعال بودن</label><input id="vs_activeReason" placeholder="مثلاً فروخته‌شده یا برگشت به طرف قرارداد" value="'+esc(v.inactiveReason||'')+'"></div>'
+  +sw('vs_rent','خودروی استیجاری است','فقط مالکیت را نشان می‌دهد؛ از سرویس و بازرسی خارج نمی‌کند',!!v.rented,'vs_rentBox')
+  +'<div id="vs_rentBox" class="vs-box" style="display:'+(v.rented?'block':'none')+'"><label>مالک یا شرکت طرف قرارداد (اختیاری)</label><input id="vs_owner" value="'+esc(v.rentOwner||'')+'"></div>'
+  +sw('vs_stop','توقف بازرسی و سرویس','خارج کردن خودرو از برنامه‌های بازرسی و سرویس',stopOn,'vs_stopBox')
+  +'<div id="vs_stopBox" class="vs-box" style="display:'+(stopOn?'block':'none')+'">'
+   +'<label>از تاریخ</label>'+jdSel('vs_from',R.vs_from)
+   +sw('vs_end','تاریخ پایان دارد','با روشن شدن، تاریخ پایان پرسیده می‌شود',endOn,'vs_endBox')
+   +'<div id="vs_endBox" class="vs-box" style="display:'+(endOn?'block':'none')+'">'+jdSel('vs_to',R.vs_to)+'</div>'
+  +'</div>'
+  +'<div style="display:flex;gap:8px;margin-top:12px"><button class="btn rs-b" style="flex:1" onclick="vehStatusSave(\''+ref+'\')">ذخیره</button><button class="btn g rs-b" style="flex:1" onclick="modal()">انصراف</button></div>');
+ const bx=document.querySelector('#m .box');if(bx)bx.classList.add('rs-box');
+};
+window.vsStopReason=function(sel){const x=document.getElementById('vs_rx');if(x)x.style.display=sel.value==='سایر'?'block':'none'};
+window.vehStatusSave=function(ref){
+ const T=clone(S);const x=listOf(T,ref).find(y=>y.id===String(ref).slice(2));if(!x)return;
+ const at=new Date().toISOString(),by=T.settings.user;const notes=[];
+ const wantActive=!!document.getElementById('vs_active').checked;
+ const wantRent=!!document.getElementById('vs_rent').checked;
+ const wantStop=!!document.getElementById('vs_stop').checked;
+ const wantEnd=!!document.getElementById('vs_end')&&document.getElementById('vs_end').checked;
+ /* فعال / غیرفعال */
+ if(!wantActive){
+  const why=((document.getElementById('vs_activeReason')||{}).value||'').trim();
+  if(!why)return toast('دلیل غیرفعال بودن را بنویسید',1);
+  if(x.active!==false)x.inactiveFrom=today();
+  x.active=false;x.inactiveReason=why;notes.push('غیرفعال: '+why);
+ }else{
+  if(x.active===false)notes.push('فعال شد');
+  x.active=true;x.inactiveReason='';x.inactiveFrom='';
+ }
+ /* استیجاری (مالکیت) */
+ x.rented=wantRent;
+ x.rentOwner=wantRent?((document.getElementById('vs_owner')||{}).value||'').trim():'';
+ if(wantRent)notes.push('استیجاری');
+ /* توقف بازرسی و سرویس */
+ if(wantStop){
+  let reason='توقف بازرسی و سرویس';
+  if(reason==='سایر')reason=((document.getElementById('vs_rx')||{}).value||'').trim();
+  
+  const from=R.vs_from;if(!from)return toast('تاریخ شروع را انتخاب کنید',1);
+  const to=wantEnd?R.vs_to:'';
+  if(to&&to<from)return toast('تاریخ پایان قبل از شروع است',1);
+  x.susp={reason,from,to:to||''};notes.push('توقف: '+reason);
+ }else{
+  const s=x.susp;
+  if(s&&s.from&&s.from<=yest())x.susp=Object.assign({},s,{to:yest()});else x.susp=null;
+ }
+ (x.statusHist=x.statusHist||[]).push({at,by,changes:notes.join('، ')||'بدون تغییر'});
+ commit(T);modal();toast('وضعیت خودرو ذخیره شد');render();
+};
+/* ---- حذف دکمه‌های قدیمی فعال/غیرفعال از صفحهٔ خودرو ---- */
+const _render=window.render;
+window.render=function(){
+ _render.apply(this,arguments);
+ const main=document.getElementById('main');if(!main)return;
+ if(view==='det'||view==='mdet'){
+  main.querySelectorAll('button').forEach(b=>{if(/togMachine\(|toggleCard\(/.test(b.getAttribute('onclick')||''))b.style.display='none'});
+ }
+};
+render();
+})();
+</script>
+<script>
+
+/* ===== Road Care V106.0: کلید «خودرو فعال است» برعکس کلیدهای دیگر؛ کادر دلیل فقط وقتی خاموش است ===== */
+(function(){
+'use strict';
+const _sw=window.vsSwitch;
+window.vsSwitch=function(cb,boxId){
+ if(cb&&cb.id==='vs_active'){
+  const b=document.getElementById('vs_activeWhy');
+  if(b)b.style.display=cb.checked?'none':'block';
+  return;
+ }
+ return _sw?_sw.apply(this,arguments):undefined;
+};
+render();
+})();
+</script>
+<script>
+
+/* ===== Road Care V107.0: غیرفعال شدن خودرو در وضعیت نمایش داده شود؛ کلیدهای استیجاری و توقف با خاموش شدن «فعال» خاموش شوند ===== */
+(function(){
+'use strict';
+const _sw=window.vsSwitch;
+window.vsSwitch=function(cb,boxId){
+ if(cb&&cb.id==='vs_active'&&!cb.checked){
+  ['vs_rent','vs_stop'].forEach(id=>{const k=document.getElementById(id);if(k&&k.checked){k.checked=false;const bid=id==='vs_rent'?'vs_rentBox':'vs_stopBox';_sw(k,bid)}});
+ }
+ return _sw.apply(this,arguments);
+};
+const _save=window.vehStatusSave;
+window.vehStatusSave=function(ref){
+ const a=document.getElementById('vs_active');
+ if(a&&!a.checked){
+  const r=document.getElementById('vs_rent');if(r)r.checked=false;
+  const s=document.getElementById('vs_stop');if(s)s.checked=false;
+ }
+ return _save.apply(this,arguments);
+};
+const _render=window.render;
+window.render=function(){
+ _render.apply(this,arguments);
+ const main=document.getElementById('main');if(!main)return;
+ if(view==='det'||view==='mdet'){
+  const ref=view==='det'?'c:'+arg:String(arg||'');
+  const id=String(ref).slice(2);
+  const v=String(ref)[0]==='c'?(S.cards||[]).find(x=>x.id==id):(S.machines||[]).find(x=>x.id==id);
+  if(v&&v.active===false){
+   main.querySelectorAll('.chip').forEach(c=>{if(c.textContent.trim()==='عادی'){c.textContent='غیرفعال: '+(v.inactiveReason||'بدون دلیل');c.className='chip over'}});
+  }
+ }
+};
+render();
+})();
+</script>
+<script>
+
+/* ===== Road Care V108.0: خودروی غیرفعال؛ بخش‌های جزئیات غیرفعال (جز تغییر وضعیت)؛ کلیدهای استیجاری و توقف قفل ===== */
+(function(){
+'use strict';
+if(!document.getElementById('v108css')){const st=document.createElement('style');st.id='v108css';st.textContent=`
+.v108-off{opacity:.45;pointer-events:none;filter:grayscale(.4)}
+.vs-sw.v108-lock{opacity:.5;pointer-events:none}
+`;document.head.appendChild(st)}
+function lockRows(){
+ const a=document.getElementById('vs_active');const off=!!a&&!a.checked;
+ ['vs_rent','vs_stop'].forEach(id=>{
+  const k=document.getElementById(id);if(!k)return;
+  const row=k.closest('.vs-sw');
+  if(off){k.checked=false;k.disabled=true}else{k.disabled=false}
+  if(row)row.classList.toggle('v108-lock',off);
+ });
+}
+const _sw=window.vsSwitch;
+window.vsSwitch=function(cb,boxId){
+ const r=_sw.apply(this,arguments);
+ if(cb&&cb.id==='vs_active')lockRows();
+ return r;
+};
+const _form=window.vehStatusForm;
+window.vehStatusForm=function(ref){
+ const r=_form.apply(this,arguments);
+ lockRows();
+ return r;
+};
+const _render=window.render;
+window.render=function(){
+ _render.apply(this,arguments);
+ const main=document.getElementById('main');if(!main)return;
+ if(view==='det'||view==='mdet'){
+  const ref=view==='det'?'c:'+arg:String(arg||'');
+  const id=String(ref).slice(2);
+  const v=String(ref)[0]==='c'?(S.cards||[]).find(x=>x.id==id):(S.machines||[]).find(x=>x.id==id);
+  if(v&&v.active===false){
+   const keep=[];
+   main.querySelectorAll('button,input,select,textarea').forEach(el=>{
+    const oc=el.getAttribute('onclick')||'';
+    if(/vehStatusForm\(/.test(oc))return;
+    el.disabled=true;
+   });
+   main.querySelectorAll('a[onclick]').forEach(a=>{if(!/vehStatusForm\(/.test(a.getAttribute('onclick')||''))a.style.pointerEvents='none'});
+   main.querySelectorAll(':scope > *').forEach(c=>{if(!c.querySelector('button[onclick*="vehStatusForm("]'))c.classList.add('v108-off')});
+   main.querySelectorAll('.card,.kpi,.cact-row,.mc-act,.ds-stat').forEach(c=>{if(!c.querySelector('button[onclick*="vehStatusForm("]'))c.classList.add('v108-off')});
+  }
+ }
+};
+render();
+})();
+</script>
+<script>
+
+/* ===== Road Care V109.0: توقف بدون دلیل؛ دکمهٔ تغییر وضعیت در جای ثابت و برچسب کوچک ===== */
+(function(){
+'use strict';
+if(!document.getElementById('v109css')){const st=document.createElement('style');st.id='v109css';st.textContent=`
+.v109-row{display:flex!important;flex-wrap:nowrap!important;align-items:center!important;justify-content:space-between!important;gap:8px!important}
+.v109-row .v109-chips{flex:1 1 auto;min-width:0;display:flex;flex-wrap:wrap;gap:4px;align-items:center}
+.v109-row .v109-btn{flex:none!important;margin-inline-start:auto!important;white-space:nowrap}
+.v109-tag{font-size:.66rem!important;padding:2px 7px!important;line-height:1.4}
+`;document.head.appendChild(st)}
+const _render=window.render;
+window.render=function(){
+ _render.apply(this,arguments);
+ const main=document.getElementById('main');if(!main)return;
+ if(view==='det'||view==='mdet'){
+  const btn=[...main.querySelectorAll('button')].find(b=>(b.getAttribute('onclick')||'').indexOf('vehStatusForm(')>=0);
+  if(btn){
+   const row=btn.parentElement;
+   if(row){
+    row.classList.add('v109-row');
+    const kids=[...row.children].filter(c=>c!==btn);
+    let chips=row.querySelector('.v109-chips');
+    if(!chips){chips=document.createElement('div');chips.className='v109-chips';row.insertBefore(chips,btn)}
+    kids.forEach(k=>{if(k!==chips)chips.appendChild(k)});
+    btn.classList.add('v109-btn');
+    chips.querySelectorAll('.chip').forEach(c=>c.classList.add('v109-tag'));
+   }
+  }
+ }
 };
 render();
 })();
